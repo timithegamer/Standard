@@ -37,7 +37,10 @@ function heroFeldStarten() {
       bahnen.push({
         lage: (b + 0.7) / (BAHNEN + 0.5),        // Höhe im Bild
         welle: 0.35 + Math.random() * 0.5,        // Ausschlag
-        takt: 0.00016 + Math.random() * 0.00022,  // Tempo
+        // Bogenmass je Sekunde. 0,10 bis 0,24 heisst: eine volle
+        // Welle dauert zwischen gut 25 und gut 60 Sekunden. Qi
+        // treibt, es flackert nicht.
+        takt: 0.10 + Math.random() * 0.14,
         phase: Math.random() * Math.PI * 2,
         dicke: b % 3 === 0 ? 1.35 : 0.8,
         kraft: b % 3 === 0 ? 0.2 : 0.1,           // Deckkraft
@@ -59,13 +62,15 @@ function heroFeldStarten() {
     stift.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  /* y einer Bahn an der Stelle t (0..1) */
+  /* y einer Bahn an der Stelle t (0..1).
+     zeit kommt in Millisekunden herein, gerechnet wird in Sekunden. */
   function bahnY(bahn, t) {
+    var s = zeit * 0.001;
     var grund = hoch * bahn.lage;
     var schwung = hoch * 0.14 * bahn.welle;
     return grund
-      + Math.sin(t * Math.PI * 2.1 + bahn.phase + zeit * bahn.takt * 1000) * schwung
-      + Math.sin(t * Math.PI * 4.6 + bahn.phase * 1.7) * schwung * 0.28;
+      + Math.sin(t * Math.PI * 2.1 + bahn.phase + s * bahn.takt) * schwung
+      + Math.sin(t * Math.PI * 4.6 + bahn.phase * 1.7 + s * bahn.takt * 0.4) * schwung * 0.28;
   }
 
   function malen() {
@@ -111,7 +116,7 @@ function heroFeldStarten() {
       for (var p = 0; p < bahn.punkte.length; p++) {
         var tp = bahn.punkte[p];
         var idx = Math.round(tp * PUNKTE_JE_BAHN);
-        var puls = 0.5 + 0.5 * Math.sin(zeit * 0.0011 + b * 1.3 + p * 2.1);
+        var puls = 0.5 + 0.5 * Math.sin(zeit * 0.00035 + b * 1.3 + p * 2.1);
         var r = 1.6 + puls * 2.2;
         stift.beginPath();
         stift.arc(xs[idx], ys[idx], r, 0, Math.PI * 2);
@@ -124,7 +129,7 @@ function heroFeldStarten() {
   function schlag(t) {
     zeit = t || 0;
     // Die Ablenkung klingt aus, wenn die Maus das Feld verlässt.
-    maus.staerke = misch(maus.staerke, maus.ziel || 0, 0.06);
+    maus.staerke = misch(maus.staerke, maus.ziel || 0, 0.035);
     malen();
   }
 

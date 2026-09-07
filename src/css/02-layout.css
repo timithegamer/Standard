@@ -15,7 +15,6 @@
 /* Die drei Grundflächen. Der Wechsel zwischen ihnen ist der Takt
    der ganzen Seite: ruhig — dicht — ruhig. */
 .abschnitt--papier { background: var(--papier); }
-.abschnitt--wasch  { background: var(--wasch); }
 
 .abschnitt--tinte {
   background: var(--tinte);

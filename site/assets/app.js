@@ -625,7 +625,10 @@ function heroFeldStarten() {
       bahnen.push({
         lage: (b + 0.7) / (BAHNEN + 0.5),        // Höhe im Bild
         welle: 0.35 + Math.random() * 0.5,        // Ausschlag
-        takt: 0.00016 + Math.random() * 0.00022,  // Tempo
+        // Bogenmass je Sekunde. 0,10 bis 0,24 heisst: eine volle
+        // Welle dauert zwischen gut 25 und gut 60 Sekunden. Qi
+        // treibt, es flackert nicht.
+        takt: 0.10 + Math.random() * 0.14,
         phase: Math.random() * Math.PI * 2,
         dicke: b % 3 === 0 ? 1.35 : 0.8,
         kraft: b % 3 === 0 ? 0.2 : 0.1,           // Deckkraft
@@ -647,13 +650,15 @@ function heroFeldStarten() {
     stift.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  /* y einer Bahn an der Stelle t (0..1) */
+  /* y einer Bahn an der Stelle t (0..1).
+     zeit kommt in Millisekunden herein, gerechnet wird in Sekunden. */
   function bahnY(bahn, t) {
+    var s = zeit * 0.001;
     var grund = hoch * bahn.lage;
     var schwung = hoch * 0.14 * bahn.welle;
     return grund
-      + Math.sin(t * Math.PI * 2.1 + bahn.phase + zeit * bahn.takt * 1000) * schwung
-      + Math.sin(t * Math.PI * 4.6 + bahn.phase * 1.7) * schwung * 0.28;
+      + Math.sin(t * Math.PI * 2.1 + bahn.phase + s * bahn.takt) * schwung
+      + Math.sin(t * Math.PI * 4.6 + bahn.phase * 1.7 + s * bahn.takt * 0.4) * schwung * 0.28;
   }
 
   function malen() {
@@ -699,7 +704,7 @@ function heroFeldStarten() {
       for (var p = 0; p < bahn.punkte.length; p++) {
         var tp = bahn.punkte[p];
         var idx = Math.round(tp * PUNKTE_JE_BAHN);
-        var puls = 0.5 + 0.5 * Math.sin(zeit * 0.0011 + b * 1.3 + p * 2.1);
+        var puls = 0.5 + 0.5 * Math.sin(zeit * 0.00035 + b * 1.3 + p * 2.1);
         var r = 1.6 + puls * 2.2;
         stift.beginPath();
         stift.arc(xs[idx], ys[idx], r, 0, Math.PI * 2);
@@ -712,7 +717,7 @@ function heroFeldStarten() {
   function schlag(t) {
     zeit = t || 0;
     // Die Ablenkung klingt aus, wenn die Maus das Feld verlässt.
-    maus.staerke = misch(maus.staerke, maus.ziel || 0, 0.06);
+    maus.staerke = misch(maus.staerke, maus.ziel || 0, 0.035);
     malen();
   }
 
@@ -769,6 +774,97 @@ function heroFeldStarten() {
   }
 
   aufraeumen.push(anhalten);
+}
+
+/* ---------- 06b-befund.js ---------- */
+/* ===========================================================
+   Befund — zwischen den Ansichten umschalten
+
+   Jede der drei Untersuchungen kennt drei Ansichten. Beim Wechsel
+   zeichnet sich der Umriss neu — das macht sichtbar, dass hier etwas
+   anderes angeschaut wird, statt nur ein Bild gegen ein anderes zu
+   tauschen.
+
+   Ohne JavaScript bleibt jeweils die erste Ansicht stehen und die
+   Schaltflächen sind ausgeblendet: Der Abschnitt bleibt vollständig
+   lesbar, er lässt sich nur nicht umschalten.
+   =========================================================== */
+
+function befundStarten() {
+  var teile = alle("[data-befund]");
+  if (!teile.length) return;
+
+  teile.forEach(function (teil) {
+    var bild = eins(".befund__bild", teil);
+    var erklaerung = eins("[data-erklaerung]", teil);
+    var knoepfe = alle(".befund__modi button", teil);
+    if (!bild || !knoepfe.length) return;
+
+    var gruppen = alle("g[data-modus]", bild);
+    var aktiv = null;
+
+    /* Den Umriss der neuen Ansicht noch einmal ziehen. Die Länge des
+       Pfades steht schon in --laenge; sie wird beim Start einmal
+       gemessen, damit hier nichts nachgerechnet werden muss. */
+    function nachzeichnen(gruppe) {
+      if (ruhig() || !gruppe.animate) return;
+
+      alle("[data-zeichnen]", gruppe).forEach(function (pfad) {
+        var laenge = parseFloat(pfad.style.getPropertyValue("--laenge"));
+        if (!laenge) {
+          try { laenge = pfad.getTotalLength(); } catch (e) { return; }
+        }
+        if (!laenge) return;
+
+        var dauer = parseInt(pfad.style.getPropertyValue("--zeichendauer"), 10) || 1400;
+        var strich = laenge + " " + laenge;
+
+        try {
+          pfad.animate(
+            [{ strokeDasharray: strich, strokeDashoffset: laenge },
+             { strokeDasharray: strich, strokeDashoffset: 0 }],
+            { duration: Math.round(dauer * 0.7), easing: "cubic-bezier(.33, 1, .68, 1)" }
+          );
+        } catch (e) { /* dann eben ohne Nachzeichnen */ }
+      });
+    }
+
+    function zeigen(modus, vomBenutzer) {
+      if (modus === aktiv) return;
+
+      var knopf = null;
+      knoepfe.forEach(function (k) {
+        var ist = k.dataset.modus === modus;
+        k.setAttribute("aria-pressed", String(ist));
+        if (ist) knopf = k;
+      });
+      if (!knopf) return;
+
+      aktiv = modus;
+
+      var neue = null;
+      gruppen.forEach(function (g) {
+        var ist = g.dataset.modus === modus;
+        g.classList.toggle("ist-an", ist);
+        if (ist) neue = g;
+      });
+
+      if (erklaerung) erklaerung.textContent = knopf.dataset.text || "";
+      if (neue && vomBenutzer) nachzeichnen(neue);
+    }
+
+    knoepfe.forEach(function (k) {
+      aufraeumen.push(an(k, "click", function () { zeigen(k.dataset.modus, true); }));
+    });
+
+    // Den Anfangszustand aus der Auszeichnung übernehmen, ohne zu
+    // zeichnen — das übernimmt beim ersten Sichtbarwerden der
+    // Beobachter über [data-zeichnen].
+    var erster = knoepfe.filter(function (k) {
+      return k.getAttribute("aria-pressed") === "true";
+    })[0] || knoepfe[0];
+    aktiv = erster.dataset.modus;
+  });
 }
 
 /* ---------- 07-leistungen.js ---------- */
@@ -1611,6 +1707,7 @@ function laufbandFuellen() {
   magnetStarten();
 
   heroFeldStarten();
+  befundStarten();
   leistungenStarten();
   elementeStarten();
 

@@ -98,3 +98,29 @@
   font-size: var(--t-klein);
   color: var(--text-3);
 }
+
+
+/* ---------- Auf dunklem Grund ----------
+   Der Abschnitt steht auf Tinte, damit das letzte Drittel der Seite
+   nicht in drei hellen Flaechen hintereinander verflacht. Linien,
+   Punkte und Nebentexte muessen dafuer mitziehen. */
+
+.abschnitt--tinte .ueber__unterschrift { color: var(--hell-3); }
+
+.abschnitt--tinte .weg::before { background: var(--linie-hell); }
+.abschnitt--tinte .weg__halt { border-bottom-color: var(--linie-hell-2); }
+.abschnitt--tinte .weg__jahr { color: var(--hell-3); }
+.abschnitt--tinte .weg__was { color: var(--hell); }
+
+.abschnitt--tinte .weg__halt::before {
+  background: var(--tinte);
+  border-color: var(--hell-3);
+}
+.abschnitt--tinte .weg__halt:hover::before {
+  background: var(--moos-hell);
+  border-color: var(--moos-hell);
+}
+
+/* Das Portraet bekommt einen schmalen Rand, sonst schwimmt der helle
+   Hintergrund des Fotos frei in der dunklen Flaeche. */
+.abschnitt--tinte .ueber__portraet { outline: 1px solid var(--linie-hell-2); outline-offset: 0; }

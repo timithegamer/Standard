@@ -18,6 +18,7 @@
   magnetStarten();
 
   heroFeldStarten();
+  befundStarten();
   leistungenStarten();
   elementeStarten();
 

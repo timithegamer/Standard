@@ -16,7 +16,7 @@
 <link rel="preload" href="assets/fonts/hanken-grotesk-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/karla-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts.css?v=63482dab">
-<link rel="stylesheet" href="assets/style.css?v=c76bcf62">
+<link rel="stylesheet" href="assets/style.css?v=6814727a">
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
 
 <script>
@@ -248,8 +248,12 @@
 </figure>
 
 <!-- ===================== Befund =====================
-     Ruhiger Abschnitt nach dem Hero. Drei Zeichnungen, die
-     erklären, was beim ersten Termin tatsächlich passiert. -->
+     Ruhiger Abschnitt nach dem Hero. Drei Zeichnungen, die erklären,
+     was beim ersten Termin tatsächlich passiert.
+
+     Die Schaltflächen unter jeder Zeichnung sind keine Dekoration: Sie
+     benennen genau das, was in der jeweiligen Untersuchung angeschaut
+     wird, und stehen so auch im Text der Praxis. -->
 <section class="abschnitt abschnitt--papier" id="befund" aria-labelledby="befund-titel">
   <div class="innen">
 
@@ -269,71 +273,192 @@
 
     <div class="befund">
 
-      <!-- Pulstastung: die Kurve wird gezeichnet, dann läuft ein Punkt darüber -->
-      <article class="befund__teil" data-heben>
-        <svg class="befund__bild befund__bild--breit" viewBox="0 0 320 90" fill="none" aria-hidden="true">
-          <line x1="0" y1="45" x2="320" y2="45" stroke="var(--linie)" stroke-width="1"/>
-          <path d="M0 45 H86 l10-13 12 28 14-36 12 42 14-21 H196 l10-10 12 20 10-10 H320"
-                stroke="var(--moos)" stroke-width="1.8" stroke-linejoin="round"
-                stroke-linecap="round" data-zeichnen style="--zeichendauer:1900ms"/>
-          <circle class="pulspunkt" r="3.4" style="offset-path:path('M0 45 H86 l10-13 12 28 14-36 12 42 14-21 H196 l10-10 12 20 10-10 H320')"/>
+      <!-- ---------- Pulstastung ---------- -->
+      <article class="befund__teil" data-befund data-heben>
+        <svg class="befund__bild befund__bild--breit" viewBox="-12 0 344 117" fill="none" aria-hidden="true">
+
+          <!-- Tiefe: drei Ebenen, in denen getastet wird -->
+          <g data-modus="tiefe" class="ist-an">
+            <text class="pulsmarke" x="0" y="29">oberflächlich</text>
+            <path d="M78 26H150l7-6 8 12 9-15 8 16 8-7H320"
+                  class="pulslinie pulslinie--fern" data-zeichnen style="--zeichendauer:1300ms"/>
+
+            <text class="pulsmarke" x="0" y="61">mittel</text>
+            <path d="M78 58H148l8-13 9 27 10-34 9 36 9-16H320"
+                  class="pulslinie pulslinie--nah" data-zeichnen style="--zeichendauer:1600ms"/>
+
+            <text class="pulsmarke" x="0" y="93">tief</text>
+            <path d="M78 90H152l6-5 8 10 8-13 8 14 7-6H320"
+                  class="pulslinie pulslinie--fern" data-zeichnen style="--zeichendauer:1300ms"/>
+          </g>
+
+          <!-- Fülle und Leere: links kräftig, rechts schwach -->
+          <g data-modus="fuelle">
+            <line x1="165" y1="18" x2="165" y2="100" class="pulsteiler"/>
+            <path d="M0 58H30l10-22 11 44 12-54 11 58 11-26H155"
+                  class="pulslinie pulslinie--nah" data-zeichnen style="--zeichendauer:1500ms"/>
+            <path d="M175 58h25l7-6 8 12 8-15 8 16 7-7H320"
+                  class="pulslinie pulslinie--nah" data-zeichnen style="--zeichendauer:1500ms"/>
+            <text class="pulsmarke" x="0" y="110">Fülle</text>
+            <text class="pulsmarke" x="175" y="110">Leere</text>
+          </g>
+
+          <!-- Hitze und Kälte: links schnell, rechts langsam -->
+          <g data-modus="hitze">
+            <line x1="165" y1="18" x2="165" y2="100" class="pulsteiler"/>
+            <path d="M0 58h6l5-16 6 32 6-32 6 32 6-32 6 32 6-32 6 32 6-32 6 32 5-16H155"
+                  class="pulslinie pulslinie--nah" data-zeichnen style="--zeichendauer:1500ms"/>
+            <path d="M175 58h34l14-15 15 30 15-30 14 15H320"
+                  class="pulslinie pulslinie--nah" data-zeichnen style="--zeichendauer:1500ms"/>
+            <text class="pulsmarke" x="0" y="110">Hitze</text>
+            <text class="pulsmarke" x="175" y="110">Kälte</text>
+          </g>
         </svg>
+
         <p class="befund__pinyin"><span class="han">脉诊</span> Mài zhěn</p>
         <h3>Pulstastung</h3>
         <p>
           Der Puls wird an beiden Handgelenken in mehreren Tiefen ertastet. Er zeigt,
           ob Fülle oder Leere vorliegt, wo Hitze oder Kälte sitzt.
         </p>
+
+        <div class="befund__modi" role="group" aria-label="Was am Puls abgelesen wird">
+          <button type="button" data-modus="tiefe" aria-pressed="true"
+                  data-text="Oberflächlich, mittel und tief — jede Ebene erzählt etwas anderes.">Tiefe</button>
+          <button type="button" data-modus="fuelle" aria-pressed="false"
+                  data-text="Ein voller Puls drängt gegen den Finger, ein leerer weicht zurück.">Fülle &amp; Leere</button>
+          <button type="button" data-modus="hitze" aria-pressed="false"
+                  data-text="Das Tempo verrät die Richtung: schnell deutet auf Hitze, langsam auf Kälte.">Hitze &amp; Kälte</button>
+        </div>
+        <p class="befund__erklaerung" data-erklaerung aria-live="polite">
+          Oberflächlich, mittel und tief — jede Ebene erzählt etwas anderes.
+        </p>
       </article>
 
-      <!-- Zungenschau: Umriss mit Zonen, die nacheinander aufleuchten -->
-      <article class="befund__teil" data-heben style="--verzug:120ms">
+      <!-- ---------- Zungenschau ---------- -->
+      <article class="befund__teil" data-befund data-heben style="--verzug:120ms">
         <svg class="befund__bild" viewBox="0 0 160 90" fill="none" aria-hidden="true">
           <defs>
             <clipPath id="zungenform">
               <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"/>
             </clipPath>
+            <pattern id="belagmuster" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="3" cy="3" r="1.1" fill="var(--moos)" opacity=".5"/>
+            </pattern>
           </defs>
-          <g clip-path="url(#zungenform)">
-            <rect class="zone" x="50" y="11" width="60" height="21"/>
-            <rect class="zone" x="50" y="34" width="60" height="21"/>
-            <rect class="zone" x="50" y="57" width="60" height="24"/>
+
+          <!-- Form: Umriss, Breite, Mittelfurche -->
+          <g data-modus="form" class="ist-an">
+            <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
+                  class="zungenlinie" data-zeichnen style="--zeichendauer:1600ms"/>
+            <path d="M80 44v28" class="zungenfurche" data-zeichnen style="--zeichendauer:1100ms"/>
+            <g class="formmasse">
+              <path d="M57 33H103" class="zungenmass"/>
+              <path d="M57 29v8M103 29v8" class="zungenmass"/>
+              <path d="M47 11V79" class="zungenmass"/>
+              <path d="M43 11h8M43 79h8" class="zungenmass"/>
+            </g>
           </g>
-          <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
-                stroke="var(--moos)" stroke-width="1.6" data-zeichnen style="--zeichendauer:1700ms"/>
-          <line x1="80" y1="14" x2="80" y2="76" stroke="var(--linie)" stroke-width="1"/>
+
+          <!-- Farbe: der Zungenkörper wechselt den Ton -->
+          <g data-modus="farbe">
+            <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
+                  class="zungenfarbe"/>
+            <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
+                  class="zungenlinie" data-zeichnen style="--zeichendauer:1600ms"/>
+          </g>
+
+          <!-- Belag: wächst von der Wurzel her -->
+          <g data-modus="belag">
+            <g clip-path="url(#zungenform)">
+              <rect class="belag" x="52" y="8" width="56" height="74" fill="url(#belagmuster)"/>
+            </g>
+            <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
+                  class="zungenlinie" data-zeichnen style="--zeichendauer:1600ms"/>
+          </g>
         </svg>
+
         <p class="befund__pinyin"><span class="han">舌诊</span> Shé zhěn</p>
         <h3>Zungenschau</h3>
         <p>
           Form, Farbe und Belag der Zunge geben Auskunft über den Zustand der inneren
           Organe und über Nässe, Trockenheit oder Stagnation.
         </p>
+
+        <div class="befund__modi" role="group" aria-label="Was an der Zunge angeschaut wird">
+          <button type="button" data-modus="form" aria-pressed="true"
+                  data-text="Breite, Ränder und die Furche in der Mitte.">Form</button>
+          <button type="button" data-modus="farbe" aria-pressed="false"
+                  data-text="Der Farbton des Zungenkörpers, von blass bis kräftig.">Farbe</button>
+          <button type="button" data-modus="belag" aria-pressed="false"
+                  data-text="Wie dick der Belag ist und wie weit er reicht.">Belag</button>
+        </div>
+        <p class="befund__erklaerung" data-erklaerung aria-live="polite">
+          Breite, Ränder und die Furche in der Mitte.
+        </p>
       </article>
 
-      <!-- Gesichtsdiagnose: Zonenraster über einem Umriss -->
-      <article class="befund__teil" data-heben style="--verzug:240ms">
+      <!-- ---------- Gesichtsdiagnose ---------- -->
+      <article class="befund__teil" data-befund data-heben style="--verzug:240ms">
         <svg class="befund__bild" viewBox="0 0 160 90" fill="none" aria-hidden="true">
           <defs>
             <clipPath id="gesichtsform">
               <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"/>
             </clipPath>
           </defs>
-          <g clip-path="url(#gesichtsform)">
-            <rect class="zone" x="52" y="7"  width="56" height="21"/>
-            <rect class="zone" x="52" y="30" width="17" height="24"/>
-            <rect class="zone" x="71" y="30" width="18" height="24"/>
-            <rect class="zone" x="91" y="30" width="17" height="24"/>
-            <rect class="zone" x="52" y="56" width="56" height="26"/>
+
+          <!-- Farbe: ein Ton zieht über das Gesicht -->
+          <g data-modus="farbe" class="ist-an">
+            <g clip-path="url(#gesichtsform)">
+              <rect class="gesichtsfarbe" x="52" y="5" width="56" height="80"/>
+              <ellipse class="tonband" cx="80" cy="50" rx="31" ry="13"/>
+            </g>
+            <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"
+                  class="gesichtslinie" data-zeichnen style="--zeichendauer:1700ms"/>
           </g>
-          <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"
-                stroke="var(--moos)" stroke-width="1.6" data-zeichnen style="--zeichendauer:1800ms"/>
+
+          <!-- Ausdruck: Brauen, Augen, Mund -->
+          <g data-modus="ausdruck">
+            <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"
+                  class="gesichtslinie" data-zeichnen style="--zeichendauer:1700ms"/>
+            <g class="zuege">
+              <path d="M63 33c3-2 8-2 11 0M86 33c3-2 8-2 11 0" class="zug zug--braue"/>
+              <path d="M63 41c3-3 8-3 11 0M86 41c3-3 8-3 11 0" class="zug"/>
+              <path d="M71 62c5 4 13 4 18 0" class="zug zug--mund"/>
+            </g>
+          </g>
+
+          <!-- Zonen: das Raster, nach dem gelesen wird -->
+          <g data-modus="zonen">
+            <g clip-path="url(#gesichtsform)">
+              <rect class="zone" x="52" y="5"  width="56" height="22"/>
+              <rect class="zone" x="52" y="29" width="17" height="24"/>
+              <rect class="zone" x="71" y="29" width="18" height="24"/>
+              <rect class="zone" x="91" y="29" width="17" height="24"/>
+              <rect class="zone" x="52" y="55" width="56" height="30"/>
+            </g>
+            <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"
+                  class="gesichtslinie" data-zeichnen style="--zeichendauer:1700ms"/>
+          </g>
         </svg>
+
         <p class="befund__pinyin"><span class="han">面诊</span> Miàn zhěn</p>
         <h3>Gesichtsdiagnose</h3>
         <p>
           Farbe, Ausdruck und Zonen im Gesicht ergänzen das Bild und helfen, die
           Behandlung auf Ihre Konstitution abzustimmen.
+        </p>
+
+        <div class="befund__modi" role="group" aria-label="Was am Gesicht angeschaut wird">
+          <button type="button" data-modus="farbe" aria-pressed="true"
+                  data-text="Der Ton der Haut und wo sie stärker durchblutet ist.">Farbe</button>
+          <button type="button" data-modus="ausdruck" aria-pressed="false"
+                  data-text="Wie gespannt oder gelöst die Züge sind.">Ausdruck</button>
+          <button type="button" data-modus="zonen" aria-pressed="false"
+                  data-text="Stirn, Mitte und Kinn werden getrennt betrachtet.">Zonen</button>
+        </div>
+        <p class="befund__erklaerung" data-erklaerung aria-live="polite">
+          Der Ton der Haut und wo sie stärker durchblutet ist.
         </p>
       </article>
 
@@ -730,7 +855,7 @@
 </section>
 
 <!-- ===================== Über mich ===================== -->
-<section class="abschnitt abschnitt--wasch" id="ueber-mich" aria-labelledby="ueber-titel">
+<section class="abschnitt abschnitt--tinte" id="ueber-mich" aria-labelledby="ueber-titel">
   <div class="innen">
 
     <div class="kopfzeile duo">
@@ -1068,6 +1193,6 @@
   <div class="zeiger__punkt" data-zeiger-punkt></div>
 </div>
 
-<script src="assets/app.js?v=446e99c5"></script>
+<script src="assets/app.js?v=58c5fcd1"></script>
 </body>
 </html>

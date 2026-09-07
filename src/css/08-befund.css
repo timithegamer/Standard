@@ -1,9 +1,14 @@
 /* ===========================================================
    Befund — drei Arten zu schauen
 
-   Jede der drei bekommt ihr eigenes Bild: der Puls als Kurve,
-   die Zunge als Zonenkarte, das Gesicht als Raster. Die Zeichnungen
-   sagen etwas aus, sie sind kein Schmuck.
+   Jede der drei bekommt ihr eigenes Bild, und jedes Bild lässt sich
+   umschalten: auf das, was in dieser Untersuchung tatsächlich
+   abgelesen wird. Die Schaltflächen sind damit selbst Inhalt — sie
+   benennen, was die Praxis anschaut, statt nur Zustände zu wechseln.
+
+   Farbe: Die Fünf-Elemente-Palette bleibt dem Abschnitt weiter unten
+   vorbehalten, wo sie etwas Bestimmtes benennt. Hier wird mit einer
+   Farbe und Abstufungen gearbeitet.
    =========================================================== */
 
 .befund {
@@ -41,10 +46,25 @@
   height: clamp(6rem, 10vw, 8.5rem);
   margin-bottom: .35rem;
 }
-.befund__bild path,
-.befund__bild line,
-.befund__bild circle,
-.befund__bild ellipse { vector-effect: non-scaling-stroke; }
+
+/* Die Pulskurve ist breit angelegt und soll die Spalte ausfüllen.
+   Eine feste Höhe würde sie in der Mitte einpassen und links und
+   rechts Luft lassen — deshalb bestimmt hier das Seitenverhältnis
+   die Höhe, nicht umgekehrt. */
+.befund__bild--breit {
+  height: auto;
+  aspect-ratio: 344 / 117;
+}
+/* Kein vector-effect: non-scaling-stroke.
+   Es rechnet das Strichmuster in Bildschirmpixeln, waehrend
+   getTotalLength() Nutzereinheiten liefert. Bei skalierter Zeichnung
+   passt beides nicht zusammen und der Umriss wird nur zum Teil
+   gezeichnet - der Rest fehlt einfach. Die Strichstaerken sind
+   stattdessen so gewaehlt, dass sie mitskaliert stimmen. */
+
+/* Immer nur eine Ansicht. Ohne JavaScript bleibt die erste stehen. */
+.befund__bild g[data-modus] { display: none; }
+.befund__bild g[data-modus].ist-an { display: inline; }
 
 .befund__pinyin {
   font-size: var(--t-klein);
@@ -61,37 +81,166 @@
   opacity: .75;
 }
 .befund__teil h3 { font-size: var(--t-mittel); }
-.befund__teil p {
+.befund__teil > p {
   color: var(--text-2);
   font-size: 1.03125rem;
   line-height: 1.6;
   max-width: 38ch;
 }
 
-/* Der laufende Punkt auf der Pulskurve */
-.pulspunkt {
-  fill: var(--moos);
-  opacity: 0;
+/* ---------- Die Umschalter ---------- */
+
+.befund__modi {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .35rem;
 }
-.ist-da .pulspunkt {
-  opacity: 1;
-  animation: puls-lauf 3.4s var(--e-beides) 1.2s infinite;
+.kein-js .befund__modi { display: none; }
+
+.befund__modi button {
+  padding: .45rem .85rem;
+  min-height: 2.5rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-rund);
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: color var(--z-schnell) var(--e-aus),
+              border-color var(--z-schnell) var(--e-aus),
+              background-color var(--z-schnell) var(--e-aus);
 }
-.ruhig .pulspunkt { animation: none; opacity: 0; }
-@keyframes puls-lauf {
-  0%       { offset-distance: 0%;   opacity: 0; }
-  8%       { opacity: 1; }
-  92%      { opacity: 1; }
-  100%     { offset-distance: 100%; opacity: 0; }
+.befund__modi button:hover { border-color: var(--text-3); color: var(--text); }
+.befund__modi button[aria-pressed="true"] {
+  background: var(--moos);
+  border-color: var(--moos);
+  color: var(--auf-moos);
 }
 
-/* Zonen der Zungen- und Gesichtskarte leuchten nacheinander auf */
-/* Die Zonen sind bewusst einfarbig: Die Fünf-Elemente-Palette steht
-   weiter unten und bedeutet dort etwas Bestimmtes. Hier ginge sie als
-   Behauptung durch, die auf der Seite sonst nirgends belegt ist. */
+.befund__erklaerung {
+  font-size: var(--t-klein);
+  line-height: 1.55;
+  color: var(--text-3);
+  max-width: 34ch;
+  min-height: 3em;      /* verhindert Springen beim Umschalten */
+}
+.kein-js .befund__erklaerung { min-height: 0; }
+
+/* ===========================================================
+   Pulstastung
+   =========================================================== */
+
+.pulslinie {
+  fill: none;
+  stroke: var(--moos);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.pulslinie--nah  { stroke-width: 1.5; }
+.pulslinie--fern { stroke-width: .9; opacity: .38; }
+
+.pulsteiler {
+  stroke: var(--linie);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+}
+
+.pulsmarke {
+  fill: var(--text-3);
+  font-family: var(--schrift-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* ===========================================================
+   Zungenschau
+   =========================================================== */
+
+.zungenlinie {
+  fill: none;
+  stroke: var(--moos);
+  stroke-width: 1.3;
+}
+.zungenfurche {
+  fill: none;
+  stroke: var(--linie);
+  stroke-width: 1;
+}
+.zungenmass {
+  fill: none;
+  stroke: var(--text-3);
+  stroke-width: .8;
+  opacity: .55;
+}
+/* Auch die ruhigste Ansicht atmet leise, damit keine der drei
+   tot wirkt, solange niemand umschaltet. */
+.ist-da .formmasse { animation: masse-atmen 5.5s var(--e-beides) infinite; }
+@keyframes masse-atmen {
+  0%, 100% { opacity: .35; }
+  50%      { opacity: 1; }
+}
+
+/* Der Zungenkörper wechselt langsam den Ton — blass bis kräftig. */
+.zungenfarbe { fill: #E6C3BE; }
+.ist-da .zungenfarbe { animation: ton-wechsel 7s var(--e-beides) infinite; }
+@keyframes ton-wechsel {
+  0%, 100% { fill: #EEDAD6; }
+  50%      { fill: #C98077; }
+}
+
+/* Der Belag wächst von der Wurzel her nach vorn. */
+.belag { transform-origin: 50% 8%; }
+.ist-da .belag { animation: belag-wachsen 6s var(--e-beides) infinite; }
+@keyframes belag-wachsen {
+  0%, 100% { transform: scaleY(.35); opacity: .55; }
+  50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+/* ===========================================================
+   Gesichtsdiagnose
+   =========================================================== */
+
+.gesichtslinie {
+  fill: none;
+  stroke: var(--moos);
+  stroke-width: 1.3;
+}
+
+.gesichtsfarbe { fill: #F0E4DC; }
+
+/* Ein Band quer durchs Gesicht statt zweier Flecken: Alles Paarige
+   auf dieser Höhe liest sich sofort als Augenpaar. */
+.tonband { fill: #D89A90; opacity: .4; }
+.ist-da .tonband { animation: ton-band 6.5s var(--e-beides) infinite; }
+@keyframes ton-band {
+  0%, 100% { opacity: .18; transform: scaleY(.85); }
+  50%      { opacity: .6;  transform: scaleY(1); }
+}
+.tonband { transform-box: fill-box; transform-origin: center; }
+
+.zug {
+  fill: none;
+  stroke: var(--moos);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: .8;
+}
+.zug--braue { opacity: .55; }
+.zuege { transform-origin: 50% 55%; }
+.ist-da .zuege { animation: zuege-loesen 6s var(--e-beides) infinite; }
+@keyframes zuege-loesen {
+  0%, 100% { transform: scaleY(.92) translateY(1px); }
+  50%      { transform: scaleY(1)   translateY(0); }
+}
+
+/* Die Zonen leuchten nacheinander auf. */
 .zone {
   fill: var(--moos);
-  opacity: .14;
+  opacity: .12;
   transform-box: fill-box;
   transform-origin: center;
 }
@@ -100,15 +249,18 @@
 .ist-da .zone:nth-of-type(3) { animation-delay: .9s; }
 .ist-da .zone:nth-of-type(4) { animation-delay: 1.35s; }
 .ist-da .zone:nth-of-type(5) { animation-delay: 1.8s; }
-.ruhig .zone { animation: none; opacity: .26; }
 @keyframes zone-atmen {
   0%, 70%, 100% { opacity: .12; }
   22%           { opacity: .42; }
 }
 
-/* Die Pulskurve darf die ganze Spalte nutzen, die beiden Umrisse
-   stehen mittig — deshalb zwei unterschiedliche Seitenverhältnisse. */
-.befund__bild--breit { /* gleiche Höhe wie die anderen, damit die Spalten auf einer Linie stehen */ }
-
-/* Rechtecke werden am Umriss beschnitten, deshalb kein transform-box */
-.zone rect, rect.zone { transform-box: view-box; }
+/* ---------- Weniger Bewegung ---------- */
+.ruhig .zungenfarbe,
+.ruhig .belag,
+.ruhig .tonband,
+.ruhig .zuege,
+.ruhig .zone,
+.ruhig .formmasse { animation: none; }
+.ruhig .belag { transform: scaleY(1); opacity: .8; }
+.ruhig .tonband { opacity: .38; transform: none; }
+.ruhig .zone  { opacity: .26; }
