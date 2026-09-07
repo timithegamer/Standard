@@ -181,6 +181,19 @@ python3 build.py && python3 build-vorschau.py
 Legt `vorschau/tcm-grohe.html` an: eine einzige Datei mit eingebetteten
 Bildern, Schriften, CSS und JS. Praktisch zum Herumschicken.
 
+Für den Verwaltungsbereich gibt es dasselbe:
+
+```bash
+python3 build.py && python3 build-portal-vorschau.py
+```
+
+Legt `vorschau/verwaltung-vorschau.html` an — die Oberfläche mit einem
+nachgestellten Server, damit sich die Bedienung ohne Deploy beurteilen
+lässt. **Das ist kein echter Zugang:** Die Anmeldung nimmt jedes Passwort
+an, es wird nichts gespeichert, es gibt keinen Schutz. Der nachgestellte
+Server steht ausschließlich in diesem Skript; in `site/` und `src/` landet
+davon nichts.
+
 ## Barrierefreiheit und Bewegung
 
 Die Seite prüft `prefers-reduced-motion`. Ist weniger Bewegung eingestellt,
