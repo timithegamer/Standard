@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de-AT" class="kein-js">
+<!--#warnung-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titel }}</title>
+<meta name="description" content="{{ beschreibung }}">
+{{ kanonisch }}
+{{ robots }}
+<meta name="theme-color" content="#FAF9F3">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preload" href="assets/fonts/hanken-grotesk-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ fonts }}">
+<link rel="stylesheet" href="{{ css }}">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+
+<script>
+  /* Vor dem ersten Anstrich: Kennzeichnet, dass JavaScript laeuft, und
+     schaltet die Inszenierung ab, wenn weniger Bewegung gewuenscht ist.
+     Steht bewusst inline, damit es kein Aufblitzen gibt. */
+  (function () {
+    var w = document.documentElement;
+    w.classList.remove("kein-js");
+    w.classList.add("js");
+    try {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) w.classList.add("ruhig");
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) w.classList.add("maus");
+    } catch (e) {}
+  })();
+</script>
+{{ kopf_extra }}
+</head>
+<body class="{{ koerperklasse }}">
+
+<a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+
+{{> partials/vorhang.html }}
+{{ vorspann }}
+{{> partials/kopf.html }}
+
+<main id="inhalt">
+{{ inhalt }}
+</main>
+
+{{> partials/fuss.html }}
+{{> partials/rufbalken.html }}
+{{> partials/zeiger.html }}
+
+<script src="{{ js }}"></script>
+</body>
+</html>

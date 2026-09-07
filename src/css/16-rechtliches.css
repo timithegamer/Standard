@@ -1,0 +1,74 @@
+/* ===========================================================
+   Impressum, Datenschutz, Danke, 404
+   Ruhig und gut lesbar. Hier will niemand beeindruckt werden.
+   =========================================================== */
+
+.rechtlich {
+  padding-top: calc(var(--kopfhoehe) + clamp(3rem, 8vw, 6rem));
+  padding-bottom: var(--bucht);
+}
+
+.rechtlich__kopf {
+  display: grid;
+  gap: 1.25rem;
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--linie);
+}
+.rechtlich__titel {
+  font-size: var(--t-anzeige);
+  letter-spacing: -0.04em;
+}
+
+.rechtlich .fliesstext { max-width: 68ch; font-size: 1.0625rem; }
+.rechtlich .fliesstext h2 {
+  font-size: var(--t-mittel);
+  margin-top: clamp(2.25rem, 4vw, 3rem);
+  margin-bottom: .75rem;
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--linie-zart);
+}
+.rechtlich .fliesstext h2:first-child { margin-top: 0; border-top: 0; padding-top: 0; }
+.rechtlich .fliesstext p { color: var(--text-2); }
+.rechtlich .fliesstext p + p { margin-top: .9em; }
+.rechtlich .fliesstext strong { color: var(--text); }
+.rechtlich .fliesstext ul { margin-block: 1em; }
+
+.rechtlich__stand {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--linie-zart);
+  color: var(--text-3);
+  font-size: var(--t-klein);
+}
+
+/* Kurze Seiten (Danke, 404) sollen den Fuss nicht nach oben ziehen. */
+.kurzseite { min-height: 70svh; display: grid; align-content: center; }
+.kurzseite .rechtlich__titel { max-width: 18ch; }
+.kurzseite__tat { margin-top: clamp(2rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: .75rem; }
+
+.wegweiser {
+  list-style: none;
+  display: grid;
+  gap: 0;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--linie);
+}
+.wegweiser li { border-bottom: 1px solid var(--linie); }
+.wegweiser a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  transition: color var(--z-schnell) var(--e-aus), padding-left var(--z-normal) var(--e-aus);
+}
+.wegweiser a:hover { color: var(--moos); padding-left: .6rem; }
+.wegweiser__was { font-family: var(--schrift-anzeige); font-size: var(--t-mittel); letter-spacing: -0.02em; }
+.wegweiser__wozu { font-size: var(--t-klein); color: var(--text-3); text-align: right; }
+
+/* Der Textblock steht links bündig zum Logo, seine Breite begrenzt
+   nicht der Rahmen, sondern das Lesemass. */
+.rechtlich__kopf,
+.wegweiser,
+.rechtlich__stand { max-width: 74ch; }

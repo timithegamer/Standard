@@ -1,0 +1,156 @@
+/* ===========================================================
+   Bewegungssystem
+
+   Eine Regel: Ohne JavaScript und bei "weniger Bewegung" ist alles
+   sofort da. Die Startzustände greifen deshalb nur unter .js und
+   ausserhalb von .ruhig — Inhalt darf nie unsichtbar hängenbleiben.
+   =========================================================== */
+
+/* ---------- Heben: der Grundfall ---------- */
+.js:not(.ruhig) [data-heben] {
+  opacity: 0;
+  transform: translate3d(0, 1.75rem, 0);
+  transition:
+    opacity var(--z-gross) var(--e-aus) var(--verzug, 0ms),
+    transform var(--z-gross) var(--e-aus) var(--verzug, 0ms);
+  will-change: transform, opacity;
+}
+.js:not(.ruhig) [data-heben].ist-da {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* ---------- Zeilen hinter der Maske ---------- */
+.zeile { display: block; overflow: hidden; padding-bottom: .04em; }
+.zeile__i { display: block; }
+
+.js:not(.ruhig) .zeile__i {
+  transform: translate3d(0, 108%, 0);
+  transition: transform var(--z-kino) var(--e-aus) var(--verzug, 0ms);
+  will-change: transform;
+}
+.js:not(.ruhig) .ist-da .zeile__i { transform: none; will-change: auto; }
+
+/* ---------- Staffel: Kinder laufen nacheinander ein ---------- */
+.js:not(.ruhig) [data-folge] > * {
+  opacity: 0;
+  transform: translate3d(0, 1.4rem, 0);
+  transition:
+    opacity var(--z-gross) var(--e-aus),
+    transform var(--z-gross) var(--e-aus);
+}
+.js:not(.ruhig) [data-folge].ist-da > * { opacity: 1; transform: none; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(1)  { transition-delay:  60ms; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(2)  { transition-delay: 130ms; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(3)  { transition-delay: 200ms; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(4)  { transition-delay: 270ms; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(5)  { transition-delay: 340ms; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(6)  { transition-delay: 410ms; }
+.js:not(.ruhig) [data-folge].ist-da > *:nth-child(n+7){ transition-delay: 480ms; }
+
+/* ---------- Bild hinter dem Vorhang ---------- */
+.bildvorhang { position: relative; overflow: hidden; }
+.bildvorhang img { width: 100%; height: 100%; object-fit: cover; }
+
+.js:not(.ruhig) .bildvorhang {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--z-kino) var(--e-aus) var(--verzug, 0ms);
+}
+.js:not(.ruhig) .bildvorhang.ist-da { clip-path: inset(0 0 0 0); }
+
+/* Das Bild selbst startet leicht vergrössert und setzt sich —
+   der Ausschnitt öffnet sich, das Motiv kommt zur Ruhe. */
+.js:not(.ruhig) .bildvorhang img {
+  transform: scale(1.14);
+  transition: transform calc(var(--z-kino) + 400ms) var(--e-aus) var(--verzug, 0ms);
+}
+.js:not(.ruhig) .bildvorhang.ist-da img { transform: scale(1); }
+
+/* ---------- Linie, die sich zieht ---------- */
+.js:not(.ruhig) [data-linie] {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--z-kino) var(--e-aus) var(--verzug, 0ms);
+}
+.js:not(.ruhig) [data-linie].ist-da { transform: scaleX(1); }
+
+/* ---------- Gezeichnete Pfade (Puls, Zyklus, Meridiane) ---------- */
+.js:not(.ruhig) [data-zeichnen] {
+  stroke-dasharray: var(--laenge, 1000);
+  stroke-dashoffset: var(--laenge, 1000);
+}
+.js:not(.ruhig) .ist-da [data-zeichnen],
+.js:not(.ruhig) [data-zeichnen].ist-da {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--zeichendauer, 1600ms) var(--e-weich) var(--verzug, 0ms);
+}
+
+/* ---------- Parallaxe ---------- */
+/* Der Versatz kommt aus JavaScript in --schub; hier nur die Umsetzung. */
+[data-parallax] { will-change: transform; }
+.ruhig [data-parallax] { transform: none !important; }
+
+/* ---------- Vorhang beim Laden ---------- */
+.vorhang {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ebene-vorhang);
+  background: var(--papier);
+  display: grid;
+  place-items: center;
+  transition: transform var(--z-kino) var(--e-atem), opacity 300ms linear 600ms;
+}
+.vorhang.ist-weg {
+  transform: translate3d(0, -101%, 0);
+  pointer-events: none;
+}
+.ruhig .vorhang, .kein-js .vorhang { display: none; }
+
+.vorhang__mitte {
+  display: grid;
+  justify-items: center;
+  gap: 1.1rem;
+}
+.vorhang__mark {
+  width: clamp(2.75rem, 6vw, 4rem);
+  height: auto;
+  fill: var(--moos);
+  opacity: 0;
+  transform: rotate(-90deg) scale(.8);
+  animation: mark-ein 900ms var(--e-aus) forwards;
+}
+@keyframes mark-ein {
+  to { opacity: 1; transform: rotate(0deg) scale(1); }
+}
+.vorhang__wort {
+  font-family: var(--schrift-anzeige);
+  font-size: var(--t-klein);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  opacity: 0;
+  animation: sanft-ein 700ms var(--e-aus) 260ms forwards;
+}
+@keyframes sanft-ein { to { opacity: 1; } }
+
+.vorhang__linie {
+  display: block;
+  width: clamp(6rem, 16vw, 11rem);
+  height: 1px;
+  background: var(--linie);
+  overflow: hidden;
+}
+.vorhang__linie i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--moos);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: linie-voll 1100ms var(--e-weich) 180ms forwards;
+}
+@keyframes linie-voll { to { transform: scaleX(1); } }
+
+/* Solange der Vorhang liegt, wird nicht gescrollt. */
+body.haelt { overflow: hidden; }

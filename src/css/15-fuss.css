@@ -1,0 +1,192 @@
+/* ===========================================================
+   Fuss — das Finale. Hier darf es lauter sein als sonst.
+   =========================================================== */
+
+.fuss {
+  position: relative;
+  background: var(--tinte);
+  color: var(--hell);
+  overflow: clip;
+}
+.fuss a { color: inherit; }
+
+.fuss__innen {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+/* ---------- Der grosse Ruf ---------- */
+.fuss__ruf { padding-block: clamp(4rem, 10vw, 8.5rem); }
+
+.rufzeile {
+  display: block;
+  position: relative;
+  margin-block: clamp(1.5rem, 3vw, 2.5rem);
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(2.75rem, 13vw, 11rem);
+  font-weight: 500;
+  line-height: .88;
+  letter-spacing: -0.05em;
+  color: var(--hell);
+}
+.rufzeile__zeile { display: block; overflow: hidden; padding-bottom: .04em; }
+
+/* Die zweite Zeile steht als Kontur — und füllt sich beim Zeigen. */
+.rufzeile__zeile--rand {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--hell-3);
+  transition: -webkit-text-stroke-color var(--z-normal) var(--e-aus),
+              color var(--z-normal) var(--e-aus);
+}
+.rufzeile:hover .rufzeile__zeile--rand,
+.rufzeile:focus-visible .rufzeile__zeile--rand {
+  color: var(--moos-hell);
+  -webkit-text-stroke-color: var(--moos-hell);
+}
+.rufzeile:hover .rufzeile__zeile:first-child { color: var(--moos-hell); }
+.rufzeile__zeile:first-child { transition: color var(--z-normal) var(--e-aus); }
+
+.rufzeile__pfeil {
+  position: absolute;
+  right: 0; top: .1em;
+  width: clamp(2rem, 5vw, 4rem);
+  height: clamp(2rem, 5vw, 4rem);
+  color: var(--hell-3);
+  transition: transform var(--z-normal) var(--e-aus), color var(--z-normal) var(--e-aus);
+}
+.rufzeile:hover .rufzeile__pfeil { transform: translateX(.35em); color: var(--moos-hell); }
+@media (max-width: 47.999rem) { .rufzeile__pfeil { display: none; } }
+
+.fuss__oder { color: var(--hell-2); max-width: 46ch; font-size: var(--t-lead); }
+.fuss__oder a {
+  color: var(--moos-hell);
+  text-decoration: underline;
+  text-underline-offset: .22em;
+  white-space: nowrap;
+}
+
+/* ---------- Laufband ---------- */
+.laufband {
+  border-block: 1px solid var(--linie-hell-2);
+  padding-block: clamp(.9rem, 2vw, 1.4rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.laufband__spur {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  width: max-content;
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(1.25rem, 3vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--hell-2);
+  white-space: nowrap;
+  animation: laufen 42s linear infinite;
+}
+.laufband:hover .laufband__spur { animation-play-state: paused; }
+.ruhig .laufband__spur { animation: none; }
+@keyframes laufen {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.laufband__punkt { color: var(--moos-hell); font-size: .5em; }
+
+/* ---------- Hauptteil ---------- */
+.fuss__haupt { padding-block: clamp(3rem, 6vw, 5rem); }
+
+.fuss__gitter {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+@media (min-width: 40rem) { .fuss__gitter { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 68rem) {
+  .fuss__gitter { grid-template-columns: 1.6fr repeat(3, 1fr); }
+}
+
+.fuss__spalte { display: grid; gap: .8rem; align-content: start; }
+.fuss__spalte .etikett { margin-bottom: .2rem; }
+
+.fussmarke { display: inline-flex; align-items: center; gap: .9rem; }
+.fussmarke__zeichen {
+  width: clamp(2.5rem, 5vw, 3.5rem);
+  height: auto;
+  color: var(--moos-hell);
+  flex: none;
+  transition: transform var(--z-gross) var(--e-aus);
+}
+.fussmarke:hover .fussmarke__zeichen { transform: rotate(-360deg); }
+.fussmarke__name {
+  display: block;
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.fussmarke__rolle {
+  display: block;
+  font-size: var(--t-klein);
+  color: var(--hell-3);
+  margin-top: .15rem;
+}
+
+.fuss__zeilen { color: var(--hell-2); line-height: 1.7; font-size: 1.03125rem; }
+.fuss__zeilen a { transition: color var(--z-schnell) var(--e-aus); }
+.fuss__zeilen a:hover { color: var(--moos-hell); }
+.fuss__leise { color: var(--hell-3); font-size: var(--t-klein); }
+.fuss__karte {
+  font-size: var(--t-klein);
+  font-weight: 600;
+  color: var(--moos-hell);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+  justify-self: start;
+}
+
+/* Ortszeit */
+.fuss__uhr { display: grid; gap: .15rem; }
+.fuss__uhr > span:first-child {
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.fuss__uhrort { font-size: var(--t-klein); color: var(--hell-3); }
+
+.fuss__hinweis {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: 1px solid var(--linie-hell-2);
+  color: var(--hell-3);
+  font-size: var(--t-klein);
+  line-height: 1.6;
+  max-width: 78ch;
+}
+
+.fuss__boden {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--linie-hell-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.75rem;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--t-klein);
+  color: var(--hell-3);
+}
+.fuss__links { display: flex; gap: 1.5rem; }
+.fuss__links a { transition: color var(--z-schnell) var(--e-aus); }
+.fuss__links a:hover { color: var(--moos-hell); }
+
+/* Damit der Rufbalken auf dem Handy nichts verdeckt */
+@media (max-width: 47.999rem) {
+  .fuss__haupt { padding-bottom: calc(clamp(3rem, 6vw, 5rem) + 3.5rem + env(safe-area-inset-bottom)); }
+}

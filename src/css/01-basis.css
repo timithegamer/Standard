@@ -1,0 +1,94 @@
+/* ---------- Grundlage ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Ein display aus einer Klasse würde das hidden-Attribut überstimmen —
+   versteckt muss versteckt bleiben. */
+[hidden] { display: none !important; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--kopfhoehe) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--text);
+  font-family: var(--schrift-text);
+  font-size: var(--t-text);
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* Körnung über der ganzen Seite: nimmt den Flächen das Digitale,
+   ohne dass man sie bewusst wahrnimmt. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: var(--koernung);
+  opacity: .022;
+  pointer-events: none;
+  z-index: 400;
+  mix-blend-mode: multiply;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--schrift-anzeige);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+
+strong, b { font-weight: 700; }
+em { font-style: italic; }
+
+::selection { background: var(--moos); color: var(--auf-moos); }
+
+/* Sichtbarer Fokus — überall, auch in den dunklen Abschnitten. */
+:focus-visible {
+  outline: 2px solid var(--moos);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.tinte :focus-visible,
+.fuss :focus-visible,
+.menu :focus-visible { outline-color: var(--moos-hell); }
+
+.sprungmarke {
+  position: fixed;
+  left: 0; top: 0;
+  transform: translateY(-120%);
+  background: var(--tinte);
+  color: var(--hell);
+  padding: .8rem 1.3rem;
+  z-index: 500;
+  font-size: var(--t-klein);
+  transition: transform var(--z-schnell) var(--e-aus);
+}
+.sprungmarke:focus { transform: translateY(0); }
+

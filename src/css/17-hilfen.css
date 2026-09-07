@@ -1,0 +1,28 @@
+/* ---------- Kleine Helfer ---------- */
+
+/* Magnetische Knöpfe: den Versatz stellt JavaScript in --mx/--my. */
+[data-magnet] {
+  transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+  transition: transform var(--z-normal) var(--e-aus);
+}
+[data-magnet].ist-gefangen { transition: transform 90ms linear; }
+.ruhig [data-magnet] { transform: none !important; }
+
+/* Bilder, die beim Zeigen leicht heranrücken */
+.zoombild { overflow: hidden; }
+.zoombild img { transition: transform 900ms var(--e-aus); }
+.zoombild:hover img { transform: scale(1.045); }
+.ruhig .zoombild img { transition: none; }
+
+/* Sehr breite Inhalte dürfen scrollen, die Seite nie. */
+.querscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Druck: nur der Inhalt, keine Inszenierung. */
+@media print {
+  .kopf, .menu, .rufbalken, .zeiger, .vorhang, .laufband, .hero__feld, .vorschau { display: none !important; }
+  body { background: #fff; color: #000; }
+  .abschnitt--tinte, .fuss { background: #fff !important; color: #000 !important; }
+  .abschnitt--tinte h1, .abschnitt--tinte h2, .abschnitt--tinte h3, .fuss { color: #000 !important; }
+  .leistung__inhalt { height: auto !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
+}

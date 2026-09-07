@@ -1,0 +1,194 @@
+/* ===========================================================
+   Hero — der erste Moment
+
+   Aufbau: ein ruhiges Papierfeld, darin ein bewegtes Qi-Feld
+   (Leitbahnen, die sich sacht verziehen und auf den Zeiger
+   reagieren), darüber die Überschrift in voller Grösse.
+   =========================================================== */
+
+.hero {
+  position: relative;
+  /* Die Kopfzeile steht darüber im Fluss, also zählt sie hier ab. */
+  min-height: calc(100svh - var(--kopfhoehe));
+  display: grid;
+  align-content: space-between;
+  padding-top: clamp(2rem, 7vh, 5rem);
+  padding-bottom: clamp(1.5rem, 4vh, 3rem);
+  overflow: clip;
+  background: var(--papier);
+  isolation: isolate;
+}
+
+/* Das Qi-Feld liegt hinter allem und bleibt bewusst leise. */
+.hero__feld {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1600ms var(--e-weich) 200ms;
+}
+.hero__feld.ist-da { opacity: 1; }
+
+/* Das Markenzeichen, an drei Seiten angeschnitten — wie bisher,
+   nur grösser und ruhiger platziert. */
+.hero__mark {
+  position: absolute;
+  right: -18%;
+  bottom: -22%;
+  width: min(58vw, 44rem);
+  height: auto;
+  color: var(--moos);
+  opacity: .07;
+  z-index: -1;
+  pointer-events: none;
+}
+@media (min-width: 62rem) {
+  .hero__mark { right: -9%; bottom: -26%; width: min(42vw, 40rem); }
+}
+
+.hero__kopf {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+}
+
+.hero__etikett { margin-bottom: clamp(1.5rem, 4vh, 2.5rem); }
+
+.hero__titel {
+  font-family: var(--schrift-anzeige);
+  font-size: var(--t-riesig);
+  font-weight: 500;
+  line-height: .9;
+  letter-spacing: -0.045em;
+  margin: 0;
+  max-width: 15ch;
+}
+.hero__titel em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--moos);
+  letter-spacing: -0.03em;
+}
+
+/* Die untere Leiste: Führungstext, Handlung, Kennwerte.
+   Sie sitzt am Fuss des Bildschirms und hält den Hero unten fest. */
+.hero__fuss {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--rand);
+  margin-top: clamp(1.75rem, 5vh, 3.25rem);
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+}
+@media (min-width: 62rem) {
+  .hero__fuss {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+    align-items: end;
+  }
+}
+
+.hero__lauf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem 2rem;
+  align-items: center;
+  font-size: var(--t-klein);
+  color: var(--text-3);
+  padding-top: clamp(1.25rem, 3vh, 2rem);
+  border-top: 1px solid var(--linie);
+}
+.hero__lauf b {
+  color: var(--text);
+  font-weight: 700;
+}
+.hero__lauf span { display: inline-flex; align-items: center; gap: .5rem; }
+.hero__lauf .punkt {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--moos);
+  flex: none;
+}
+
+.hero__rechts { display: grid; gap: clamp(1.25rem, 3vw, 1.75rem); }
+.hero__tat { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ---------- Hinweis zum Scrollen ---------- */
+.scrollwink {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(.75rem, 2vh, 1.5rem);
+  transform: translateX(-50%);
+  display: none;
+  align-items: center;
+  gap: .6rem;
+  font-size: var(--t-etikett);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text-3);
+  pointer-events: none;
+}
+@media (min-width: 62rem) and (min-height: 42rem) { .scrollwink { display: flex; } }
+
+.scrollwink__rohr {
+  position: relative;
+  width: 1px; height: 2.5rem;
+  background: var(--linie);
+  overflow: hidden;
+}
+.scrollwink__rohr i {
+  position: absolute;
+  inset: 0;
+  background: var(--moos);
+  animation: tropfen 2.4s var(--e-beides) infinite;
+}
+@keyframes tropfen {
+  0%   { transform: translateY(-100%); }
+  55%  { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+.ruhig .scrollwink__rohr i { animation: none; transform: none; opacity: .5; }
+
+/* ---------- Neu-Hinweis (Umzug) ---------- */
+.hinweisband {
+  position: relative;
+  z-index: 1;
+  background: var(--tinte);
+  color: var(--hell);
+}
+.hinweisband__innen {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: .85rem var(--rand);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1.1rem;
+  font-size: var(--t-klein);
+}
+.hinweisband__marke {
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tinte);
+  background: var(--moos-hell);
+  padding: .25rem .6rem;
+  border-radius: var(--radius-rund);
+  flex: none;
+}
+.hinweisband__text { color: var(--hell-2); }
+.hinweisband__text b { color: var(--hell); font-weight: 700; }
+.hinweisband a.verweis { color: var(--moos-hell); margin-left: auto; white-space: nowrap; font-weight: 600; }
+
+/* Auf dem Handy darf der Hinweis nicht das halbe erste Bild belegen. */
+@media (max-width: 47.999rem) {
+  .hinweisband__innen { padding-block: .7rem; gap: .35rem .7rem; font-size: .875rem; }
+  .hinweisband__marke { font-size: .625rem; padding: .2rem .5rem; }
+  .hinweisband a.verweis { margin-left: 0; }
+}

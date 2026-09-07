@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Baut aus dem Website-Ordner eine einzelne HTML-Datei fuer die Vorschau.
+"""Baut aus site/ eine einzelne HTML-Datei fuer die Vorschau.
+
+Voraussetzung: site/ ist aktuell - also vorher "python3 build.py" laufen lassen.
 Bilder, Schriften, CSS und JS werden eingebettet - die Seite laedt dann
 nichts mehr von aussen nach."""
 import base64, mimetypes, pathlib, re
@@ -35,8 +37,12 @@ html = re.sub(r'<link rel="stylesheet" href="assets/style\.css(?:\?v=[0-9a-f]+)?
 #     termine.json zum Nachladen.
 termine = (SITE / "termine.json").read_text()
 html = re.sub(r'<script src="assets/app\.js(?:\?v=[0-9a-f]+)?"></script>',
-              lambda m: ('<script type="application/json" id="termine-fallback">'
+              lambda m: ('<script type="application/json" id="termine-reserve">'
                          + termine + '</script>\n<script>\n' + js + '\n</script>'), html)
+
+# --- Vorladen und Favicon zeigen ins Leere, sobald alles eingebettet ist
+html = re.sub(r'<link rel="preload"[^>]*>\s*', '', html)
+html = re.sub(r'<link rel="icon"[^>]*>\s*', '', html)
 
 # --- Bilder einbetten
 def bild(m):

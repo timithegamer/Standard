@@ -1,0 +1,109 @@
+<!-- ===================== Fünf Wandlungsphasen =====================
+     Die begehbare Grafik. Element wählen — links leuchtet der Bogen
+     auf, der zum nächsten Element führt, rechts steht, wofür es steht. -->
+<section class="abschnitt abschnitt--tinte" id="elemente" aria-labelledby="elemente-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Wu Xing <span class="han" aria-hidden="true">五行</span></p>
+      <div>
+        <h2 class="kopfzeile__titel" id="elemente-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Die fünf</span></span>
+          <span class="zeile"><span class="zeile__i">Wandlungsphasen.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Jede Jahreszeit gehört zu einem Element, jedes Element zu bestimmten Organen —
+          und jedes Element nährt das nächste. Deshalb sind meine Kochworkshops nicht
+          beliebig angesetzt, sondern folgen dem Lauf des Jahres.
+        </p>
+      </div>
+    </div>
+
+    <div class="wuxing">
+
+      <div class="wuxing__kreis" data-wuxing>
+        <svg viewBox="-22 -8 384 358" role="img"
+             aria-label="Der Nährungszyklus der fünf Wandlungsphasen: Holz nährt Feuer, Feuer nährt Erde, Erde nährt Metall, Metall nährt Wasser, Wasser nährt Holz. Die Elemente lassen sich einzeln auswählen.">
+
+          <circle class="wx-ring" cx="170" cy="170" r="100"/>
+
+          <!-- Die Bögen des Nährungszyklus, im Uhrzeigersinn -->
+          <path class="wx-bogen" data-von="holz"   style="--el:var(--el-holz-h)"   d="M170,70 A100,100 0 0,1 265.1,139.1"/>
+          <path class="wx-bogen" data-von="feuer"  style="--el:var(--el-feuer-h)"  d="M265.1,139.1 A100,100 0 0,1 228.8,250.9"/>
+          <path class="wx-bogen" data-von="erde"   style="--el:var(--el-erde-h)"   d="M228.8,250.9 A100,100 0 0,1 111.2,250.9"/>
+          <path class="wx-bogen" data-von="metall" style="--el:var(--el-metall-h)" d="M111.2,250.9 A100,100 0 0,1 74.9,139.1"/>
+          <path class="wx-bogen" data-von="wasser" style="--el:var(--el-wasser-h)" d="M74.9,139.1 A100,100 0 0,1 170,70"/>
+
+          <!-- Pfeilspitzen: die Richtung des Zyklus -->
+          <g fill="var(--hell-3)" aria-hidden="true">
+            <polygon points="0,-4 8,0 0,4" transform="translate(228.8,89.1) rotate(36)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(265.1,200.9) rotate(108)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(170,270) rotate(180)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(74.9,200.9) rotate(252)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(111.2,89.1) rotate(324)"/>
+          </g>
+
+          <!-- Ein Lichtpunkt läuft den Zyklus entlang -->
+          <circle class="wx-laeufer" aria-hidden="true"
+                  style="offset-path:path('M170,70 A100,100 0 1,1 170,270 A100,100 0 1,1 170,70')"/>
+
+          <g class="wx-knopf" data-element="holz" style="--el:var(--el-holz-h)"
+             role="button" tabindex="0" aria-pressed="false" aria-label="Holz — Frühling, Leber">
+            <circle class="wx-treffer" cx="170" cy="70" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="170" cy="70" r="27"/>
+            <circle class="wx-scheibe" cx="170" cy="70" r="17"/>
+            <text class="wx-han" x="170" y="70">木</text>
+            <text class="wx-name" x="170" y="34" text-anchor="middle" dominant-baseline="central">Holz</text>
+          </g>
+
+          <g class="wx-knopf" data-element="feuer" style="--el:var(--el-feuer-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Feuer — Sommer, Herz">
+            <circle class="wx-treffer" cx="265.1" cy="139.1" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="265.1" cy="139.1" r="27"/>
+            <circle class="wx-scheibe" cx="265.1" cy="139.1" r="17"/>
+            <text class="wx-han" x="265.1" y="139.1">火</text>
+            <text class="wx-name" x="292" y="129.8" text-anchor="start" dominant-baseline="central">Feuer</text>
+          </g>
+
+          <g class="wx-knopf" data-element="erde" style="--el:var(--el-erde-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Erde — Spätsommer, Milz">
+            <circle class="wx-treffer" cx="228.8" cy="250.9" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="228.8" cy="250.9" r="27"/>
+            <circle class="wx-scheibe" cx="228.8" cy="250.9" r="17"/>
+            <text class="wx-han" x="228.8" y="250.9">土</text>
+            <text class="wx-name" x="228.8" y="292" text-anchor="middle" dominant-baseline="central">Erde</text>
+          </g>
+
+          <g class="wx-knopf" data-element="metall" style="--el:var(--el-metall-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Metall — Herbst, Lunge">
+            <circle class="wx-treffer" cx="111.2" cy="250.9" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="111.2" cy="250.9" r="27"/>
+            <circle class="wx-scheibe" cx="111.2" cy="250.9" r="17"/>
+            <text class="wx-han" x="111.2" y="250.9">金</text>
+            <text class="wx-name" x="111.2" y="292" text-anchor="middle" dominant-baseline="central">Metall</text>
+          </g>
+
+          <g class="wx-knopf" data-element="wasser" style="--el:var(--el-wasser-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Wasser — Winter, Niere">
+            <circle class="wx-treffer" cx="74.9" cy="139.1" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="74.9" cy="139.1" r="27"/>
+            <circle class="wx-scheibe" cx="74.9" cy="139.1" r="17"/>
+            <text class="wx-han" x="74.9" y="139.1">水</text>
+            <text class="wx-name" x="48" y="129.8" text-anchor="end" dominant-baseline="central">Wasser</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="wuxing__tafel" data-wuxing-tafel data-heben>
+        <div class="wxt__wechsel" data-wuxing-wechsel aria-live="polite"></div>
+        <p class="wuxing__hinweis">
+          <b>Element wählen</b>, um mehr zu sehen.
+          Im Kochworkshop verbinden wir Theorie und Praxis: Wir schauen uns an, was das
+          Element der jeweiligen Jahreszeit für Ihren Körper bedeutet, und kochen
+          anschließend gemeinsam. <a href="#termine">Zu den Terminen</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>

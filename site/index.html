@@ -1,11 +1,38 @@
 <!doctype html>
-<html lang="de-AT">
+<html lang="de-AT" class="kein-js">
+<!-- Erzeugte Datei - nicht direkt bearbeiten.
+   Quelle: src/pages/index.html
+   Bauen:  python3 build.py -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TCM &amp; Tuina Massage in Pinsdorf bei Gmunden — Sabine Grohe</title>
+<title>TCM & Tuina Massage in Pinsdorf bei Gmunden — Sabine Grohe</title>
 <meta name="description" content="Tuina Anmo Massage, Schröpfen, Moxa, Laserakupunktur und Ernährungsberatung nach den fünf Elementen. Praxis von Sabine Grohe in Pinsdorf im Salzkammergut. Kochworkshops und Kuren mit aktuellen Terminen.">
 <link rel="canonical" href="https://www.tcm-grohe.at/">
+
+<meta name="theme-color" content="#FAF9F3">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preload" href="assets/fonts/hanken-grotesk-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css?v=63482dab">
+<link rel="stylesheet" href="assets/style.css?v=bbc7fc0e">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+
+<script>
+  /* Vor dem ersten Anstrich: Kennzeichnet, dass JavaScript laeuft, und
+     schaltet die Inszenierung ab, wenn weniger Bewegung gewuenscht ist.
+     Steht bewusst inline, damit es kein Aufblitzen gibt. */
+  (function () {
+    var w = document.documentElement;
+    w.classList.remove("kein-js");
+    w.classList.add("js");
+    try {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) w.classList.add("ruhig");
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) w.classList.add("maus");
+    } catch (e) {}
+  })();
+</script>
 <meta property="og:title" content="TCM &amp; Tuina Massage in Pinsdorf bei Gmunden">
 <meta property="og:description" content="Tuina Anmo Massage, Schröpfen, Laserakupunktur und Ernährung nach den fünf Elementen. Praxis in Pinsdorf, Salzkammergut.">
 <meta property="og:type" content="website">
@@ -17,9 +44,6 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Der Behandlungsraum der Praxis mit Massageliege und Meridiantafeln">
 <meta name="twitter:card" content="summary_large_image">
-
-<link rel="stylesheet" href="assets/fonts.css?v=63482dab">
-<link rel="stylesheet" href="assets/style.css?v=0dcf9c20">
 
 <script type="application/ld+json">
 {
@@ -77,398 +101,662 @@
   }
 }
 </script>
+
 </head>
-<body>
+<body class="">
 
-<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+<a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
 
-<!-- ===================== Kopf ===================== -->
-<header class="masthead">
-  <div class="wrap masthead__inner">
-    <a class="wordmark" href="#top">
-      <svg class="wordmark__mark" viewBox="0 0 200 200" aria-hidden="true">
-        <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
-      </svg>
-      <span class="wordmark__name">Sabine Grohe
-        <span class="wordmark__role">Wohlbefinden und Gesundheit mit TCM</span>
-      </span>
-    </a>
-    <a class="btn masthead__call" href="tel:+436765566998">Anrufen</a>
-    <nav class="nav" aria-label="Hauptnavigation">
-      <a href="#leistungen">Leistungen</a>
-      <a href="#buchen">Termin buchen</a>
-      <a href="#termine">Workshops</a>
-      <a href="#ueber-mich">Über mich</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
+<!-- Vorhang: der erste Moment. Hebt sich, sobald die Seite bereit ist. -->
+<div class="vorhang" id="vorhang" aria-hidden="true">
+  <div class="vorhang__mitte">
+    <svg class="vorhang__mark" viewBox="0 0 200 200">
+      <path d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+    </svg>
+    <span class="vorhang__wort">Sabine Grohe</span>
+    <span class="vorhang__linie"><i></i></span>
   </div>
-</header>
-
-<main id="inhalt">
-
-<!-- ===================== Neue Praxis ===================== -->
-<aside class="announce">
-  <div class="wrap announce__inner">
-    <span class="announce__tag">Neu</span>
-    <p class="announce__text">
-      Die Praxis ist umgezogen. Sie finden mich ab sofort in der
-      <strong>Zugleiten 21</strong> in <strong>4812 Pinsdorf</strong>.
+</div>
+<!-- Umzugshinweis: steht über allem, weil er zeitlich begrenzt wichtig ist -->
+<aside class="hinweisband">
+  <div class="hinweisband__innen">
+    <span class="hinweisband__marke">Neu</span>
+    <p class="hinweisband__text">
+      Die Praxis ist umgezogen — Sie finden mich ab sofort in der
+      <b>Zugleiten 21</b> in <b>4812 Pinsdorf</b>.
     </p>
-    <a class="announce__link" href="#kontakt">Anfahrt &amp; Kontakt →</a>
+    <a class="verweis" href="#kontakt">Anfahrt ansehen</a>
   </div>
 </aside>
 
-<!-- ===================== Hero ===================== -->
-<section class="hero" id="top">
-  <!-- Die Marke, wie im Original an drei Seiten angeschnitten -->
-  <svg class="hero__mark" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<header class="kopf" id="kopf" data-kopf>
+  <div class="kopf__innen">
+
+    <a class="marke" href="#oben" data-magnet>
+      <svg class="marke__zeichen" viewBox="0 0 200 200" aria-hidden="true">
+        <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+      </svg>
+      <span class="marke__text">
+        <span class="marke__name">Sabine Grohe</span>
+        <span class="marke__rolle">Traditionelle Chinesische Medizin</span>
+      </span>
+    </a>
+
+    <nav class="kopfnav" aria-label="Hauptnavigation">
+      <a href="#leistungen" data-nav>Leistungen</a>
+      <a href="#termine" data-nav>Workshops</a>
+      <a href="#ueber-mich" data-nav>Über mich</a>
+      <a href="#kontakt" data-nav>Kontakt</a>
+    </nav>
+
+    <div class="kopf__tat">
+      <a class="knopf knopf--klein" href="#buchen" data-magnet>
+        <span class="knopf__text"><span data-schub="Termin buchen">Termin buchen</span></span>
+      </a>
+      <button class="menuknopf" type="button" id="menuknopf"
+              aria-expanded="false" aria-controls="menu">
+        <span class="menuknopf__balken" aria-hidden="true"><i></i><i></i></span>
+        <span class="menuknopf__wort">Menü</span>
+      </button>
+    </div>
+
+  </div>
+  <div class="kopf__fortschritt" aria-hidden="true"><i data-fortschritt></i></div>
+</header>
+
+<!-- Vollflaechiges Menue fuers Handy -->
+<div class="menu" id="menu" hidden>
+  <nav class="menu__innen" aria-label="Menü">
+    <ul class="menu__liste">
+      <li><a href="#leistungen"><span>Leistungen</span></a></li>
+      <li><a href="#buchen"><span>Termin buchen</span></a></li>
+      <li><a href="#elemente"><span>Fünf Elemente</span></a></li>
+      <li><a href="#termine"><span>Workshops &amp; Kuren</span></a></li>
+      <li><a href="#ueber-mich"><span>Über mich</span></a></li>
+      <li><a href="#kontakt"><span>Kontakt &amp; Anfahrt</span></a></li>
+    </ul>
+    <div class="menu__fuss">
+      <div>
+        <p class="etikett">Praxis</p>
+        <p>Zugleiten 21<br>4812 Pinsdorf</p>
+      </div>
+      <div>
+        <p class="etikett">Direkt</p>
+        <p>
+          <a href="tel:+436765566998">+43 676 5566998</a><br>
+          <a href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a>
+        </p>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<main id="inhalt">
+<section class="hero" id="oben">
+  <canvas class="hero__feld" aria-hidden="true"></canvas>
+
+  <svg class="hero__mark" viewBox="0 0 200 200" aria-hidden="true">
     <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
   </svg>
 
-  <div class="wrap hero__grid">
-    <div class="hero__copy">
-      <p class="label" style="margin-bottom:1.1rem">TCM-Praxis in Pinsdorf · Salzkammergut</p>
-      <h1 class="hero__title">Wieder in <em>die Mitte</em> kommen.</h1>
-      <p class="lead">
+  <div class="hero__kopf">
+    <p class="etikett hero__etikett" data-hero-folge>TCM-Praxis in Pinsdorf · Salzkammergut</p>
+
+    <h1 class="hero__titel" data-teilen data-hero-folge>
+      <span class="zeile"><span class="zeile__i">Wieder in</span></span>
+      <span class="zeile"><span class="zeile__i"><em>die Mitte</em></span></span>
+      <span class="zeile"><span class="zeile__i">kommen.</span></span>
+    </h1>
+  </div>
+
+  <div class="hero__fuss">
+    <div class="hero__lauf" data-hero-folge>
+      <span><i class="punkt" aria-hidden="true"></i> Praxis in <b>4812 Pinsdorf</b></span>
+      <span>Termine <b>nach Vereinbarung</b></span>
+      <span><b>75 €</b> pro Stunde</span>
+    </div>
+
+    <div class="hero__rechts" data-hero-folge>
+      <p class="fuehrung">
         Angespannt, erschöpft, einfach nicht ausgeglichen? Über Pulstastung und
-        Zungenschau finde ich heraus, wo Ihr Qi ins Stocken geraten ist –
+        Zungenschau finde ich heraus, wo Ihr Qi ins Stocken geraten ist —
         und wir bringen es wieder in Fluss.
       </p>
-      <div class="hero__actions">
-        <a class="btn" href="#buchen">Termin vereinbaren</a>
-        <a class="btn btn--ghost" href="#termine">Workshops &amp; Kuren</a>
+      <div class="hero__tat">
+        <a class="knopf" href="#buchen" data-magnet>
+          <span class="knopf__text"><span data-schub="Termin vereinbaren">Termin vereinbaren</span></span>
+        </a>
+        <a class="knopf knopf--geist" href="#termine" data-magnet>
+          <span class="knopf__text"><span data-schub="Workshops &amp; Kuren">Workshops &amp; Kuren</span></span>
+        </a>
       </div>
     </div>
   </div>
+
+  <div class="scrollwink" aria-hidden="true">
+    <span class="scrollwink__rohr"><i></i></span>
+    Scrollen
+  </div>
 </section>
 
-<!-- Bildband -->
-<figure class="band">
-  <img src="img/web/praxis-raum.jpg" width="1800" height="599"
-       alt="Der Behandlungsraum der Praxis: Massageliege, Regal mit Tüchern und Meridiantafeln an der Wand">
+<!-- Bildband: der Behandlungsraum, über die volle Breite -->
+<figure class="band" style="margin:0">
+  <div class="bildvorhang" data-parallax="0.06">
+    <img src="img/web/praxis-raum.jpg" width="1800" height="599" fetchpriority="high"
+         alt="Der Behandlungsraum der Praxis: Massageliege, Regal mit Tüchern und Meridiantafeln an der Wand">
+  </div>
 </figure>
 
-<!-- ===================== Befund ===================== -->
-<section class="section section--wash" aria-labelledby="befund-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Der Befund</span></p>
-      <h2 class="section__title" id="befund-titel">Zuerst schauen, dann beginnen.</h2>
-      <p class="lead">
-        Jede Behandlung beginnt mit einer chinesischen Befundung. Erst dann weiß ich,
-        womit ich Ihnen am besten helfe.
-      </p>
+<!-- ===================== Befund =====================
+     Ruhiger Abschnitt nach dem Hero. Drei Zeichnungen, die
+     erklären, was beim ersten Termin tatsächlich passiert. -->
+<section class="abschnitt abschnitt--papier" id="befund" aria-labelledby="befund-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Der Befund</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="befund-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Zuerst schauen,</span></span>
+          <span class="zeile"><span class="zeile__i">dann beginnen.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Jede Behandlung beginnt mit einer chinesischen Befundung. Erst dann weiß ich,
+          womit ich Ihnen am besten helfe.
+        </p>
+      </div>
     </div>
 
-    <div class="trias">
-      <div class="trias__item">
-        <span class="trias__n">Mài zhěn</span>
+    <div class="befund">
+
+      <!-- Pulstastung: die Kurve wird gezeichnet, dann läuft ein Punkt darüber -->
+      <article class="befund__teil" data-heben>
+        <svg class="befund__bild befund__bild--breit" viewBox="0 0 320 90" fill="none" aria-hidden="true">
+          <line x1="0" y1="45" x2="320" y2="45" stroke="var(--linie)" stroke-width="1"/>
+          <path d="M0 45 H86 l10-13 12 28 14-36 12 42 14-21 H196 l10-10 12 20 10-10 H320"
+                stroke="var(--moos)" stroke-width="1.8" stroke-linejoin="round"
+                stroke-linecap="round" data-zeichnen style="--zeichendauer:1900ms"/>
+          <circle class="pulspunkt" r="3.4" style="offset-path:path('M0 45 H86 l10-13 12 28 14-36 12 42 14-21 H196 l10-10 12 20 10-10 H320')"/>
+        </svg>
+        <p class="befund__pinyin"><span class="han">脉诊</span> Mài zhěn</p>
         <h3>Pulstastung</h3>
-        <p>Der Puls wird an beiden Handgelenken in mehreren Tiefen ertastet. Er zeigt, ob Fülle oder Leere vorliegt, wo Hitze oder Kälte sitzt.</p>
-      </div>
-      <div class="trias__item">
-        <span class="trias__n">Shé zhěn</span>
+        <p>
+          Der Puls wird an beiden Handgelenken in mehreren Tiefen ertastet. Er zeigt,
+          ob Fülle oder Leere vorliegt, wo Hitze oder Kälte sitzt.
+        </p>
+      </article>
+
+      <!-- Zungenschau: Umriss mit Zonen, die nacheinander aufleuchten -->
+      <article class="befund__teil" data-heben style="--verzug:120ms">
+        <svg class="befund__bild" viewBox="0 0 160 90" fill="none" aria-hidden="true">
+          <defs>
+            <clipPath id="zungenform">
+              <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#zungenform)">
+            <rect class="zone" x="50" y="11" width="60" height="21"/>
+            <rect class="zone" x="50" y="34" width="60" height="21"/>
+            <rect class="zone" x="50" y="57" width="60" height="24"/>
+          </g>
+          <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
+                stroke="var(--moos)" stroke-width="1.6" data-zeichnen style="--zeichendauer:1700ms"/>
+          <line x1="80" y1="14" x2="80" y2="76" stroke="var(--linie)" stroke-width="1"/>
+        </svg>
+        <p class="befund__pinyin"><span class="han">舌诊</span> Shé zhěn</p>
         <h3>Zungenschau</h3>
-        <p>Form, Farbe und Belag der Zunge geben Auskunft über den Zustand der inneren Organe und über Nässe, Trockenheit oder Stagnation.</p>
-      </div>
-      <div class="trias__item">
-        <span class="trias__n">Miàn zhěn</span>
+        <p>
+          Form, Farbe und Belag der Zunge geben Auskunft über den Zustand der inneren
+          Organe und über Nässe, Trockenheit oder Stagnation.
+        </p>
+      </article>
+
+      <!-- Gesichtsdiagnose: Zonenraster über einem Umriss -->
+      <article class="befund__teil" data-heben style="--verzug:240ms">
+        <svg class="befund__bild" viewBox="0 0 160 90" fill="none" aria-hidden="true">
+          <defs>
+            <clipPath id="gesichtsform">
+              <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#gesichtsform)">
+            <rect class="zone" x="52" y="7"  width="56" height="21"/>
+            <rect class="zone" x="52" y="30" width="17" height="24"/>
+            <rect class="zone" x="71" y="30" width="18" height="24"/>
+            <rect class="zone" x="91" y="30" width="17" height="24"/>
+            <rect class="zone" x="52" y="56" width="56" height="26"/>
+          </g>
+          <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"
+                stroke="var(--moos)" stroke-width="1.6" data-zeichnen style="--zeichendauer:1800ms"/>
+        </svg>
+        <p class="befund__pinyin"><span class="han">面诊</span> Miàn zhěn</p>
         <h3>Gesichtsdiagnose</h3>
-        <p>Farbe, Ausdruck und Zonen im Gesicht ergänzen das Bild und helfen, die Behandlung auf Ihre Konstitution abzustimmen.</p>
+        <p>
+          Farbe, Ausdruck und Zonen im Gesicht ergänzen das Bild und helfen, die
+          Behandlung auf Ihre Konstitution abzustimmen.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== Leistungen =====================
+     Der dichte Abschnitt: dunkler Grund, grosse Namen, und beim
+     Aufklappen Bild und Text. Mit der Maus wandert eine Vorschau mit. -->
+<section class="abschnitt abschnitt--tinte" id="leistungen" aria-labelledby="leistungen-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Leistungen</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="leistungen-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Womit ich</span></span>
+          <span class="zeile"><span class="zeile__i">arbeite.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Vier Methoden, die ich je nach Befund kombiniere. Was zu Ihnen passt,
+          zeigt sich nach dem ersten Gespräch.
+        </p>
       </div>
     </div>
+
+    <div class="leistungen" data-leistungen>
+
+      <article class="leistung" data-bild="img/web/tuina.jpg">
+        <h3 class="leistung__ueber">
+          <button class="leistung__kopf" type="button">
+            <span class="leistung__nr">01</span>
+            <span class="leistung__namen">
+              <span class="leistung__titel">Tuina Anmo Massage</span>
+              <span class="leistung__kicker">Eine der fünf Säulen der TCM</span>
+            </span>
+            <span class="leistung__zeichen" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="leistung__inhalt">
+          <div class="leistung__innen">
+            <figure class="leistung__figur" style="margin:0">
+              <img src="img/web/tuina.jpg" width="800" height="1200" loading="lazy" decoding="async"
+                   alt="Hände bei einer Tuina-Anmo-Massage auf dem Rücken einer liegenden Person">
+            </figure>
+            <div class="leistung__text fliesstext">
+              <p>
+                Tuina Anmo ist die traditionelle Heilmassage der chinesischen Medizin. Je nach
+                Bedarf kombiniere ich Muskelentspannung, Akupressur, Leitbahntherapie und
+                Mobilisation.
+              </p>
+              <p><strong>Hilfreich bei:</strong></p>
+              <ul>
+                <li>muskulären Verspannungen durch Stress und Fehlhaltungen</li>
+                <li>Schmerzen nach Trauma, Unfall oder Gelenksveränderung</li>
+                <li>Kopfschmerzen, Verdauungs- und Zyklusstörungen, Schlafproblemen, Unruhe</li>
+                <li>zur Vorbeugung und zum Stärken der Konstitution</li>
+                <li>begleitend zur Behandlung durch Arzt und Physiotherapie</li>
+                <li>oder einfach zum Wohlfühlen</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="leistung" data-bild="img/web/schroepfen.jpg">
+        <h3 class="leistung__ueber">
+          <button class="leistung__kopf" type="button">
+            <span class="leistung__nr">02</span>
+            <span class="leistung__namen">
+              <span class="leistung__titel">Moxa, Schröpfen &amp; Gua Sha</span>
+              <span class="leistung__kicker">Ergänzend zur Massage</span>
+            </span>
+            <span class="leistung__zeichen" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="leistung__inhalt">
+          <div class="leistung__innen">
+            <figure class="leistung__figur" style="margin:0">
+              <img src="img/web/schroepfen.jpg" width="900" height="1600" loading="lazy" decoding="async"
+                   alt="Zwei Schröpfgläser auf dem Rücken einer liegenden Person, daneben die Hand der Praktikerin">
+            </figure>
+            <div class="leistung__text fliesstext">
+              <p>
+                Diese drei Verfahren setze ich bei Bedarf zusätzlich zur Massage ein — dort, wo
+                die Hände allein nicht tief genug reichen.
+              </p>
+              <p>
+                <strong>Moxibustion</strong> wärmt mit glimmendem Beifuß gezielt einzelne Punkte
+                und wirkt bei Kälte und Leere. <strong>Schröpfen</strong> löst festsitzende
+                Stagnationen im Gewebe. <strong>Gua Sha</strong>, das Schaben, bringt Stauungen
+                an die Oberfläche und macht sie damit lösbar.
+              </p>
+              <div class="leistung__schilder">
+                <span class="schild">Moxibustion</span>
+                <span class="schild">Schröpfen</span>
+                <span class="schild">Gua Sha (Schaben)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="leistung" data-bild="img/web/laser.jpg">
+        <h3 class="leistung__ueber">
+          <button class="leistung__kopf" type="button">
+            <span class="leistung__nr">03</span>
+            <span class="leistung__namen">
+              <span class="leistung__titel">Magnet- und Laserakupunktur</span>
+              <span class="leistung__kicker">Akupunktur ohne Hautverletzung</span>
+            </span>
+            <span class="leistung__zeichen" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="leistung__inhalt">
+          <div class="leistung__innen">
+            <div class="leistung__paar">
+              <figure style="margin:0">
+                <img src="img/web/laser.jpg" width="800" height="1200" loading="lazy" decoding="async"
+                     alt="Laserakupunktur: das Handgerät setzt einen roten Lichtpunkt auf die Haut">
+              </figure>
+              <figure style="margin:0">
+                <img src="img/web/magnet.jpg" width="800" height="1200" loading="lazy" decoding="async"
+                     alt="Magnetakupunktur: kleine Magnete werden auf Akupunkturpunkte gesetzt">
+              </figure>
+            </div>
+            <div class="leistung__text fliesstext">
+              <p>
+                Diese Formen der Akupunktur beruhen auf denselben Wirkprinzipien wie die
+                Nadelakupunktur, kommen aber ohne Hautverletzung aus.
+              </p>
+              <p>
+                Nach der chinesischen Befundung erstelle ich ein Behandlungskonzept, das
+                Disharmonien im Leitbahnsystem über die Akupunkturpunkte ausgleicht. Gerade
+                die Laserakupunktur eignet sich gut für Kinder, weil sie völlig schmerzfrei ist.
+              </p>
+              <div class="leistung__schilder">
+                <span class="schild">Schmerzfrei</span>
+                <span class="schild">Auch für Kinder</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="leistung" data-bild="img/web/kraeuter.jpg">
+        <h3 class="leistung__ueber">
+          <button class="leistung__kopf" type="button">
+            <span class="leistung__nr">04</span>
+            <span class="leistung__namen">
+              <span class="leistung__titel">Ernährung und Kräuter</span>
+              <span class="leistung__kicker">Lebenspflege nach den fünf Elementen</span>
+            </span>
+            <span class="leistung__zeichen" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="leistung__inhalt">
+          <div class="leistung__innen">
+            <figure class="leistung__figur" style="margin:0">
+              <img src="img/web/kraeuter.jpg" width="900" height="1200" loading="lazy" decoding="async"
+                   alt="Kräuter und Zutaten auf einem Leinentuch: Ingwer, getrocknete Wurzeln, Thymian, Salbei, Blüten, Pinienkerne und ein Glas Tee mit Goji-Beeren">
+            </figure>
+            <div class="leistung__text fliesstext">
+              <p>
+                Was wir essen, soll den Körper stützen und Energie geben — und kann bestehende
+                Disharmonien spürbar beeinflussen. Bei der Ernährungsempfehlung schaue ich auf
+                Ihre Konstitution, Ihre momentane Situation und die äußeren Einflüsse.
+              </p>
+              <p>
+                Mir ist wichtig, dass die Empfehlungen alltagstauglich sind. Mit westlichen und
+                chinesischen Kräutermischungen als Tee oder Presslinge lässt sich der
+                Therapieerfolg zusätzlich verstärken — dazu berate ich Sie gerne persönlich.
+              </p>
+              <div class="leistung__schilder">
+                <span class="schild">5-Elemente-Ernährung</span>
+                <span class="schild">Kräutertherapie</span>
+                <span class="schild">Kochworkshops</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
   </div>
 </section>
 
-<!-- ===================== Leistungen ===================== -->
-<section class="section" id="leistungen" aria-labelledby="leistungen-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Leistungen</span></p>
-      <h2 class="section__title" id="leistungen-titel">Was ich anbiete</h2>
+<!-- ===================== Termin buchen =====================
+     Bewusst ruhig. Hier soll niemand von Gestaltung abgelenkt werden. -->
+<section class="abschnitt abschnitt--papier abschnitt--linie" id="buchen" aria-labelledby="buchen-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Termin buchen</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="buchen-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Einen Termin</span></span>
+          <span class="zeile"><span class="zeile__i">finden wir.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Wählen Sie aus, worum es geht — im Kalender sehen Sie meine freien Zeiten und
+          bekommen die Bestätigung sofort. Ist nichts Passendes dabei, rufen Sie bitte
+          einfach an, es findet sich fast immer etwas.
+        </p>
+      </div>
     </div>
 
-    <div class="services">
-
-      <article class="service reveal">
-        <div class="service__figure">
-          <img src="img/web/tuina.jpg" width="800" height="1200" loading="lazy"
-               alt="Hände bei einer Tuina-Anmo-Massage auf dem Rücken einer liegenden Person">
-        </div>
-        <div>
-          <p class="label service__kicker">Eine der fünf Säulen der TCM</p>
-          <h3 class="service__title">Tuina Anmo Massage</h3>
-          <div class="service__body prose">
-            <p>
-              Tuina Anmo ist die traditionelle Heilmassage der chinesischen Medizin. Je nach
-              Bedarf kombiniere ich Muskelentspannung, Akupressur, Leitbahntherapie und
-              Mobilisation.
-            </p>
-            <p><strong>Hilfreich bei:</strong></p>
-            <ul>
-              <li>muskulären Verspannungen durch Stress und Fehlhaltungen</li>
-              <li>Schmerzen nach Trauma, Unfall oder Gelenksveränderung</li>
-              <li>Kopfschmerzen, Verdauungs- und Zyklusstörungen, Schlafproblemen, Unruhe</li>
-              <li>zur Vorbeugung und zum Stärken der Konstitution</li>
-              <li>begleitend zur Behandlung durch Arzt und Physiotherapie</li>
-              <li>oder einfach zum Wohlfühlen</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="service reveal">
-        <div class="service__figure">
-          <img src="img/web/schroepfen.jpg" width="900" height="1600" loading="lazy"
-               alt="Zwei Schröpfgläser auf dem Rücken einer liegenden Person, daneben die Hand der Praktikerin">
-        </div>
-        <div>
-          <p class="label service__kicker">Ergänzend zur Massage</p>
-          <h3 class="service__title">Moxa, Schröpfen &amp; Gua Sha</h3>
-          <div class="service__body prose">
-            <p>
-              Diese drei Verfahren setze ich bei Bedarf zusätzlich zur Massage ein – dort, wo
-              die Hände allein nicht tief genug reichen.
-            </p>
-            <p>
-              <strong>Moxibustion</strong> wärmt mit glimmendem Beifuß gezielt einzelne Punkte
-              und wirkt bei Kälte und Leere. <strong>Schröpfen</strong> löst festsitzende
-              Stagnationen im Gewebe. <strong>Gua Sha</strong>, das Schaben, bringt Stauungen
-              an die Oberfläche und macht sie damit lösbar.
-            </p>
-          </div>
-          <div class="service__tags">
-            <span class="tag">Moxibustion</span>
-            <span class="tag">Schröpfen</span>
-            <span class="tag">Gua Sha (Schaben)</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="service reveal">
-        <div class="service__figure">
-          <img src="img/web/laser.jpg" width="800" height="1200" loading="lazy"
-               alt="Laserakupunktur: das Handgerät setzt einen roten Lichtpunkt auf die Haut">
-        </div>
-        <div>
-          <p class="label service__kicker">Akupunktur ohne Hautverletzung</p>
-          <h3 class="service__title">Magnet- und Laserakupunktur</h3>
-          <div class="service__body prose">
-            <p>
-              Diese Formen der Akupunktur beruhen auf denselben Wirkprinzipien wie die
-              Nadelakupunktur, kommen aber ohne Hautverletzung aus.
-            </p>
-            <p>
-              Nach der chinesischen Befundung erstelle ich ein Behandlungskonzept, das
-              Disharmonien im Leitbahnsystem über die Akupunkturpunkte ausgleicht. Gerade
-              die Laserakupunktur eignet sich gut für Kinder, weil sie völlig schmerzfrei ist.
-            </p>
-          </div>
-        </div>
-      </article>
-
-      <article class="service reveal">
-        <div class="service__figure">
-          <img src="img/web/kraeuter.jpg" width="900" height="1200" loading="lazy"
-               alt="Kräuter und Zutaten auf einem Leinentuch ausgelegt: Ingwer, getrocknete Wurzeln, Thymian, Salbei, blaue und gelbe Blüten, Pinienkerne und ein Glas Tee mit Goji-Beeren">
-        </div>
-        <div>
-          <p class="label service__kicker">Lebenspflege nach den fünf Elementen</p>
-          <h3 class="service__title">Ernährung und Kräuter</h3>
-          <div class="service__body prose">
-            <p>
-              Was wir essen, soll den Körper stützen und Energie geben – und kann bestehende
-              Disharmonien spürbar beeinflussen. Bei der Ernährungsempfehlung schaue ich auf
-              Ihre Konstitution, Ihre momentane Situation und die äußeren Einflüsse.
-            </p>
-            <p>
-              Mir ist wichtig, dass die Empfehlungen alltagstauglich sind. Mit westlichen und
-              chinesischen Kräutermischungen als Tee oder Presslinge lässt sich der
-              Therapieerfolg zusätzlich verstärken – dazu berate ich Sie gerne persönlich.
-            </p>
-          </div>
-          <div class="service__tags">
-            <span class="tag">5-Elemente-Ernährung</span>
-            <span class="tag">Kräutertherapie</span>
-            <span class="tag">Kochworkshops</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===================== Termin buchen ===================== -->
-<section class="section section--rule" id="buchen" aria-labelledby="buchen-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Termin buchen</span></p>
-      <h2 class="section__title" id="buchen-titel">Termin buchen</h2>
-      <p class="lead">
-        Wählen Sie aus, worum es geht – im Kalender sehen Sie meine freien Zeiten und
-        bekommen die Bestätigung sofort. Ist nichts Passendes dabei, rufen Sie bitte
-        einfach an, es findet sich fast immer etwas.
-      </p>
-    </div>
-
-    <div class="preisband">
-      <p class="preis">75 €<span> pro Stunde</span></p>
-      <p class="contact__note">
+    <div class="preisband" data-heben>
+      <p class="preis">75 €<small>pro Stunde</small></p>
+      <p class="preisband__text">
         Abgerechnet wird nach tatsächlicher Dauer. Eine Behandlung dauert
         meist 45 bis 60 Minuten, das Erstgespräch mit Befundung länger.
       </p>
     </div>
 
-    <div class="onlinebox" id="online-buchung" hidden></div>
+    <div class="buchwege" id="buchwege" hidden></div>
 
-    <div class="slots" id="slots-liste">
-      <p class="slots__laedt">Freie Termine werden geladen …</p>
+    <div class="plaetze" id="plaetze-liste">
+      <p class="plaetze__laedt">Freie Termine werden geladen …</p>
     </div>
+    <p class="plaetze__fuss" id="plaetze-stand"></p>
 
-    <p class="slots__fuss" id="slots-stand"></p>
-
-    <div class="slots__notfall">
+    <div class="notfall" data-heben>
       <p>
         <strong>Kein passender Termin dabei?</strong>
         Rufen Sie an unter <a href="tel:+436765566998">+43 676 5566998</a> oder
-        <a href="#kontakt">schreiben Sie mir</a>. Ich melde mich verlässlich zurück.
+        <a href="#anfrage">schreiben Sie mir</a>. Ich melde mich verlässlich zurück.
       </p>
     </div>
+
   </div>
 </section>
 
-<!-- ===================== Fünf Elemente ===================== -->
-<section class="section section--wash" id="elemente" aria-labelledby="elemente-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Wu Xing</span></p>
-      <h2 class="section__title" id="elemente-titel">Die fünf Wandlungsphasen</h2>
-      <p class="lead">
-        Jede Jahreszeit gehört zu einem Element, jedes Element zu bestimmten Organen –
-        und jedes Element nährt das nächste. Deshalb sind meine Kochworkshops nicht
-        beliebig angesetzt, sondern folgen dem Lauf des Jahres.
-      </p>
-    </div>
+<!-- ===================== Fünf Wandlungsphasen =====================
+     Die begehbare Grafik. Element wählen — links leuchtet der Bogen
+     auf, der zum nächsten Element führt, rechts steht, wofür es steht. -->
+<section class="abschnitt abschnitt--tinte" id="elemente" aria-labelledby="elemente-titel">
+  <div class="innen">
 
-    <div class="elements">
-      <svg class="wuxing" viewBox="-22 0 384 300" role="img"
-           aria-label="Der Nährungszyklus der fünf Wandlungsphasen: Holz nährt Feuer, Feuer nährt Erde, Erde nährt Metall, Metall nährt Wasser, Wasser nährt Holz.">
-        <circle class="wx-ring" cx="170" cy="155" r="78"/>
-
-        <!-- Pfeilspitzen: der Nährungszyklus läuft im Uhrzeigersinn -->
-        <g class="wx-arrow">
-          <polygon points="0,-5 9,0 0,5" transform="translate(215.9,91.9) rotate(36)"/>
-          <polygon points="0,-5 9,0 0,5" transform="translate(244.2,179.1) rotate(108)"/>
-          <polygon points="0,-5 9,0 0,5" transform="translate(170.0,233.0) rotate(180)"/>
-          <polygon points="0,-5 9,0 0,5" transform="translate(95.8,179.1) rotate(252)"/>
-          <polygon points="0,-5 9,0 0,5" transform="translate(124.1,91.9) rotate(324)"/>
-        </g>
-
-        <circle cx="170" cy="77" r="11" fill="var(--el-holz)"/>
-        <text class="wx-name"   x="170" y="42" text-anchor="middle" fill="var(--el-holz)">Holz</text>
-        <text class="wx-season" x="170" y="57" text-anchor="middle">Frühling · Leber</text>
-
-        <circle cx="244.2" cy="130.9" r="11" fill="var(--el-feuer)"/>
-        <text class="wx-name"   x="262" y="127" text-anchor="start" fill="var(--el-feuer)">Feuer</text>
-        <text class="wx-season" x="262" y="142" text-anchor="start">Sommer · Herz</text>
-
-        <circle cx="215.9" cy="218.1" r="11" fill="var(--el-erde)"/>
-        <text class="wx-name"   x="216" y="252" text-anchor="middle" fill="var(--el-erde)">Erde</text>
-        <text class="wx-season" x="216" y="267" text-anchor="middle">Spätsommer · Milz</text>
-
-        <circle cx="124.1" cy="218.1" r="11" fill="var(--el-metall)"/>
-        <text class="wx-name"   x="124" y="252" text-anchor="middle" fill="var(--el-metall)">Metall</text>
-        <text class="wx-season" x="124" y="267" text-anchor="middle">Herbst · Lunge</text>
-
-        <circle cx="95.8" cy="130.9" r="11" fill="var(--el-wasser)"/>
-        <text class="wx-name"   x="78" y="127" text-anchor="end" fill="var(--el-wasser)">Wasser</text>
-        <text class="wx-season" x="78" y="142" text-anchor="end">Winter · Niere</text>
-      </svg>
-
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Wu Xing <span class="han" aria-hidden="true">五行</span></p>
       <div>
-        <div class="prose">
-          <p>
-            Im Kochworkshop verbinden wir Theorie und Praxis: Wir schauen uns an, was das
-            Element der jeweiligen Jahreszeit für Ihren Körper bedeutet, und kochen
-            anschließend gemeinsam. Sie gehen mit Rezepten nach Hause, die sich ohne
-            Sonderzutaten in den Alltag einbauen lassen.
-          </p>
-        </div>
-        <div class="elkey">
-          <div class="elkey__row"><span class="elkey__dot" style="background:var(--el-holz)"></span><span class="elkey__name">Holz</span><span class="elkey__txt">Freier Energiefluss, Entgiftung, emotionale Balance</span></div>
-          <div class="elkey__row"><span class="elkey__dot" style="background:var(--el-feuer)"></span><span class="elkey__name">Feuer</span><span class="elkey__txt">Lebensfreude und Aktivität – ohne innere Hitze und Unruhe</span></div>
-          <div class="elkey__row"><span class="elkey__dot" style="background:var(--el-erde)"></span><span class="elkey__name">Erde</span><span class="elkey__txt">Die Mitte: Verdauung, Gewicht, Energie aus der Nahrung</span></div>
-          <div class="elkey__row"><span class="elkey__dot" style="background:var(--el-metall)"></span><span class="elkey__name">Metall</span><span class="elkey__txt">Abwehrkraft, Haut und Atemwege vor dem Winter</span></div>
-          <div class="elkey__row"><span class="elkey__dot" style="background:var(--el-wasser)"></span><span class="elkey__name">Wasser</span><span class="elkey__txt">Regeneration, Vitalität, innere Stabilität</span></div>
-        </div>
+        <h2 class="kopfzeile__titel" id="elemente-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Die fünf</span></span>
+          <span class="zeile"><span class="zeile__i">Wandlungsphasen.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Jede Jahreszeit gehört zu einem Element, jedes Element zu bestimmten Organen —
+          und jedes Element nährt das nächste. Deshalb sind meine Kochworkshops nicht
+          beliebig angesetzt, sondern folgen dem Lauf des Jahres.
+        </p>
       </div>
     </div>
+
+    <div class="wuxing">
+
+      <div class="wuxing__kreis" data-wuxing>
+        <svg viewBox="-22 -8 384 358" role="img"
+             aria-label="Der Nährungszyklus der fünf Wandlungsphasen: Holz nährt Feuer, Feuer nährt Erde, Erde nährt Metall, Metall nährt Wasser, Wasser nährt Holz. Die Elemente lassen sich einzeln auswählen.">
+
+          <circle class="wx-ring" cx="170" cy="170" r="100"/>
+
+          <!-- Die Bögen des Nährungszyklus, im Uhrzeigersinn -->
+          <path class="wx-bogen" data-von="holz"   style="--el:var(--el-holz-h)"   d="M170,70 A100,100 0 0,1 265.1,139.1"/>
+          <path class="wx-bogen" data-von="feuer"  style="--el:var(--el-feuer-h)"  d="M265.1,139.1 A100,100 0 0,1 228.8,250.9"/>
+          <path class="wx-bogen" data-von="erde"   style="--el:var(--el-erde-h)"   d="M228.8,250.9 A100,100 0 0,1 111.2,250.9"/>
+          <path class="wx-bogen" data-von="metall" style="--el:var(--el-metall-h)" d="M111.2,250.9 A100,100 0 0,1 74.9,139.1"/>
+          <path class="wx-bogen" data-von="wasser" style="--el:var(--el-wasser-h)" d="M74.9,139.1 A100,100 0 0,1 170,70"/>
+
+          <!-- Pfeilspitzen: die Richtung des Zyklus -->
+          <g fill="var(--hell-3)" aria-hidden="true">
+            <polygon points="0,-4 8,0 0,4" transform="translate(228.8,89.1) rotate(36)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(265.1,200.9) rotate(108)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(170,270) rotate(180)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(74.9,200.9) rotate(252)"/>
+            <polygon points="0,-4 8,0 0,4" transform="translate(111.2,89.1) rotate(324)"/>
+          </g>
+
+          <!-- Ein Lichtpunkt läuft den Zyklus entlang -->
+          <circle class="wx-laeufer" aria-hidden="true"
+                  style="offset-path:path('M170,70 A100,100 0 1,1 170,270 A100,100 0 1,1 170,70')"/>
+
+          <g class="wx-knopf" data-element="holz" style="--el:var(--el-holz-h)"
+             role="button" tabindex="0" aria-pressed="false" aria-label="Holz — Frühling, Leber">
+            <circle class="wx-treffer" cx="170" cy="70" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="170" cy="70" r="27"/>
+            <circle class="wx-scheibe" cx="170" cy="70" r="17"/>
+            <text class="wx-han" x="170" y="70">木</text>
+            <text class="wx-name" x="170" y="34" text-anchor="middle" dominant-baseline="central">Holz</text>
+          </g>
+
+          <g class="wx-knopf" data-element="feuer" style="--el:var(--el-feuer-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Feuer — Sommer, Herz">
+            <circle class="wx-treffer" cx="265.1" cy="139.1" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="265.1" cy="139.1" r="27"/>
+            <circle class="wx-scheibe" cx="265.1" cy="139.1" r="17"/>
+            <text class="wx-han" x="265.1" y="139.1">火</text>
+            <text class="wx-name" x="292" y="129.8" text-anchor="start" dominant-baseline="central">Feuer</text>
+          </g>
+
+          <g class="wx-knopf" data-element="erde" style="--el:var(--el-erde-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Erde — Spätsommer, Milz">
+            <circle class="wx-treffer" cx="228.8" cy="250.9" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="228.8" cy="250.9" r="27"/>
+            <circle class="wx-scheibe" cx="228.8" cy="250.9" r="17"/>
+            <text class="wx-han" x="228.8" y="250.9">土</text>
+            <text class="wx-name" x="228.8" y="292" text-anchor="middle" dominant-baseline="central">Erde</text>
+          </g>
+
+          <g class="wx-knopf" data-element="metall" style="--el:var(--el-metall-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Metall — Herbst, Lunge">
+            <circle class="wx-treffer" cx="111.2" cy="250.9" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="111.2" cy="250.9" r="27"/>
+            <circle class="wx-scheibe" cx="111.2" cy="250.9" r="17"/>
+            <text class="wx-han" x="111.2" y="250.9">金</text>
+            <text class="wx-name" x="111.2" y="292" text-anchor="middle" dominant-baseline="central">Metall</text>
+          </g>
+
+          <g class="wx-knopf" data-element="wasser" style="--el:var(--el-wasser-h)"
+             role="button" tabindex="-1" aria-pressed="false" aria-label="Wasser — Winter, Niere">
+            <circle class="wx-treffer" cx="74.9" cy="139.1" r="32" fill="rgba(0,0,0,0)"/>
+            <circle class="wx-hof" cx="74.9" cy="139.1" r="27"/>
+            <circle class="wx-scheibe" cx="74.9" cy="139.1" r="17"/>
+            <text class="wx-han" x="74.9" y="139.1">水</text>
+            <text class="wx-name" x="48" y="129.8" text-anchor="end" dominant-baseline="central">Wasser</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="wuxing__tafel" data-wuxing-tafel data-heben>
+        <div class="wxt__wechsel" data-wuxing-wechsel aria-live="polite"></div>
+        <p class="wuxing__hinweis">
+          <b>Element wählen</b>, um mehr zu sehen.
+          Im Kochworkshop verbinden wir Theorie und Praxis: Wir schauen uns an, was das
+          Element der jeweiligen Jahreszeit für Ihren Körper bedeutet, und kochen
+          anschließend gemeinsam. <a href="#termine">Zu den Terminen</a>
+        </p>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- ===================== Termine ===================== -->
-<section class="section" id="termine" aria-labelledby="termine-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Workshops &amp; Kuren</span></p>
-      <h2 class="section__title" id="termine-titel">Kommende Workshops und Kuren</h2>
-      <p class="lead">
-        Kochworkshops dauern rund vier Stunden, finden in kleinen Gruppen statt und
-        umfassen Theorie und Kochpraxis. Rezepte und Lebensmittel sind im Preis enthalten.
-      </p>
+<!-- ===================== Workshops und Kuren ===================== -->
+<section class="abschnitt abschnitt--papier" id="termine" aria-labelledby="termine-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Workshops &amp; Kuren</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="termine-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Kommende</span></span>
+          <span class="zeile"><span class="zeile__i">Termine.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Kochworkshops dauern rund vier Stunden, finden in kleinen Gruppen statt und
+          umfassen Theorie und Kochpraxis. Rezepte und Lebensmittel sind im Preis enthalten.
+        </p>
+      </div>
     </div>
 
     <div class="kochbilder">
-      <figure>
-        <img src="img/web/kochworkshop.jpg" width="1200" height="1170" loading="lazy"
-             alt="Angerichtete Teller mit Rote-Bete-Carpaccio, Rucola und Pinienkernen aus einem Kochworkshop">
+      <figure style="margin:0">
+        <div class="bildvorhang zoombild">
+          <img src="img/web/kochworkshop.jpg" width="1200" height="1170" loading="lazy" decoding="async"
+               alt="Angerichtete Teller mit Rote-Bete-Carpaccio, Rucola und Pinienkernen aus einem Kochworkshop">
+        </div>
       </figure>
-      <figure>
-        <img src="img/web/kochworkshop-2.jpg" width="881" height="1200" loading="lazy"
-             alt="Beim Kochworkshop wird eine Zutat über eine Schale gerieben, daneben Gewürze, Öl und Avocado">
+      <figure style="margin:0">
+        <div class="bildvorhang zoombild" style="--verzug:160ms">
+          <img src="img/web/kochworkshop-2.jpg" width="881" height="1200" loading="lazy" decoding="async"
+               alt="Beim Kochworkshop wird eine Zutat über eine Schale gerieben, daneben Gewürze, Öl und Avocado">
+        </div>
       </figure>
     </div>
 
-    <div class="termine__toolbar">
-      <div class="filters" id="termine-filter" hidden></div>
+    <div class="termine__leiste" id="termine-filter" hidden></div>
+
+    <div class="termine" id="termine-liste">
+      <div class="termine__leer"><p>Termine werden geladen …</p></div>
     </div>
 
-    <div class="termine__list" id="termine-liste">
-      <div class="termine__empty"><p>Termine werden geladen …</p></div>
-    </div>
-
-    <div class="termine__foot">
-      <span id="termine-stand"></span>
-    </div>
-
-    <figure style="margin:clamp(2.5rem,5vw,4rem) 0 0">
-      <img src="img/web/praxis-raum-weit.jpg" width="1600" height="666" loading="lazy"
-           style="width:100%;height:clamp(240px,34vw,440px);object-fit:cover;object-position:50% 50%"
-           alt="Der Behandlungsraum der Praxis mit Massageliege, Meridiantafeln und Regal">
-      <figcaption style="margin-top:.8rem;font-size:.98rem;color:var(--ink-3)">
-        Der Behandlungsraum in der Zugleiten 21.
-      </figcaption>
-    </figure>
   </div>
+
+  <!-- Bildband: der Behandlungsraum in voller Breite -->
+  <figure class="band" style="margin:clamp(3rem,7vw,6rem) 0 0">
+    <div class="bildvorhang" data-parallax="0.05">
+      <img src="img/web/praxis-raum-weit.jpg" width="1600" height="666" loading="lazy" decoding="async"
+           alt="Der Behandlungsraum der Praxis mit Massageliege, Meridiantafeln und Regal">
+    </div>
+    <figcaption>Der Behandlungsraum in der Zugleiten 21.</figcaption>
+  </figure>
 </section>
 
 <!-- ===================== Über mich ===================== -->
-<section class="section section--rule" id="ueber-mich" aria-labelledby="ueber-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Über mich</span></p>
-      <h2 class="section__title" id="ueber-titel">Sabine Grohe</h2>
+<section class="abschnitt abschnitt--wasch" id="ueber-mich" aria-labelledby="ueber-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Über mich</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="ueber-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Sabine</span></span>
+          <span class="zeile"><span class="zeile__i">Grohe.</span></span>
+        </h2>
+      </div>
     </div>
 
-    <div class="about">
-      <img class="about__portrait" src="img/web/sabine.jpg" width="1000" height="761" loading="lazy"
-           alt="Porträt von Sabine Grohe">
+    <div class="ueber">
       <div>
-        <div class="prose">
-          <p class="lead" style="margin-bottom:1.2rem">
+        <figure class="bildvorhang ueber__portraet" style="margin:0">
+          <img src="img/web/sabine.jpg" width="1000" height="761" loading="lazy" decoding="async"
+               alt="Porträt von Sabine Grohe">
+        </figure>
+        <p class="ueber__unterschrift">Sabine Grohe, Tuina Anmo Praktikerin.</p>
+      </div>
+
+      <div class="ueber__text">
+        <div class="fliesstext" data-heben>
+          <p class="fuehrung" style="margin-bottom:1.2rem">
             Mit den traditionellen chinesischen Lehren bin ich schon früh in Berührung
-            gekommen – meine Mutter war Feng-Shui-Beraterin.
+            gekommen — meine Mutter war Feng-Shui-Beraterin.
           </p>
           <p>
             Diese Philosophie hat mich von Anfang an beeindruckt, und ich habe meinen Weg in
@@ -477,79 +765,127 @@
           </p>
         </div>
 
-        <div class="cv">
-          <div class="cv__row"><span class="cv__yr">2005–2006</span><span>Chinesische Energiearbeit</span></div>
-          <div class="cv__row"><span class="cv__yr">2011–2013</span><span>Tuina Anmo Massage</span></div>
-          <div class="cv__row"><span class="cv__yr">2016–2018</span><span>Kräutertherapie mit westlichen und chinesischen Kräutern</span></div>
-          <div class="cv__row"><span class="cv__yr">2018–2019</span><span>Differentialdiagnostik in der TCM</span></div>
-          <div class="cv__row"><span class="cv__yr">2020</span><span>Ernährung nach den fünf Elementen</span></div>
+        <div>
+          <h3 class="etikett" style="margin-bottom:1.25rem">Ausbildungen</h3>
+          <div class="weg">
+            <div class="weg__halt">
+              <span class="weg__jahr">2005–2006</span>
+              <span class="weg__was">Chinesische Energiearbeit</span>
+            </div>
+            <div class="weg__halt">
+              <span class="weg__jahr">2011–2013</span>
+              <span class="weg__was">Tuina Anmo Massage</span>
+            </div>
+            <div class="weg__halt">
+              <span class="weg__jahr">2016–2018</span>
+              <span class="weg__was">Kräutertherapie mit westlichen und chinesischen Kräutern</span>
+            </div>
+            <div class="weg__halt">
+              <span class="weg__jahr">2018–2019</span>
+              <span class="weg__was">Differentialdiagnostik in der TCM</span>
+            </div>
+            <div class="weg__halt">
+              <span class="weg__jahr">2020</span>
+              <span class="weg__was">Ernährung nach den fünf Elementen</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ===================== Kontakt ===================== -->
-<section class="section section--wash" id="kontakt" aria-labelledby="kontakt-titel">
-  <div class="wrap">
-    <div class="section__head">
-      <p class="label eyebrow"><span>Kontakt</span></p>
-      <h2 class="section__title" id="kontakt-titel">Schreiben Sie mir oder rufen Sie an</h2>
+<!-- ===================== Kontakt, Anfahrt, Formular ===================== -->
+<section class="abschnitt abschnitt--papier" id="kontakt" aria-labelledby="kontakt-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Kontakt</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="kontakt-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Schreiben Sie mir</span></span>
+          <span class="zeile"><span class="zeile__i">oder rufen Sie an.</span></span>
+        </h2>
+      </div>
     </div>
 
-    <div class="contact">
-      <div class="contact__block">
+    <div class="kontakt">
+      <div class="kontakt__block" data-heben>
         <h3>Praxis</h3>
-        <div class="contact__list">
-          <span>Sabine Grohe</span>
-          <span>Zugleiten 21</span>
-          <span>4812 Pinsdorf</span>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Zugleiten+21+4812+Pinsdorf+%C3%96sterreich"
-             target="_blank" rel="noopener noreferrer">Auf der Karte ansehen →</a>
-        </div>
+        <p class="kontakt__zeilen">
+          Sabine Grohe<br>
+          Zugleiten 21<br>
+          4812 Pinsdorf
+        </p>
+        <a class="pfeilverweis" target="_blank" rel="noopener noreferrer"
+           href="https://www.google.com/maps/search/?api=1&amp;query=Zugleiten+21+4812+Pinsdorf+%C3%96sterreich">
+          Auf der Karte ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
       </div>
 
-      <div class="contact__block">
+      <div class="kontakt__block" data-heben style="--verzug:120ms">
         <h3>Erreichbarkeit</h3>
-        <div class="contact__list">
-          <a href="tel:+436765566998">+43 676 5566998</a>
-          <a href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a>
-        </div>
-        <p class="contact__note">
+        <p class="kontakt__gross">
+          <a class="verweis" href="tel:+436765566998">+43 676 5566998</a>
+          <a class="verweis" href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a>
+        </p>
+        <p class="kontakt__notiz">
           Rufen Sie einfach an. Wenn ich gerade in einer Behandlung bin, hebe ich
-          nicht ab – ich rufe aber verlässlich zurück. Schriftlich geht es über das
+          nicht ab — ich rufe aber verlässlich zurück. Schriftlich geht es über das
           <a href="#anfrage">Formular</a> weiter unten.
         </p>
       </div>
 
+      <div class="kontakt__block" data-heben style="--verzug:240ms">
+        <h3>Gut zu wissen</h3>
+        <p class="kontakt__notiz">
+          Die Praxis erreichen Sie über die Außentreppe. Im Wartebereich können Sie
+          in Ruhe ankommen — kommen Sie gerne ein paar Minuten früher.
+        </p>
+        <p class="kontakt__notiz">
+          Ich bin keine Ärztin. Meine Arbeit ersetzt keine ärztliche Untersuchung
+          oder Behandlung, sondern begleitet sie.
+        </p>
+      </div>
     </div>
 
     <!-- Anfahrt -->
     <div class="anfahrt">
-      <h3 class="anfahrt__titel">So finden Sie mich</h3>
+      <h3 class="etikett" data-heben>So finden Sie mich</h3>
       <div class="anfahrt__bilder">
-        <figure>
-          <img src="img/web/anfahrt-haus.jpg" width="620" height="930" loading="lazy"
-               alt="Das Haus der Praxis in der Zugleiten 21, von der Straße aus gesehen">
+        <figure style="margin:0">
+          <div class="bildvorhang zoombild">
+            <img src="img/web/anfahrt-haus.jpg" width="620" height="930" loading="lazy" decoding="async"
+                 alt="Das Haus der Praxis in der Zugleiten 21, von der Straße aus gesehen">
+          </div>
           <figcaption>Das Haus von der Straße aus.</figcaption>
         </figure>
-        <figure>
-          <img src="img/web/anfahrt-tuer.jpg" width="620" height="930" loading="lazy"
-               alt="Der Eingang zur Praxis mit der Außentreppe">
-          <figcaption>Der Eingang – die Praxis erreichen Sie über die Außentreppe.</figcaption>
+        <figure style="margin:0">
+          <div class="bildvorhang zoombild" style="--verzug:140ms">
+            <img src="img/web/anfahrt-tuer.jpg" width="620" height="930" loading="lazy" decoding="async"
+                 alt="Der Eingang zur Praxis mit der Außentreppe">
+          </div>
+          <figcaption>Der Eingang — über die Außentreppe.</figcaption>
         </figure>
-        <figure>
-          <img class="bild--warten" src="img/web/praxis-warten.jpg" width="1120" height="630" loading="lazy"
-               alt="Der Wartebereich der Praxis mit Sofa, Holzkommode und Pflanzen">
-          <figcaption>Der Wartebereich – hier können Sie in Ruhe ankommen.</figcaption>
+        <figure style="margin:0">
+          <div class="bildvorhang zoombild" style="--verzug:280ms">
+            <img src="img/web/praxis-warten.jpg" width="1120" height="630" loading="lazy" decoding="async"
+                 alt="Der Wartebereich der Praxis mit Sofa, Holzkommode und Pflanzen">
+          </div>
+          <figcaption>Der Wartebereich — hier können Sie ankommen.</figcaption>
         </figure>
       </div>
     </div>
 
     <!-- Anfrageformular -->
-    <div class="formbox">
-      <h3 class="formbox__titel" id="anfrage">Nachricht schreiben</h3>
-      <p class="formbox__text">
+    <div class="formkasten" data-heben>
+      <h3 class="formkasten__titel" id="anfrage">Nachricht schreiben</h3>
+      <p class="formkasten__text">
         Alle Felder mit * brauche ich, um mich zurückmelden zu können.
       </p>
 
@@ -600,7 +936,9 @@
         </div>
 
         <div class="form__fuss">
-          <button class="btn" type="submit">Nachricht senden</button>
+          <button class="knopf" type="submit">
+            <span class="knopf__text"><span data-schub="Nachricht senden">Nachricht senden</span></span>
+          </button>
           <p class="form__hinweis">
             Ihre Angaben verwende ich ausschließlich, um Ihre Anfrage zu beantworten.
             Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
@@ -608,62 +946,128 @@
         </div>
       </form>
     </div>
+
   </div>
 </section>
-
 </main>
 
-<!-- ===================== Fuß ===================== -->
+<footer class="fuss" id="fuss">
+
+  <!-- Grosser Abschluss: die eine Handlung, die zaehlt -->
+  <div class="fuss__ruf">
+    <div class="fuss__innen">
+      <p class="etikett etikett--hell" data-heben>Nächster Schritt</p>
+      <a class="rufzeile" href="#buchen" data-magnet data-zeiger-hinweis="Termin">
+        <span class="rufzeile__zeile" data-teilen>Termin</span>
+        <span class="rufzeile__zeile rufzeile__zeile--rand" data-teilen>vereinbaren</span>
+        <svg class="rufzeile__pfeil" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <p class="fuss__oder" data-heben>
+        Oder ganz direkt: <a href="tel:+436765566998">+43 676 5566998</a>.
+        Wenn ich in einer Behandlung bin, rufe ich zurück.
+      </p>
+    </div>
+  </div>
+
+  <!-- Laufband: die Methoden -->
+  <div class="laufband" aria-hidden="true">
+    <div class="laufband__spur" data-laufband>
+      <span>Tuina Anmo</span><span class="laufband__punkt">✳</span>
+      <span>Moxibustion</span><span class="laufband__punkt">✳</span>
+      <span>Schröpfen</span><span class="laufband__punkt">✳</span>
+      <span>Gua Sha</span><span class="laufband__punkt">✳</span>
+      <span>Laserakupunktur</span><span class="laufband__punkt">✳</span>
+      <span>Fünf Elemente</span><span class="laufband__punkt">✳</span>
+      <span>Kräutertherapie</span><span class="laufband__punkt">✳</span>
+    </div>
+  </div>
+
+  <div class="fuss__innen fuss__haupt">
+    <div class="fuss__gitter">
+
+      <div class="fuss__spalte fuss__spalte--marke">
+        <a class="fussmarke" href="#oben" aria-label="Zum Seitenanfang">
+          <svg class="fussmarke__zeichen" viewBox="0 0 200 200" aria-hidden="true">
+            <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+          </svg>
+          <span>
+            <span class="fussmarke__name">Sabine Grohe</span>
+            <span class="fussmarke__rolle">Wohlbefinden und Gesundheit mit TCM</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="fuss__spalte">
+        <p class="etikett etikett--hell">Praxis</p>
+        <p class="fuss__zeilen">
+          Zugleiten 21<br>
+          4812 Pinsdorf<br>
+          Oberösterreich
+        </p>
+        <a class="fuss__karte" href="https://www.google.com/maps/search/?api=1&amp;query=Zugleiten+21+4812+Pinsdorf+%C3%96sterreich"
+           target="_blank" rel="noopener noreferrer">Auf der Karte ansehen <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="fuss__spalte">
+        <p class="etikett etikett--hell">Kontakt</p>
+        <p class="fuss__zeilen">
+          <a href="tel:+436765566998">+43 676 5566998</a><br>
+          <a href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a><br>
+          <a href="https://www.instagram.com/tcm.grohe/" target="_blank" rel="noopener noreferrer me">Instagram <span aria-hidden="true">↗</span></a>
+        </p>
+        <p class="fuss__zeilen fuss__leise">Termine nach Vereinbarung.</p>
+      </div>
+
+      <div class="fuss__spalte">
+        <p class="etikett etikett--hell">Vor Ort</p>
+        <p class="fuss__uhr">
+          <span data-uhr aria-live="off">--:--</span>
+          <span class="fuss__uhrort">Pinsdorf · Ortszeit</span>
+        </p>
+        <p class="fuss__zeilen fuss__leise">47.93° N / 13.78° O<br>Salzkammergut, Österreich</p>
+      </div>
+
+    </div>
+
+    <p class="fuss__hinweis">
+      Ich bin keine Ärztin und führe keine ärztlichen Untersuchungen, Diagnosen oder
+      Behandlungen durch. Meine Arbeit erfolgt ausschließlich im Rahmen meiner
+      therapeutischen Tätigkeit und stellt keinen Ersatz für eine schulmedizinische
+      oder ärztliche Behandlung dar.
+    </p>
+
+    <div class="fuss__boden">
+      <span>© <span data-jahr>2026</span> Sabine Grohe</span>
+      <nav class="fuss__links" aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <span class="fuss__leise">Fotos: eigene Aufnahmen</span>
+    </div>
+  </div>
+</footer>
 <!-- Fester Balken am unteren Rand, nur auf dem Handy -->
-<div class="rufbalken">
+<div class="rufbalken" data-rufbalken>
   <a class="rufbalken__tel" href="tel:+436765566998">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
     </svg>
     Anrufen
   </a>
   <a class="rufbalken__buchen" href="#buchen">Termin buchen</a>
 </div>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer__grid">
-      <div>
-        <a class="logo-voll" href="#top"
-           aria-label="Sabine Grohe – Wohlbefinden und Gesundheit mit TCM">
-          <svg viewBox="0 0 630 168" aria-hidden="true">
-          <g transform="translate(6 28) scale(0.56)">
-          <path fill="#567123" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
-          </g>
-
-          <text x="146" y="84" fill="#171A11"
-          font-family="Hanken Grotesk, Helvetica Neue, Arial, sans-serif"
-          font-size="46" font-weight="500" letter-spacing="-0.8">Sabine Grohe</text>
-          <text x="146" y="122" fill="#676D59"
-          font-family="Karla, Helvetica Neue, Arial, sans-serif"
-          font-size="25" font-weight="600">Wohlbefinden und Gesundheit mit TCM</text>
-          </svg>
-        </a>
-        <div class="footer__links">
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-          <a href="https://www.instagram.com/tcm.grohe/" target="_blank" rel="noopener noreferrer me">Instagram</a>
-        </div>
-      </div>
-      <p class="disclaimer">
-        Ich bin keine Ärztin und führe keine ärztlichen Untersuchungen, Diagnosen oder
-        Behandlungen durch. Meine Arbeit erfolgt ausschließlich im Rahmen meiner
-        therapeutischen Tätigkeit und stellt keinen Ersatz für eine schulmedizinische
-        oder ärztliche Behandlung dar.
-      </p>
-    </div>
-    <div class="footer__bottom">
-      <span>© <span data-jahr>2026</span> Sabine Grohe · Pinsdorf, Oberösterreich</span>
-      <span>Fotos: eigene Aufnahmen</span>
-    </div>
+<!-- Eigener Mauszeiger. Nur mit echter Maus, nie auf dem Handy. -->
+<div class="zeiger" data-zeiger aria-hidden="true">
+  <div class="zeiger__ring" data-zeiger-ring>
+    <span class="zeiger__wort" data-zeiger-wort></span>
   </div>
-</footer>
+  <div class="zeiger__punkt" data-zeiger-punkt></div>
+</div>
 
-<script src="assets/app.js?v=eff8455f"></script>
+<script src="assets/app.js?v=7730c18a"></script>
 </body>
 </html>

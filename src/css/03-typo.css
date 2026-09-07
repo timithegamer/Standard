@@ -1,0 +1,226 @@
+/* ---------- Schrift-Bausteine ---------- */
+
+.etikett {
+  font-family: var(--schrift-text);
+  font-size: var(--t-etikett);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-feature-settings: "tnum";
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  line-height: 1.4;
+  /* Auf schmalen Geräten darf das Etikett umbrechen, statt die
+     Seite in die Breite zu ziehen. */
+  flex-wrap: wrap;
+  row-gap: .3rem;
+}
+/* Ein kurzer Strich vor dem Etikett — der einzige Schmuck, den es gibt. */
+.etikett::before {
+  content: "";
+  width: clamp(1.5rem, 3vw, 2.75rem);
+  height: 1px;
+  background: currentColor;
+  opacity: .5;
+  flex: none;
+}
+.etikett--hell { color: var(--hell-3); }
+
+.fuehrung {
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: var(--text-2);
+  max-width: var(--mass);
+  text-wrap: pretty;
+}
+
+.fliesstext { max-width: var(--mass); }
+.fliesstext p + p { margin-top: 1.1em; }
+.fliesstext a {
+  color: var(--moos-tief);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  transition: color var(--z-schnell) var(--e-aus);
+}
+.fliesstext a:hover { color: var(--moos); }
+.abschnitt--tinte .fliesstext a { color: var(--moos-hell); }
+
+.fliesstext ul {
+  list-style: none;
+  margin-top: 1em;
+  display: grid;
+  gap: .5em;
+}
+.fliesstext ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.fliesstext ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .72em;
+  width: .5rem; height: 1px;
+  background: var(--moos);
+}
+.abschnitt--tinte .fliesstext ul li::before { background: var(--moos-hell); }
+
+/* Chinesisches Schriftzeichen als leises Wasserzeichen */
+.han {
+  font-family: var(--schrift-han);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* ---------- Knöpfe ---------- */
+
+.knopf {
+  --knopf-grund: var(--tinte);
+  --knopf-schrift: var(--hell);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: 1.05rem 1.9rem;
+  min-height: 3.25rem;
+  background: var(--knopf-grund);
+  color: var(--knopf-schrift);
+  border: 1px solid var(--knopf-grund);
+  border-radius: var(--radius-rund);
+  font-family: var(--schrift-text);
+  font-size: var(--t-klein);
+  font-weight: 700;
+  letter-spacing: .04em;
+  line-height: 1;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color var(--z-normal) var(--e-aus),
+              border-color var(--z-normal) var(--e-aus),
+              transform var(--z-schnell) var(--e-aus);
+}
+/* Die Fläche läuft von unten ein, statt einfach umzuschalten. */
+.knopf::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  background: var(--moos);
+  transform: translateY(101%);
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.knopf:hover::before,
+.knopf:focus-visible::before { transform: translateY(0); }
+.knopf:hover { color: var(--auf-moos); border-color: var(--moos); }
+.knopf:active { transform: scale(.985); }
+
+.knopf--geist {
+  --knopf-grund: transparent;
+  --knopf-schrift: var(--text);
+  border-color: var(--linie);
+}
+.knopf--geist:hover { color: var(--auf-moos); border-color: var(--moos); }
+
+.abschnitt--tinte .knopf--geist,
+.fuss .knopf--geist {
+  --knopf-schrift: var(--hell);
+  border-color: var(--linie-hell);
+}
+
+.knopf--klein { padding: .8rem 1.4rem; min-height: 2.75rem; font-size: .8125rem; }
+
+/* Textverschiebung im Knopf: der Text rollt nach oben weg, die Kopie
+   kommt von unten nach.
+
+   Dafür braucht es zwei Ebenen. Die äussere ist genau eine Zeile hoch
+   und schneidet ab; die innere bewegt sich und bringt ihre Kopie mit.
+   Läge der Schnitt auf der bewegten Ebene, würde sie ihre eigene Kopie
+   abschneiden — der Effekt sähe dann aus wie ein Darstellungsfehler. */
+.knopf__text {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.knopf__text > span {
+  position: relative;
+  display: block;
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.knopf__text > span::after {
+  content: attr(data-schub);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+}
+.knopf:hover .knopf__text > span,
+.knopf:focus-visible .knopf__text > span { transform: translateY(-100%); }
+
+/* ---------- Verweise mit wachsender Linie ---------- */
+
+.verweis {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  padding-bottom: 2px;
+}
+.verweis::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.verweis:hover::after,
+.verweis:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+/* Verweis mit Pfeil, der beim Zeigen anläuft */
+.pfeilverweis {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: var(--t-klein);
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--moos-tief);
+}
+.pfeilverweis svg { width: 1.05em; height: 1.05em; flex: none; }
+.pfeilverweis:hover svg { animation: pfeil-durch var(--z-normal) var(--e-aus); }
+.abschnitt--tinte .pfeilverweis { color: var(--moos-hell); }
+
+@keyframes pfeil-durch {
+  50%  { transform: translateX(35%); opacity: 0; }
+  51%  { transform: translateX(-35%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* ---------- Schildchen ---------- */
+
+.schild {
+  display: inline-flex;
+  align-items: center;
+  padding: .4rem .85rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-rund);
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--text-2);
+  line-height: 1;
+  white-space: nowrap;
+}
+.abschnitt--tinte .schild { border-color: var(--linie-hell); color: var(--hell-2); }
+
+/* Auf schmalen Geräten wird das Etikett kleiner, statt den Strich
+   in eine eigene Zeile zu drängen. */
+@media (max-width: 30rem) {
+  .etikett { font-size: .6875rem; letter-spacing: .13em; gap: .55rem; }
+  .etikett::before { width: 1.25rem; }
+}

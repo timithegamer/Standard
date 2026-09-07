@@ -9,12 +9,12 @@ h = quelle.read_text()
 
 # Freie Termine einbetten - in der Einzeldatei gibt es nichts zum Nachladen
 slots = pathlib.Path("site/freie-termine.json").read_text()
-h = h.replace('<script type="application/json" id="termine-fallback">',
-              f'<script type="application/json" id="slots-fallback">{slots}</script>\n'
-              '<script type="application/json" id="termine-fallback">')
+h = h.replace('<script type="application/json" id="termine-reserve">',
+              f'<script type="application/json" id="plaetze-reserve">{slots}</script>\n'
+              '<script type="application/json" id="termine-reserve">')
 
 for muster in [r'<!doctype html>\s*', r'<html[^>]*>\s*', r'</html>\s*',
-               r'<head>\s*', r'</head>\s*', r'<body>\s*', r'</body>\s*']:
+               r'<head>\s*', r'</head>\s*', r'<body[^>]*>\s*', r'</body>\s*']:
     h = re.sub(muster, '', h, flags=re.I)
 
 h = h.replace("<title>", "<!-- Vorschau der neuen Website tcm-grohe.at -->\n<title>", 1)

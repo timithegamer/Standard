@@ -1,0 +1,261 @@
+/* ---------- Kopfzeile ---------- */
+
+.kopf {
+  /* Klebend statt fest: So kann der Umzugshinweis darüber stehen und
+     mit wegscrollen, ohne dass sich die beiden überlagern. */
+  position: sticky;
+  top: 0;
+  z-index: var(--ebene-kopf);
+  transition:
+    transform var(--z-normal) var(--e-aus),
+    background-color var(--z-normal) var(--e-aus),
+    border-color var(--z-normal) var(--e-aus);
+  border-bottom: 1px solid transparent;
+}
+
+/* Beim Scrollen legt sich Papier unter die Zeile und sie wird flacher. */
+.kopf.ist-fest {
+  background: rgba(250, 249, 243, .82);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom-color: var(--linie-zart);
+}
+/* Nach unten scrollen räumt die Zeile weg, nach oben holt sie zurück. */
+.kopf.ist-weg { transform: translate3d(0, -100%, 0); }
+
+/* Über den dunklen Abschnitten dreht die Zeile auf Hell. */
+.kopf.ist-hell { color: var(--hell); }
+.kopf.ist-hell.ist-fest {
+  background: rgba(20, 23, 15, .72);
+  border-bottom-color: var(--linie-hell-2);
+}
+.kopf.ist-hell .marke__rolle { color: var(--hell-3); }
+.kopf.ist-hell .kopfnav a { color: var(--hell-2); }
+.kopf.ist-hell .kopfnav a:hover,
+.kopf.ist-hell .kopfnav a.ist-hier { color: var(--hell); }
+.kopf.ist-hell .knopf {
+  --knopf-grund: var(--hell);
+  --knopf-schrift: var(--tinte);
+}
+.kopf.ist-hell .menuknopf { color: var(--hell); }
+
+.kopf__innen {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 0 var(--rand);
+  min-height: var(--kopfhoehe);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* ---------- Marke ---------- */
+.marke {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  margin-right: auto;
+  color: inherit;
+}
+.marke__zeichen {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--moos);
+  flex: none;
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.kopf.ist-hell .marke__zeichen { color: var(--moos-hell); }
+.marke:hover .marke__zeichen { transform: rotate(-32deg); }
+
+.marke__text { display: grid; line-height: 1.15; }
+.marke__name {
+  font-family: var(--schrift-anzeige);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.marke__rolle {
+  font-size: .6875rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 600;
+}
+@media (max-width: 30rem) { .marke__rolle { display: none; } }
+
+/* ---------- Navigation ---------- */
+.kopfnav {
+  display: none;
+  align-items: center;
+  gap: clamp(1.1rem, 2.4vw, 2.2rem);
+  font-size: var(--t-klein);
+  font-weight: 600;
+}
+@media (min-width: 62rem) { .kopfnav { display: flex; } }
+
+.kopfnav a {
+  color: var(--text-2);
+  position: relative;
+  padding-block: .35rem;
+  transition: color var(--z-schnell) var(--e-aus);
+}
+.kopfnav a:hover { color: var(--text); }
+
+/* Der aktive Abschnitt bekommt einen Punkt, keine Unterstreichung —
+   ruhiger, und er springt beim Scrollen nicht. */
+.kopfnav a::before {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -.35rem;
+  width: 4px; height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--moos);
+  transform: scale(0);
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.kopf.ist-hell .kopfnav a::before { background: var(--moos-hell); }
+.kopfnav a.ist-hier { color: var(--text); }
+.kopfnav a.ist-hier::before { transform: scale(1); }
+
+.kopf__tat { display: flex; align-items: center; gap: .75rem; }
+.kopf__tat .knopf { display: none; }
+@media (min-width: 48rem) { .kopf__tat .knopf { display: inline-flex; } }
+
+/* ---------- Menüknopf ---------- */
+.menuknopf {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: var(--t-etikett);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding: .65rem .25rem;
+  min-height: 2.75rem;
+}
+@media (min-width: 62rem) { .menuknopf { display: none; } }
+
+.menuknopf__balken {
+  position: relative;
+  width: 1.4rem; height: .7rem;
+  flex: none;
+}
+.menuknopf__balken i {
+  position: absolute;
+  left: 0;
+  width: 100%; height: 1.5px;
+  background: currentColor;
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.menuknopf__balken i:nth-child(1) { top: 0; }
+.menuknopf__balken i:nth-child(2) { bottom: 0; }
+.menuknopf[aria-expanded="true"] .menuknopf__balken i:nth-child(1) { transform: translateY(.35rem) rotate(45deg); }
+.menuknopf[aria-expanded="true"] .menuknopf__balken i:nth-child(2) { transform: translateY(-.35rem) rotate(-45deg); }
+
+/* ---------- Lesefortschritt ---------- */
+.kopf__fortschritt {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1.5px;
+  opacity: 0;
+  transition: opacity var(--z-normal) var(--e-aus);
+}
+.kopf.ist-fest .kopf__fortschritt { opacity: 1; }
+.kopf__fortschritt i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--moos);
+  transform: scaleX(var(--anteil, 0));
+  transform-origin: left;
+}
+.kopf.ist-hell .kopf__fortschritt i { background: var(--moos-hell); }
+
+/* ---------- Vollflächiges Menü ---------- */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ebene-menu);
+  background: var(--tinte);
+  color: var(--hell);
+  display: grid;
+  align-items: center;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path var(--z-normal) var(--e-atem);
+}
+.menu.ist-offen { clip-path: inset(0 0 0 0); }
+.ruhig .menu { transition-duration: 1ms; }
+
+.menu__innen {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: calc(var(--kopfhoehe) + 2rem) var(--rand) 2.5rem;
+  display: grid;
+  gap: clamp(2rem, 6vh, 4rem);
+  align-content: center;
+  max-height: 100dvh;
+  overflow-y: auto;
+}
+
+.menu__liste { list-style: none; display: grid; gap: .1rem; }
+.menu__liste li { overflow: hidden; }
+.menu__liste a {
+  display: block;
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(2rem, 9vw, 3.75rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  padding-block: .12em;
+  color: var(--hell);
+  transition: color var(--z-schnell) var(--e-aus);
+}
+.menu__liste a span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform var(--z-gross) var(--e-aus);
+}
+.menu.ist-offen .menu__liste a span { transform: none; }
+.menu.ist-offen .menu__liste li:nth-child(1) a span { transition-delay:  90ms; }
+.menu.ist-offen .menu__liste li:nth-child(2) a span { transition-delay: 150ms; }
+.menu.ist-offen .menu__liste li:nth-child(3) a span { transition-delay: 210ms; }
+.menu.ist-offen .menu__liste li:nth-child(4) a span { transition-delay: 270ms; }
+.menu.ist-offen .menu__liste li:nth-child(5) a span { transition-delay: 330ms; }
+.menu.ist-offen .menu__liste li:nth-child(6) a span { transition-delay: 390ms; }
+.ruhig .menu__liste a span { transform: none; transition: none; }
+.menu__liste a:hover { color: var(--moos-hell); }
+
+.menu__fuss {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.75rem;
+  padding-top: clamp(1.5rem, 4vh, 2.5rem);
+  border-top: 1px solid var(--linie-hell-2);
+  font-size: var(--t-klein);
+  color: var(--hell-2);
+  opacity: 0;
+  transition: opacity var(--z-gross) var(--e-aus) 420ms;
+}
+.menu.ist-offen .menu__fuss { opacity: 1; }
+.menu__fuss .etikett { color: var(--hell-3); margin-bottom: .5rem; }
+.menu__fuss a { color: var(--hell); text-decoration: underline; text-underline-offset: .2em; }
+.menu__fuss a:hover { color: var(--moos-hell); }
+
+/* Solange das Menü offen ist, liegt die Kopfzeile darüber — sonst wäre
+   der Knopf zum Schliessen verdeckt. Sie zeigt sich dann in Hell,
+   ohne Papierrücken, damit sie auf der dunklen Fläche steht. */
+body.menu-offen .kopf,
+body.menu-offen .kopf.ist-fest {
+  color: var(--hell);
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
+body.menu-offen .kopf .marke__zeichen { color: var(--moos-hell); }
+body.menu-offen .kopf .marke__rolle { color: var(--hell-3); }
+body.menu-offen .kopf.ist-fest .kopf__fortschritt,
+body.menu-offen .kopf__fortschritt { opacity: 0; }

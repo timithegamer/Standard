@@ -1,67 +1,282 @@
 <!doctype html>
-<html lang="de-AT">
+<html lang="de-AT" class="kein-js">
+<!-- Erzeugte Datei - nicht direkt bearbeiten.
+   Quelle: src/pages/404.html
+   Bauen:  python3 build.py -->
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Seite nicht gefunden — Sabine Grohe</title>
-<meta name="robots" content="noindex">
-<link rel="stylesheet" href="assets/fonts.css?v=63482dab">
-<link rel="stylesheet" href="assets/style.css?v=0dcf9c20">
-</head>
-<body>
+<meta name="description" content="Diese Seite gibt es nicht mehr.">
 
-<header class="masthead">
-  <div class="wrap masthead__inner">
-    <a class="wordmark" href="index.html">
-      <svg class="wordmark__mark" viewBox="0 0 200 200" aria-hidden="true">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FAF9F3">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="preload" href="assets/fonts/hanken-grotesk-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css?v=63482dab">
+<link rel="stylesheet" href="assets/style.css?v=bbc7fc0e">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+
+<script>
+  /* Vor dem ersten Anstrich: Kennzeichnet, dass JavaScript laeuft, und
+     schaltet die Inszenierung ab, wenn weniger Bewegung gewuenscht ist.
+     Steht bewusst inline, damit es kein Aufblitzen gibt. */
+  (function () {
+    var w = document.documentElement;
+    w.classList.remove("kein-js");
+    w.classList.add("js");
+    try {
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) w.classList.add("ruhig");
+      if (matchMedia("(hover: hover) and (pointer: fine)").matches) w.classList.add("maus");
+    } catch (e) {}
+  })();
+</script>
+
+</head>
+<body class="">
+
+<a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+
+<!-- Vorhang: der erste Moment. Hebt sich, sobald die Seite bereit ist. -->
+<div class="vorhang" id="vorhang" aria-hidden="true">
+  <div class="vorhang__mitte">
+    <svg class="vorhang__mark" viewBox="0 0 200 200">
+      <path d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+    </svg>
+    <span class="vorhang__wort">Sabine Grohe</span>
+    <span class="vorhang__linie"><i></i></span>
+  </div>
+</div>
+
+<header class="kopf" id="kopf" data-kopf>
+  <div class="kopf__innen">
+
+    <a class="marke" href="index.html#oben" data-magnet>
+      <svg class="marke__zeichen" viewBox="0 0 200 200" aria-hidden="true">
         <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
       </svg>
-      <span class="wordmark__name">Sabine Grohe
-        <span class="wordmark__role">Wohlbefinden und Gesundheit mit TCM</span>
+      <span class="marke__text">
+        <span class="marke__name">Sabine Grohe</span>
+        <span class="marke__rolle">Traditionelle Chinesische Medizin</span>
       </span>
     </a>
-    <a class="btn masthead__call" href="index.html">Zur Startseite</a>
+
+    <nav class="kopfnav" aria-label="Hauptnavigation">
+      <a href="index.html#leistungen" data-nav>Leistungen</a>
+      <a href="index.html#termine" data-nav>Workshops</a>
+      <a href="index.html#ueber-mich" data-nav>Über mich</a>
+      <a href="index.html#kontakt" data-nav>Kontakt</a>
+    </nav>
+
+    <div class="kopf__tat">
+      <a class="knopf knopf--klein" href="index.html#buchen" data-magnet>
+        <span class="knopf__text"><span data-schub="Termin buchen">Termin buchen</span></span>
+      </a>
+      <button class="menuknopf" type="button" id="menuknopf"
+              aria-expanded="false" aria-controls="menu">
+        <span class="menuknopf__balken" aria-hidden="true"><i></i><i></i></span>
+        <span class="menuknopf__wort">Menü</span>
+      </button>
+    </div>
+
   </div>
+  <div class="kopf__fortschritt" aria-hidden="true"><i data-fortschritt></i></div>
 </header>
 
-<main class="legal">
-  <div class="wrap">
-    <h1>Diese Seite gibt es nicht (mehr).</h1>
-    <div class="prose">
-      <p class="lead">
-        Möglicherweise haben Sie einen alten Link erwischt – die Website wurde
+<!-- Vollflaechiges Menue fuers Handy -->
+<div class="menu" id="menu" hidden>
+  <nav class="menu__innen" aria-label="Menü">
+    <ul class="menu__liste">
+      <li><a href="index.html#leistungen"><span>Leistungen</span></a></li>
+      <li><a href="index.html#buchen"><span>Termin buchen</span></a></li>
+      <li><a href="index.html#elemente"><span>Fünf Elemente</span></a></li>
+      <li><a href="index.html#termine"><span>Workshops &amp; Kuren</span></a></li>
+      <li><a href="index.html#ueber-mich"><span>Über mich</span></a></li>
+      <li><a href="index.html#kontakt"><span>Kontakt &amp; Anfahrt</span></a></li>
+    </ul>
+    <div class="menu__fuss">
+      <div>
+        <p class="etikett">Praxis</p>
+        <p>Zugleiten 21<br>4812 Pinsdorf</p>
+      </div>
+      <div>
+        <p class="etikett">Direkt</p>
+        <p>
+          <a href="tel:+436765566998">+43 676 5566998</a><br>
+          <a href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a>
+        </p>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<main id="inhalt">
+<section class="rechtlich kurzseite">
+  <div class="innen">
+
+    <div class="rechtlich__kopf" style="border:0;margin-bottom:0">
+      <p class="etikett">Fehler 404</p>
+      <h1 class="rechtlich__titel" data-teilen>
+        <span class="zeile"><span class="zeile__i">Diese Seite gibt</span></span>
+        <span class="zeile"><span class="zeile__i">es nicht mehr.</span></span>
+      </h1>
+      <p class="fuehrung">
+        Möglicherweise haben Sie einen alten Link erwischt — die Website wurde
         neu gebaut, und dabei haben sich einige Adressen geändert.
       </p>
-      <p>Hier kommen Sie weiter:</p>
-      <ul>
-        <li><a href="index.html#leistungen">Leistungen</a> – Tuina Anmo, Schröpfen, Laserakupunktur, Ernährung</li>
-        <li><a href="index.html#buchen">Termin buchen</a></li>
-        <li><a href="index.html#termine">Workshops und Kuren</a></li>
-        <li><a href="index.html#kontakt">Kontakt und Anfahrt</a></li>
-      </ul>
-      <p style="margin-top:1.5rem">
-        Oder rufen Sie einfach an: <a href="tel:+436765566998">+43 676 5566998</a>
-      </p>
-      <p style="margin-top:2rem">
-        <a class="btn" href="index.html">Zur Startseite</a>
+    </div>
+
+    <ul class="wegweiser">
+      <li><a href="index.html#leistungen">
+        <span class="wegweiser__was">Leistungen</span>
+        <span class="wegweiser__wozu">Tuina Anmo, Schröpfen, Laser, Ernährung</span>
+      </a></li>
+      <li><a href="index.html#buchen">
+        <span class="wegweiser__was">Termin buchen</span>
+        <span class="wegweiser__wozu">Freie Zeiten im Kalender</span>
+      </a></li>
+      <li><a href="index.html#termine">
+        <span class="wegweiser__was">Workshops &amp; Kuren</span>
+        <span class="wegweiser__wozu">Kochworkshops nach den fünf Elementen</span>
+      </a></li>
+      <li><a href="index.html#kontakt">
+        <span class="wegweiser__was">Kontakt &amp; Anfahrt</span>
+        <span class="wegweiser__wozu">Zugleiten 21, 4812 Pinsdorf</span>
+      </a></li>
+    </ul>
+
+    <div class="kurzseite__tat">
+      <a class="knopf" href="index.html" data-magnet>
+        <span class="knopf__text"><span data-schub="Zur Startseite">Zur Startseite</span></span>
+      </a>
+      <a class="knopf knopf--geist" href="tel:+436765566998" data-magnet>
+        <span class="knopf__text"><span data-schub="+43 676 5566998">+43 676 5566998</span></span>
+      </a>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="fuss" id="fuss">
+
+  <!-- Grosser Abschluss: die eine Handlung, die zaehlt -->
+  <div class="fuss__ruf">
+    <div class="fuss__innen">
+      <p class="etikett etikett--hell" data-heben>Nächster Schritt</p>
+      <a class="rufzeile" href="index.html#buchen" data-magnet data-zeiger-hinweis="Termin">
+        <span class="rufzeile__zeile" data-teilen>Termin</span>
+        <span class="rufzeile__zeile rufzeile__zeile--rand" data-teilen>vereinbaren</span>
+        <svg class="rufzeile__pfeil" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <p class="fuss__oder" data-heben>
+        Oder ganz direkt: <a href="tel:+436765566998">+43 676 5566998</a>.
+        Wenn ich in einer Behandlung bin, rufe ich zurück.
       </p>
     </div>
   </div>
-</main>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer__links">
-      <a href="index.html">Startseite</a>
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
+  <!-- Laufband: die Methoden -->
+  <div class="laufband" aria-hidden="true">
+    <div class="laufband__spur" data-laufband>
+      <span>Tuina Anmo</span><span class="laufband__punkt">✳</span>
+      <span>Moxibustion</span><span class="laufband__punkt">✳</span>
+      <span>Schröpfen</span><span class="laufband__punkt">✳</span>
+      <span>Gua Sha</span><span class="laufband__punkt">✳</span>
+      <span>Laserakupunktur</span><span class="laufband__punkt">✳</span>
+      <span>Fünf Elemente</span><span class="laufband__punkt">✳</span>
+      <span>Kräutertherapie</span><span class="laufband__punkt">✳</span>
     </div>
-    <div class="footer__bottom">
-      <span>© <span data-jahr>2026</span> Sabine Grohe · Pinsdorf, Oberösterreich</span>
+  </div>
+
+  <div class="fuss__innen fuss__haupt">
+    <div class="fuss__gitter">
+
+      <div class="fuss__spalte fuss__spalte--marke">
+        <a class="fussmarke" href="index.html#oben" aria-label="Zum Seitenanfang">
+          <svg class="fussmarke__zeichen" viewBox="0 0 200 200" aria-hidden="true">
+            <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+          </svg>
+          <span>
+            <span class="fussmarke__name">Sabine Grohe</span>
+            <span class="fussmarke__rolle">Wohlbefinden und Gesundheit mit TCM</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="fuss__spalte">
+        <p class="etikett etikett--hell">Praxis</p>
+        <p class="fuss__zeilen">
+          Zugleiten 21<br>
+          4812 Pinsdorf<br>
+          Oberösterreich
+        </p>
+        <a class="fuss__karte" href="https://www.google.com/maps/search/?api=1&amp;query=Zugleiten+21+4812+Pinsdorf+%C3%96sterreich"
+           target="_blank" rel="noopener noreferrer">Auf der Karte ansehen <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <div class="fuss__spalte">
+        <p class="etikett etikett--hell">Kontakt</p>
+        <p class="fuss__zeilen">
+          <a href="tel:+436765566998">+43 676 5566998</a><br>
+          <a href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a><br>
+          <a href="https://www.instagram.com/tcm.grohe/" target="_blank" rel="noopener noreferrer me">Instagram <span aria-hidden="true">↗</span></a>
+        </p>
+        <p class="fuss__zeilen fuss__leise">Termine nach Vereinbarung.</p>
+      </div>
+
+      <div class="fuss__spalte">
+        <p class="etikett etikett--hell">Vor Ort</p>
+        <p class="fuss__uhr">
+          <span data-uhr aria-live="off">--:--</span>
+          <span class="fuss__uhrort">Pinsdorf · Ortszeit</span>
+        </p>
+        <p class="fuss__zeilen fuss__leise">47.93° N / 13.78° O<br>Salzkammergut, Österreich</p>
+      </div>
+
+    </div>
+
+    <p class="fuss__hinweis">
+      Ich bin keine Ärztin und führe keine ärztlichen Untersuchungen, Diagnosen oder
+      Behandlungen durch. Meine Arbeit erfolgt ausschließlich im Rahmen meiner
+      therapeutischen Tätigkeit und stellt keinen Ersatz für eine schulmedizinische
+      oder ärztliche Behandlung dar.
+    </p>
+
+    <div class="fuss__boden">
+      <span>© <span data-jahr>2026</span> Sabine Grohe</span>
+      <nav class="fuss__links" aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <span class="fuss__leise">Fotos: eigene Aufnahmen</span>
     </div>
   </div>
 </footer>
+<!-- Fester Balken am unteren Rand, nur auf dem Handy -->
+<div class="rufbalken" data-rufbalken>
+  <a class="rufbalken__tel" href="tel:+436765566998">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+    Anrufen
+  </a>
+  <a class="rufbalken__buchen" href="index.html#buchen">Termin buchen</a>
+</div>
+<!-- Eigener Mauszeiger. Nur mit echter Maus, nie auf dem Handy. -->
+<div class="zeiger" data-zeiger aria-hidden="true">
+  <div class="zeiger__ring" data-zeiger-ring>
+    <span class="zeiger__wort" data-zeiger-wort></span>
+  </div>
+  <div class="zeiger__punkt" data-zeiger-punkt></div>
+</div>
 
-<script src="assets/app.js?v=eff8455f"></script>
+<script src="assets/app.js?v=7730c18a"></script>
 </body>
 </html>

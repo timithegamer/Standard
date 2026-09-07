@@ -1,0 +1,100 @@
+/* ===========================================================
+   Über mich — Porträt und Weg
+   =========================================================== */
+
+.ueber {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+@media (min-width: 62rem) {
+  .ueber { grid-template-columns: minmax(0, 25rem) minmax(0, 1fr); }
+}
+
+.ueber__portraet {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+.ueber__portraet img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.ueber__unterschrift {
+  margin-top: .9rem;
+  font-size: var(--t-klein);
+  color: var(--text-3);
+}
+
+.ueber__text { display: grid; gap: clamp(1.75rem, 3.5vw, 2.75rem); }
+
+/* ---------- Weg: eine Linie, an der die Stationen hängen ---------- */
+.weg {
+  position: relative;
+  display: grid;
+  padding-left: clamp(1.75rem, 3vw, 2.5rem);
+}
+.weg::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .9rem; bottom: .9rem;
+  width: 1px;
+  background: var(--linie);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--z-kino) var(--e-weich);
+}
+.weg.ist-da::before, .kein-js .weg::before { transform: scaleY(1); }
+
+.weg__halt {
+  position: relative;
+  display: grid;
+  gap: .1rem .5rem;
+  padding-block: clamp(.75rem, 1.5vw, 1rem);
+  border-bottom: 1px solid var(--linie-zart);
+}
+.weg__halt:last-child { border-bottom: 0; }
+@media (min-width: 34rem) {
+  .weg__halt { grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr); align-items: baseline; }
+}
+
+/* Der Punkt auf der Linie */
+.weg__halt::before {
+  content: "";
+  position: absolute;
+  left: calc(clamp(1.75rem, 3vw, 2.5rem) * -1);
+  top: calc(clamp(.75rem, 1.5vw, 1rem) + .55em);
+  width: 7px; height: 7px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--papier);
+  border: 1px solid var(--text-3);
+  transition: background-color var(--z-normal) var(--e-aus),
+              border-color var(--z-normal) var(--e-aus),
+              transform var(--z-normal) var(--e-aus);
+}
+.weg__halt:hover::before { background: var(--moos); border-color: var(--moos); transform: scale(1.35); }
+
+.weg__jahr {
+  font-family: var(--schrift-text);
+  font-size: var(--t-klein);
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.weg__was { font-size: 1.0625rem; }
+
+/* ---------- Bildband über die volle Breite ---------- */
+.band { position: relative; overflow: clip; }
+.band .bildvorhang { height: clamp(15rem, 42vw, 34rem); }
+.band img { width: 100%; height: 100%; object-fit: cover; }
+.band figcaption {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: .9rem var(--rand) 0;
+  font-size: var(--t-klein);
+  color: var(--text-3);
+}

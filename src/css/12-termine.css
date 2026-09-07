@@ -1,0 +1,161 @@
+/* ===========================================================
+   Workshops und Kuren — die Liste
+   Farbe kommt aus dem Element des Termins, nicht aus Dekoration.
+   =========================================================== */
+
+.termine__leiste {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.filter {
+  padding: .55rem 1.1rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius-rund);
+  font-size: var(--t-klein);
+  font-weight: 600;
+  color: var(--text-2);
+  min-height: 2.5rem;
+  transition: color var(--z-schnell) var(--e-aus),
+              background-color var(--z-schnell) var(--e-aus),
+              border-color var(--z-schnell) var(--e-aus);
+}
+.filter:hover { border-color: var(--text-3); color: var(--text); }
+.filter[aria-pressed="true"] {
+  background: var(--tinte);
+  border-color: var(--tinte);
+  color: var(--hell);
+}
+
+.termine { border-top: 1px solid var(--linie); }
+
+.termin {
+  --el: var(--el-neutral);
+  position: relative;
+  display: grid;
+  gap: 1rem clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+  border-bottom: 1px solid var(--linie);
+  transition: background-color var(--z-normal) var(--e-aus);
+}
+@media (min-width: 56rem) {
+  .termin {
+    grid-template-columns: minmax(0, 9rem) minmax(0, 1fr) minmax(0, 14rem);
+    align-items: start;
+  }
+}
+.termin:hover { background: var(--papier-hoch); }
+
+/* Der Farbstrich links zeigt das Element des Termins. */
+.termin::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--rand) * -0.35);
+  top: clamp(1.5rem, 3vw, 2.5rem);
+  width: 2px;
+  height: 2.5rem;
+  background: var(--el);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.termin.ist-da::before, .kein-js .termin::before { transform: scaleY(1); }
+@media (max-width: 55.999rem) { .termin::before { left: 0; top: 0; width: 100%; height: 2px; transform-origin: left; transform: scaleX(1); } }
+
+.termin__wann { display: grid; gap: .1rem; align-content: start; }
+.termin__tag {
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 300;
+  line-height: .95;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--el);
+}
+.termin__monat { font-weight: 700; font-size: 1.0625rem; }
+.termin__jahr, .termin__zeit { font-size: var(--t-klein); color: var(--text-3); }
+
+.termin__was { display: grid; gap: .6rem; }
+.termin__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .9rem;
+  font-size: var(--t-etikett);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.termin__art { color: var(--el); }
+.termin__element { color: var(--text-3); }
+.termin__titel { font-size: var(--t-mittel); letter-spacing: -0.025em; }
+.termin__text { color: var(--text-2); font-size: 1.03125rem; max-width: 58ch; }
+.termin__fakten {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.25rem;
+  font-size: var(--t-klein);
+  color: var(--text-3);
+  margin-top: .25rem;
+}
+.termin__fakten b { color: var(--text); font-weight: 700; }
+
+.termin__tat {
+  display: grid;
+  gap: .65rem;
+  justify-items: start;
+  align-content: start;
+}
+@media (min-width: 56rem) { .termin__tat { justify-items: stretch; } }
+
+.termin__kalender {
+  font-size: var(--t-klein);
+  color: var(--text-3);
+  text-decoration: underline;
+  text-underline-offset: .25em;
+  transition: color var(--z-schnell) var(--e-aus);
+}
+.termin__kalender:hover { color: var(--moos-tief); }
+
+/* ---------- Plätze-Schildchen ---------- */
+.stand {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: var(--t-etikett);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.stand::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.stand--frei   { color: var(--el-holz); }
+.stand--wenige { color: var(--el-erde); }
+.stand--voll   { color: var(--text-3); }
+
+.termine__leer {
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--linie);
+}
+.termine__leer a { color: var(--moos-tief); text-decoration: underline; text-underline-offset: .2em; }
+
+/* ---------- Bildpaar der Kochworkshops ---------- */
+.kochbilder {
+  display: grid;
+  gap: clamp(.75rem, 1.5vw, 1.25rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+@media (min-width: 48rem) {
+  .kochbilder { grid-template-columns: 1.35fr 1fr; align-items: start; }
+  .kochbilder > *:nth-child(2) { margin-top: clamp(2rem, 6vw, 5rem); }
+}
+.kochbilder figure { margin: 0; }
+.kochbilder .bildvorhang { aspect-ratio: 4 / 3; }
+.kochbilder > *:nth-child(2) .bildvorhang { aspect-ratio: 3 / 4; }

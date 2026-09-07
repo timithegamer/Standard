@@ -1,0 +1,114 @@
+/* ===========================================================
+   Befund — drei Arten zu schauen
+
+   Jede der drei bekommt ihr eigenes Bild: der Puls als Kurve,
+   die Zunge als Zonenkarte, das Gesicht als Raster. Die Zeichnungen
+   sagen etwas aus, sie sind kein Schmuck.
+   =========================================================== */
+
+.befund {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--linie);
+}
+@media (min-width: 56rem) {
+  .befund { grid-template-columns: repeat(3, 1fr); }
+}
+
+.befund__teil {
+  padding: clamp(2rem, 4vw, 3.25rem) 0;
+  border-bottom: 1px solid var(--linie);
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+@media (min-width: 56rem) {
+  .befund__teil {
+    padding: clamp(2rem, 3.5vw, 3.25rem) clamp(1.5rem, 2.5vw, 2.5rem);
+    border-bottom: 0;
+    border-right: 1px solid var(--linie);
+  }
+  .befund__teil:first-child { padding-left: 0; }
+  .befund__teil:last-child  { padding-right: 0; border-right: 0; }
+
+  /* Leichter Versatz — die Spalten stehen nicht stur auf einer Linie. */
+  .befund__teil:nth-child(2) { transform: translateY(clamp(1rem, 2.5vw, 2.5rem)); }
+  .befund__teil:nth-child(3) { transform: translateY(clamp(2rem, 5vw, 5rem)); }
+}
+
+.befund__bild {
+  width: 100%;
+  height: clamp(6rem, 10vw, 8.5rem);
+  margin-bottom: .35rem;
+}
+.befund__bild path,
+.befund__bild line,
+.befund__bild circle,
+.befund__bild ellipse { vector-effect: non-scaling-stroke; }
+
+.befund__pinyin {
+  font-size: var(--t-klein);
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--moos);
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+}
+.befund__pinyin .han {
+  font-size: 1.05rem;
+  color: var(--text-3);
+  opacity: .75;
+}
+.befund__teil h3 { font-size: var(--t-mittel); }
+.befund__teil p {
+  color: var(--text-2);
+  font-size: 1.03125rem;
+  line-height: 1.6;
+  max-width: 38ch;
+}
+
+/* Der laufende Punkt auf der Pulskurve */
+.pulspunkt {
+  fill: var(--moos);
+  opacity: 0;
+}
+.ist-da .pulspunkt {
+  opacity: 1;
+  animation: puls-lauf 3.4s var(--e-beides) 1.2s infinite;
+}
+.ruhig .pulspunkt { animation: none; opacity: 0; }
+@keyframes puls-lauf {
+  0%       { offset-distance: 0%;   opacity: 0; }
+  8%       { opacity: 1; }
+  92%      { opacity: 1; }
+  100%     { offset-distance: 100%; opacity: 0; }
+}
+
+/* Zonen der Zungen- und Gesichtskarte leuchten nacheinander auf */
+/* Die Zonen sind bewusst einfarbig: Die Fünf-Elemente-Palette steht
+   weiter unten und bedeutet dort etwas Bestimmtes. Hier ginge sie als
+   Behauptung durch, die auf der Seite sonst nirgends belegt ist. */
+.zone {
+  fill: var(--moos);
+  opacity: .14;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.ist-da .zone { animation: zone-atmen 5.2s var(--e-beides) infinite; }
+.ist-da .zone:nth-of-type(2) { animation-delay: .45s; }
+.ist-da .zone:nth-of-type(3) { animation-delay: .9s; }
+.ist-da .zone:nth-of-type(4) { animation-delay: 1.35s; }
+.ist-da .zone:nth-of-type(5) { animation-delay: 1.8s; }
+.ruhig .zone { animation: none; opacity: .26; }
+@keyframes zone-atmen {
+  0%, 70%, 100% { opacity: .12; }
+  22%           { opacity: .42; }
+}
+
+/* Die Pulskurve darf die ganze Spalte nutzen, die beiden Umrisse
+   stehen mittig — deshalb zwei unterschiedliche Seitenverhältnisse. */
+.befund__bild--breit { /* gleiche Höhe wie die anderen, damit die Spalten auf einer Linie stehen */ }
+
+/* Rechtecke werden am Umriss beschnitten, deshalb kein transform-box */
+.zone rect, rect.zone { transform-box: view-box; }

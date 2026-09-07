@@ -1,0 +1,160 @@
+/* ===========================================================
+   Leistungen — der dichte Abschnitt
+
+   Keine Kartenwand. Eine Liste, wie im Inhaltsverzeichnis eines
+   Buchs: Nummer, Name, und beim Aufklappen Bild und Text. Mit der
+   Maus wandert eine Vorschau des Bildes mit dem Zeiger.
+   =========================================================== */
+
+.leistungen { border-top: 1px solid var(--linie-hell); }
+
+.leistung { border-bottom: 1px solid var(--linie-hell); }
+
+.leistung__kopf {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(.9rem, 2.5vw, 2rem);
+  padding: clamp(1.35rem, 3vw, 2.4rem) 0;
+  text-align: left;
+  color: var(--hell);
+  cursor: pointer;
+  transition: color var(--z-normal) var(--e-aus);
+}
+.leistung__kopf:hover { color: var(--moos-hell); }
+
+.leistung__nr {
+  font-family: var(--schrift-text);
+  font-size: var(--t-etikett);
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--hell-3);
+  font-variant-numeric: tabular-nums;
+  padding-top: .35em;
+  align-self: start;
+  transition: color var(--z-normal) var(--e-aus);
+}
+.leistung.ist-offen .leistung__nr { color: var(--moos-hell); }
+
+.leistung__namen { display: grid; gap: .5rem; }
+.leistung__titel {
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(1.6rem, 4.6vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+.leistung__kicker {
+  font-size: var(--t-klein);
+  color: var(--hell-3);
+  letter-spacing: .01em;
+}
+
+/* Das Pluszeichen dreht sich zum Minus */
+.leistung__zeichen {
+  position: relative;
+  width: clamp(2.25rem, 4vw, 3rem);
+  height: clamp(2.25rem, 4vw, 3rem);
+  border: 1px solid var(--linie-hell);
+  border-radius: 50%;
+  flex: none;
+  transition: background-color var(--z-normal) var(--e-aus),
+              border-color var(--z-normal) var(--e-aus),
+              transform var(--z-normal) var(--e-aus);
+}
+.leistung__zeichen::before,
+.leistung__zeichen::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 42%; height: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform var(--z-normal) var(--e-aus), opacity var(--z-normal) var(--e-aus);
+}
+.leistung__zeichen::after { transform: translate(-50%, -50%) rotate(90deg); }
+.leistung__kopf:hover .leistung__zeichen { border-color: var(--moos-hell); transform: rotate(90deg); }
+.leistung.ist-offen .leistung__zeichen {
+  background: var(--moos-hell);
+  border-color: var(--moos-hell);
+  color: var(--tinte);
+  transform: rotate(180deg);
+}
+.leistung.ist-offen .leistung__zeichen::after { opacity: 0; }
+
+/* Der aufklappbare Teil. Die Höhe stellt JavaScript, damit sich
+   die Bewegung animieren lässt — ohne JS steht er einfach offen. */
+.leistung__inhalt {
+  overflow: hidden;
+  height: 0;
+  transition: height var(--z-normal) var(--e-atem);
+}
+.kein-js .leistung__inhalt { height: auto; }
+
+.leistung__innen {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+@media (min-width: 56rem) {
+  .leistung__innen {
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+    align-items: start;
+    padding-left: clamp(3rem, 8vw, 8rem);
+  }
+}
+
+.leistung__figur {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--tinte-3);
+}
+.leistung__figur img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+  transition: transform 900ms var(--e-aus);
+}
+.leistung.ist-offen .leistung__figur img { transform: scale(1); }
+
+.leistung__text { color: var(--hell-2); }
+.leistung__text strong { color: var(--hell); }
+.leistung__text ul li::before { background: var(--moos-hell); }
+
+.leistung__schilder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1.5rem;
+}
+
+/* ---------- Vorschau am Zeiger ---------- */
+.vorschau {
+  position: fixed;
+  top: 0; left: 0;
+  width: clamp(11rem, 15vw, 15rem);
+  aspect-ratio: 4 / 5;
+  z-index: calc(var(--ebene-zeiger) - 1);
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(.9);
+  transition: opacity var(--z-normal) var(--e-aus), transform var(--z-normal) var(--e-aus);
+  will-change: transform;
+  display: none;
+}
+.js.maus:not(.ruhig) .vorschau { display: block; }
+.vorschau.ist-da { opacity: 1; }
+.vorschau img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Zwei Bilder nebeneinander, wenn eine Leistung zwei Motive hat */
+.leistung__paar { display: grid; gap: .75rem; grid-template-columns: 1fr 1fr; align-content: start; }
+.leistung__paar figure { overflow: hidden; aspect-ratio: 3 / 4; background: var(--tinte-3); }
+.leistung__paar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Die Schaltfläche steckt in einer Überschrift — so wie es die
+   ARIA-Empfehlung für Aufklapper vorsieht. Die Überschrift selbst
+   bringt keine eigene Gestaltung mit. */
+.leistung__ueber { margin: 0; font: inherit; letter-spacing: inherit; }

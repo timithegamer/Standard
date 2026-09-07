@@ -1,0 +1,140 @@
+/* ===========================================================
+   Termin buchen — die eine Stelle, an der es konkret wird.
+   Ruhig gehalten: hier soll niemand von Gestaltung abgelenkt werden.
+   =========================================================== */
+
+.preisband {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: end;
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+  border-top: 1px solid var(--linie);
+  border-bottom: 1px solid var(--linie);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+@media (min-width: 48rem) {
+  .preisband { grid-template-columns: auto minmax(0, 1fr); }
+}
+
+.preis {
+  font-family: var(--schrift-anzeige);
+  font-size: clamp(3.25rem, 9vw, 6.5rem);
+  font-weight: 300;
+  line-height: .85;
+  letter-spacing: -0.05em;
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 .7rem;
+}
+.preis small {
+  font-family: var(--schrift-text);
+  font-size: var(--t-klein);
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--text-3);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.preisband__text {
+  color: var(--text-2);
+  max-width: 48ch;
+  font-size: 1.03125rem;
+}
+
+/* ---------- Buchungswege ---------- */
+.buchwege {
+  display: grid;
+  gap: 1px;
+  background: var(--linie);
+  border: 1px solid var(--linie);
+}
+@media (min-width: 48rem) { .buchwege { grid-template-columns: 1fr 1fr; } }
+
+.buchkarte {
+  position: relative;
+  background: var(--papier);
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  /* Spalte statt Raster, damit die Schaltflächen beider Karten auf
+     einer Linie stehen, auch wenn die Texte verschieden lang sind. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .9rem;
+  transition: background-color var(--z-normal) var(--e-aus);
+}
+.buchkarte:hover { background: var(--papier-hoch); }
+
+.buchkarte__titel {
+  font-size: var(--t-gross);
+  letter-spacing: -0.03em;
+}
+.buchkarte__text {
+  color: var(--text-2);
+  font-size: 1.03125rem;
+  max-width: 42ch;
+}
+.buchkarte__tat { margin-top: auto; padding-top: .9rem; }
+
+/* Eine Linie, die beim Zeigen von links durchläuft */
+.buchkarte::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: var(--moos);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.buchkarte:hover::after { transform: scaleX(1); }
+
+/* ---------- Freie Termine (Reserve, wenn keine Onlinebuchung läuft) ---------- */
+.plaetze { display: grid; gap: 1px; background: var(--linie); border-block: 1px solid var(--linie); }
+
+.platz {
+  background: var(--papier);
+  display: grid;
+  gap: .75rem 1.5rem;
+  align-items: center;
+  padding: clamp(1.1rem, 2.5vw, 1.6rem) 0;
+}
+@media (min-width: 48rem) {
+  .platz { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto; }
+}
+
+.platz__wann { display: grid; gap: .15rem; }
+.platz__tag { font-weight: 700; font-size: 1.0625rem; }
+.platz__zeit {
+  font-family: var(--schrift-anzeige);
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.platz__was { display: grid; gap: .2rem; font-size: 1.03125rem; }
+.platz__dauer { font-size: var(--t-klein); color: var(--text-3); }
+
+.plaetze__laedt, .plaetze__leer {
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0;
+  color: var(--text-3);
+}
+.plaetze__leer a { color: var(--moos-tief); text-decoration: underline; text-underline-offset: .2em; }
+
+.plaetze__fuss {
+  margin-top: 1rem;
+  font-size: var(--t-klein);
+  color: var(--text-3);
+}
+
+.notfall {
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  background: var(--wasch);
+  font-size: 1.03125rem;
+  color: var(--text-2);
+}
+.notfall strong { color: var(--text); display: block; margin-bottom: .25rem; }
+.notfall a { color: var(--moos-tief); text-decoration: underline; text-underline-offset: .2em; font-weight: 600; }

@@ -1,0 +1,156 @@
+/* ===========================================================
+   Fünf Wandlungsphasen — die begehbare Grafik
+
+   Der Kreis ist bedienbar: Element wählen, und rechts erscheint,
+   wofür es steht. Damit wird aus einem Schaubild ein Werkzeug,
+   und der Zusammenhang zu den Kochworkshops wird sichtbar.
+   =========================================================== */
+
+.wuxing {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+@media (min-width: 62rem) {
+  .wuxing { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+.wuxing__kreis { position: relative; }
+.wuxing__kreis svg { width: 100%; height: auto; }
+
+.wx-ring {
+  fill: none;
+  stroke: var(--linie-hell);
+  stroke-width: 1;
+}
+.wx-bogen {
+  fill: none;
+  stroke: var(--linie-hell);
+  stroke-width: 1;
+  transition: stroke var(--z-normal) var(--e-aus), stroke-width var(--z-normal) var(--e-aus);
+}
+.wx-bogen.ist-aktiv { stroke: var(--el, var(--moos-hell)); stroke-width: 2; }
+
+/* Ein Lichtpunkt läuft den Nährungszyklus entlang */
+.wx-laeufer {
+  fill: var(--moos-hell);
+  r: 3.5;
+}
+.ist-da .wx-laeufer { animation: wx-runde 14s linear infinite; }
+.ruhig .wx-laeufer { animation: none; opacity: 0; }
+@keyframes wx-runde {
+  from { offset-distance: 0%; }
+  to   { offset-distance: 100%; }
+}
+
+.wx-knopf { cursor: pointer; }
+.wx-knopf .wx-scheibe {
+  fill: var(--tinte);
+  stroke: var(--el);
+  stroke-width: 1.5;
+  transition: fill var(--z-normal) var(--e-aus), r var(--z-normal) var(--e-aus);
+}
+.wx-knopf .wx-hof {
+  fill: var(--el);
+  opacity: 0;
+  transition: opacity var(--z-normal) var(--e-aus), r var(--z-normal) var(--e-aus);
+}
+.wx-knopf .wx-han {
+  fill: var(--el);
+  font-family: var(--schrift-han);
+  font-size: 17px;
+  text-anchor: middle;
+  dominant-baseline: central;
+  transition: fill var(--z-normal) var(--e-aus);
+  pointer-events: none;
+}
+.wx-knopf .wx-name {
+  fill: var(--hell-2);
+  font-family: var(--schrift-text);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transition: fill var(--z-normal) var(--e-aus);
+  pointer-events: none;
+}
+
+.wx-knopf:hover .wx-scheibe,
+.wx-knopf.ist-gewaehlt .wx-scheibe { fill: var(--el); }
+.wx-knopf:hover .wx-han,
+.wx-knopf.ist-gewaehlt .wx-han { fill: var(--tinte); }
+.wx-knopf:hover .wx-name,
+.wx-knopf.ist-gewaehlt .wx-name { fill: var(--hell); }
+.wx-knopf.ist-gewaehlt .wx-hof { opacity: .18; }
+.wx-knopf:focus-visible { outline: none; }
+.wx-knopf:focus-visible .wx-scheibe { stroke-width: 3; }
+
+/* ---------- Die Tafel rechts ---------- */
+.wuxing__tafel {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+}
+@media (min-width: 62rem) {
+  /* Verhindert, dass der Kreis springt, wenn ein Element mit weniger
+     Text gewählt wird. */
+  .wuxing__tafel { min-height: 23rem; }
+}
+
+.wxt__kopf { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.wxt__han {
+  font-family: var(--schrift-han);
+  font-size: clamp(3rem, 7vw, 5rem);
+  line-height: 1;
+  color: var(--el, var(--moos-hell));
+  transition: color var(--z-normal) var(--e-aus);
+}
+.wxt__name {
+  font-family: var(--schrift-anzeige);
+  font-size: var(--t-gross);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.wxt__zeit {
+  font-size: var(--t-klein);
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--hell-3);
+}
+
+.wxt__satz {
+  font-size: var(--t-lead);
+  line-height: 1.45;
+  color: var(--hell);
+  max-width: 34ch;
+}
+.wxt__text { color: var(--hell-2); max-width: 44ch; }
+
+.wxt__daten {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--linie-hell-2);
+}
+.wxt__reihe {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: 1rem;
+  padding-block: .8rem;
+  border-bottom: 1px solid var(--linie-hell-2);
+  font-size: var(--t-klein);
+}
+.wxt__reihe dt { color: var(--hell-3); font-weight: 600; letter-spacing: .04em; }
+.wxt__reihe dd { margin: 0; color: var(--hell); }
+
+/* Der Inhalt der Tafel wechselt weich, statt zu springen. */
+.wxt__wechsel { transition: opacity var(--z-normal) var(--e-aus); }
+.wxt__wechsel.ist-blass { opacity: 0; }
+.ruhig .wxt__wechsel { transition: none; }
+
+.wuxing__hinweis {
+  margin-top: .5rem;
+  font-size: var(--t-klein);
+  color: var(--hell-3);
+}
+.wuxing__hinweis a { color: var(--moos-hell); text-decoration: underline; text-underline-offset: .2em; }

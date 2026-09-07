@@ -1,0 +1,153 @@
+<!-- ===================== Kontakt, Anfahrt, Formular ===================== -->
+<section class="abschnitt abschnitt--papier" id="kontakt" aria-labelledby="kontakt-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Kontakt</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="kontakt-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Schreiben Sie mir</span></span>
+          <span class="zeile"><span class="zeile__i">oder rufen Sie an.</span></span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="kontakt">
+      <div class="kontakt__block" data-heben>
+        <h3>Praxis</h3>
+        <p class="kontakt__zeilen">
+          Sabine Grohe<br>
+          Zugleiten 21<br>
+          4812 Pinsdorf
+        </p>
+        <a class="pfeilverweis" target="_blank" rel="noopener noreferrer"
+           href="https://www.google.com/maps/search/?api=1&amp;query=Zugleiten+21+4812+Pinsdorf+%C3%96sterreich">
+          Auf der Karte ansehen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="kontakt__block" data-heben style="--verzug:120ms">
+        <h3>Erreichbarkeit</h3>
+        <p class="kontakt__gross">
+          <a class="verweis" href="tel:+436765566998">+43 676 5566998</a>
+          <a class="verweis" href="mailto:sabine.grohe@live.at">sabine.grohe@live.at</a>
+        </p>
+        <p class="kontakt__notiz">
+          Rufen Sie einfach an. Wenn ich gerade in einer Behandlung bin, hebe ich
+          nicht ab — ich rufe aber verlässlich zurück. Schriftlich geht es über das
+          <a href="#anfrage">Formular</a> weiter unten.
+        </p>
+      </div>
+
+      <div class="kontakt__block" data-heben style="--verzug:240ms">
+        <h3>Gut zu wissen</h3>
+        <p class="kontakt__notiz">
+          Die Praxis erreichen Sie über die Außentreppe. Im Wartebereich können Sie
+          in Ruhe ankommen — kommen Sie gerne ein paar Minuten früher.
+        </p>
+        <p class="kontakt__notiz">
+          Ich bin keine Ärztin. Meine Arbeit ersetzt keine ärztliche Untersuchung
+          oder Behandlung, sondern begleitet sie.
+        </p>
+      </div>
+    </div>
+
+    <!-- Anfahrt -->
+    <div class="anfahrt">
+      <h3 class="etikett" data-heben>So finden Sie mich</h3>
+      <div class="anfahrt__bilder">
+        <figure style="margin:0">
+          <div class="bildvorhang zoombild">
+            <img src="img/web/anfahrt-haus.jpg" width="620" height="930" loading="lazy" decoding="async"
+                 alt="Das Haus der Praxis in der Zugleiten 21, von der Straße aus gesehen">
+          </div>
+          <figcaption>Das Haus von der Straße aus.</figcaption>
+        </figure>
+        <figure style="margin:0">
+          <div class="bildvorhang zoombild" style="--verzug:140ms">
+            <img src="img/web/anfahrt-tuer.jpg" width="620" height="930" loading="lazy" decoding="async"
+                 alt="Der Eingang zur Praxis mit der Außentreppe">
+          </div>
+          <figcaption>Der Eingang — über die Außentreppe.</figcaption>
+        </figure>
+        <figure style="margin:0">
+          <div class="bildvorhang zoombild" style="--verzug:280ms">
+            <img src="img/web/praxis-warten.jpg" width="1120" height="630" loading="lazy" decoding="async"
+                 alt="Der Wartebereich der Praxis mit Sofa, Holzkommode und Pflanzen">
+          </div>
+          <figcaption>Der Wartebereich — hier können Sie ankommen.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Anfrageformular -->
+    <div class="formkasten" data-heben>
+      <h3 class="formkasten__titel" id="anfrage">Nachricht schreiben</h3>
+      <p class="formkasten__text">
+        Alle Felder mit * brauche ich, um mich zurückmelden zu können.
+      </p>
+
+      <form class="form" name="anfrage" method="POST"
+            data-netlify="true" netlify-honeypot="firmenname" action="/danke.html">
+        <input type="hidden" name="form-name" value="anfrage">
+        <p class="form__falle">
+          <label>Bitte nicht ausfüllen: <input name="firmenname" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <div class="form__reihe">
+          <div class="form__feld">
+            <label for="f-name">Name *</label>
+            <input id="f-name" name="Name" type="text" required autocomplete="name">
+          </div>
+          <div class="form__feld">
+            <label for="f-tel">Telefon *</label>
+            <input id="f-tel" name="Telefon" type="tel" required autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form__reihe">
+          <div class="form__feld">
+            <label for="f-mail">E-Mail</label>
+            <input id="f-mail" name="E-Mail" type="email" autocomplete="email">
+          </div>
+          <div class="form__feld">
+            <label for="f-anliegen">Worum geht es? *</label>
+            <select id="f-anliegen" name="Anliegen" required>
+              <option value="Behandlungstermin">Behandlungstermin</option>
+              <option value="Kochworkshop">Kochworkshop</option>
+              <option value="Kur">Kur</option>
+              <option value="Allgemeine Frage">Allgemeine Frage</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form__feld">
+          <label for="f-termin">Wunschtermin</label>
+          <input id="f-termin" name="Wunschtermin" type="text"
+                 placeholder="z. B. Dienstagvormittag, oder ein Termin aus der Liste oben">
+        </div>
+
+        <div class="form__feld">
+          <label for="f-text">Nachricht</label>
+          <textarea id="f-text" name="Nachricht" rows="5"
+                    placeholder="Wobei kann ich Ihnen helfen?"></textarea>
+        </div>
+
+        <div class="form__fuss">
+          <button class="knopf" type="submit">
+            <span class="knopf__text"><span data-schub="Nachricht senden">Nachricht senden</span></span>
+          </button>
+          <p class="form__hinweis">
+            Ihre Angaben verwende ich ausschließlich, um Ihre Anfrage zu beantworten.
+            Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</section>

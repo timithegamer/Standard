@@ -1,0 +1,93 @@
+<!-- ===================== Befund =====================
+     Ruhiger Abschnitt nach dem Hero. Drei Zeichnungen, die
+     erklären, was beim ersten Termin tatsächlich passiert. -->
+<section class="abschnitt abschnitt--papier" id="befund" aria-labelledby="befund-titel">
+  <div class="innen">
+
+    <div class="kopfzeile duo">
+      <p class="etikett" data-heben>Der Befund</p>
+      <div>
+        <h2 class="kopfzeile__titel" id="befund-titel" data-teilen>
+          <span class="zeile"><span class="zeile__i">Zuerst schauen,</span></span>
+          <span class="zeile"><span class="zeile__i">dann beginnen.</span></span>
+        </h2>
+        <p class="fuehrung" data-heben style="--verzug:180ms;margin-top:1.5rem">
+          Jede Behandlung beginnt mit einer chinesischen Befundung. Erst dann weiß ich,
+          womit ich Ihnen am besten helfe.
+        </p>
+      </div>
+    </div>
+
+    <div class="befund">
+
+      <!-- Pulstastung: die Kurve wird gezeichnet, dann läuft ein Punkt darüber -->
+      <article class="befund__teil" data-heben>
+        <svg class="befund__bild befund__bild--breit" viewBox="0 0 320 90" fill="none" aria-hidden="true">
+          <line x1="0" y1="45" x2="320" y2="45" stroke="var(--linie)" stroke-width="1"/>
+          <path d="M0 45 H86 l10-13 12 28 14-36 12 42 14-21 H196 l10-10 12 20 10-10 H320"
+                stroke="var(--moos)" stroke-width="1.8" stroke-linejoin="round"
+                stroke-linecap="round" data-zeichnen style="--zeichendauer:1900ms"/>
+          <circle class="pulspunkt" r="3.4" style="offset-path:path('M0 45 H86 l10-13 12 28 14-36 12 42 14-21 H196 l10-10 12 20 10-10 H320')"/>
+        </svg>
+        <p class="befund__pinyin"><span class="han">脉诊</span> Mài zhěn</p>
+        <h3>Pulstastung</h3>
+        <p>
+          Der Puls wird an beiden Handgelenken in mehreren Tiefen ertastet. Er zeigt,
+          ob Fülle oder Leere vorliegt, wo Hitze oder Kälte sitzt.
+        </p>
+      </article>
+
+      <!-- Zungenschau: Umriss mit Zonen, die nacheinander aufleuchten -->
+      <article class="befund__teil" data-heben style="--verzug:120ms">
+        <svg class="befund__bild" viewBox="0 0 160 90" fill="none" aria-hidden="true">
+          <defs>
+            <clipPath id="zungenform">
+              <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#zungenform)">
+            <rect class="zone" x="50" y="11" width="60" height="21"/>
+            <rect class="zone" x="50" y="34" width="60" height="21"/>
+            <rect class="zone" x="50" y="57" width="60" height="24"/>
+          </g>
+          <path d="M80 11c-15 0-23 9-23 22 0 17 9 46 23 46s23-29 23-46c0-13-8-22-23-22Z"
+                stroke="var(--moos)" stroke-width="1.6" data-zeichnen style="--zeichendauer:1700ms"/>
+          <line x1="80" y1="14" x2="80" y2="76" stroke="var(--linie)" stroke-width="1"/>
+        </svg>
+        <p class="befund__pinyin"><span class="han">舌诊</span> Shé zhěn</p>
+        <h3>Zungenschau</h3>
+        <p>
+          Form, Farbe und Belag der Zunge geben Auskunft über den Zustand der inneren
+          Organe und über Nässe, Trockenheit oder Stagnation.
+        </p>
+      </article>
+
+      <!-- Gesichtsdiagnose: Zonenraster über einem Umriss -->
+      <article class="befund__teil" data-heben style="--verzug:240ms">
+        <svg class="befund__bild" viewBox="0 0 160 90" fill="none" aria-hidden="true">
+          <defs>
+            <clipPath id="gesichtsform">
+              <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"/>
+            </clipPath>
+          </defs>
+          <g clip-path="url(#gesichtsform)">
+            <rect class="zone" x="52" y="7"  width="56" height="21"/>
+            <rect class="zone" x="52" y="30" width="17" height="24"/>
+            <rect class="zone" x="71" y="30" width="18" height="24"/>
+            <rect class="zone" x="91" y="30" width="17" height="24"/>
+            <rect class="zone" x="52" y="56" width="56" height="26"/>
+          </g>
+          <path d="M80 7c-16 0-26 12-26 29 0 17 7 35 19 43 3 2 5 2 7 2s4 0 7-2c12-8 19-26 19-43 0-17-10-29-26-29Z"
+                stroke="var(--moos)" stroke-width="1.6" data-zeichnen style="--zeichendauer:1800ms"/>
+        </svg>
+        <p class="befund__pinyin"><span class="han">面诊</span> Miàn zhěn</p>
+        <h3>Gesichtsdiagnose</h3>
+        <p>
+          Farbe, Ausdruck und Zonen im Gesicht ergänzen das Bild und helfen, die
+          Behandlung auf Ihre Konstitution abzustimmen.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>

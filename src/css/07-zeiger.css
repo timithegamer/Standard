@@ -1,0 +1,111 @@
+/* ---------- Eigener Mauszeiger ----------
+   Nur bei echter Maus. Er fängt keine Klicks ab und ersetzt den
+   System-Zeiger nicht — er begleitet ihn. */
+
+.zeiger { display: none; }
+
+.zeiger .zeiger__ring,
+.zeiger .zeiger__punkt {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: var(--ebene-zeiger);
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.js.maus:not(.ruhig) .zeiger { display: block; }
+
+/* Bis die Maus sich das erste Mal bewegt hat, steht der Zeiger nicht
+   irgendwo in der Mitte herum. */
+.zeiger { opacity: 0; transition: opacity var(--z-normal) var(--e-aus); }
+.zeiger.ist-wach { opacity: 1; }
+
+.zeiger__punkt {
+  width: 6px; height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--tinte);
+  transition: opacity var(--z-schnell) linear, transform 120ms var(--e-aus);
+}
+.zeiger__ring {
+  width: 34px; height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1px solid rgba(20, 23, 15, .35);
+  display: grid;
+  place-items: center;
+  transition:
+    width var(--z-normal) var(--e-aus),
+    height var(--z-normal) var(--e-aus),
+    margin var(--z-normal) var(--e-aus),
+    background-color var(--z-normal) var(--e-aus),
+    border-color var(--z-normal) var(--e-aus);
+}
+
+/* Über dunklen Flächen dreht der Zeiger auf hell. */
+.zeiger.auf-tinte .zeiger__punkt { background: var(--hell); }
+.zeiger.auf-tinte .zeiger__ring  { border-color: rgba(246, 245, 236, .4); }
+
+/* Über Verweisen und Knöpfen wächst der Ring, der Punkt verschwindet. */
+.zeiger.ist-aktiv .zeiger__ring {
+  width: 56px; height: 56px;
+  margin: -28px 0 0 -28px;
+  background: rgba(86, 113, 35, .1);
+  border-color: var(--moos);
+}
+.zeiger.ist-aktiv .zeiger__punkt { opacity: 0; }
+
+/* Mit Beschriftung ("Ansehen", "Termin") wird daraus eine Scheibe. */
+.zeiger.hat-wort .zeiger__ring {
+  width: 88px; height: 88px;
+  margin: -44px 0 0 -44px;
+  background: var(--moos);
+  border-color: var(--moos);
+}
+.zeiger.hat-wort .zeiger__punkt { opacity: 0; }
+
+.zeiger__wort {
+  font-family: var(--schrift-text);
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--auf-moos);
+  opacity: 0;
+  transform: scale(.85);
+  transition: opacity var(--z-schnell) var(--e-aus), transform var(--z-normal) var(--e-aus);
+  white-space: nowrap;
+}
+.zeiger.hat-wort .zeiger__wort { opacity: 1; transform: scale(1); }
+
+/* Beim Drücken zieht sich der Ring kurz zusammen. */
+.zeiger.ist-gedrueckt .zeiger__ring { transform: scale(.82); }
+
+/* ---------- Rufbalken (nur Handy) ---------- */
+.rufbalken {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: var(--ebene-ruf);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--papier-hoch);
+  border-top: 1px solid var(--linie);
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translate3d(0, 110%, 0);
+  transition: transform var(--z-normal) var(--e-aus);
+}
+.rufbalken.ist-da { transform: none; }
+@media (min-width: 48rem) { .rufbalken { display: none; } }
+
+.rufbalken a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 3.5rem;
+  font-size: var(--t-klein);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.rufbalken svg { width: 1.05rem; height: 1.05rem; }
+.rufbalken__tel { color: var(--text); border-right: 1px solid var(--linie); }
+.rufbalken__buchen { background: var(--moos); color: var(--auf-moos); }
