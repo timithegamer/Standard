@@ -8,3 +8,6 @@ vorschau/
 schriftvergleich.html
 
 .DS_Store
+
+# Abhaengigkeiten der Netlify-Funktionen (installiert Netlify beim Deploy)
+node_modules/

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de-AT" class="kein-js">
+<!--#warnung-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ titel }}</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="same-origin">
+<meta name="theme-color" content="#FAF9F3">
+
+<link rel="stylesheet" href="{{ fonts }}">
+<link rel="stylesheet" href="{{ css }}">
+<link rel="stylesheet" href="{{ verw_css }}">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+
+<script>
+  (function () {
+    var w = document.documentElement;
+    w.classList.remove("kein-js");
+    w.classList.add("js");
+  })();
+</script>
+</head>
+<body class="verwaltungsseite">
+
+<main id="inhalt">
+{{ inhalt }}
+</main>
+
+<script src="{{ verw_js }}"></script>
+</body>
+</html>

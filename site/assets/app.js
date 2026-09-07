@@ -1031,14 +1031,16 @@ function elementeStarten() {
 /* ===========================================================
    Termine — laden, sortieren, Vergangenes ausblenden
 
-   Reihenfolge der Quellen (unverändert gegenüber der bisherigen Seite):
-     1. Google-Tabelle über die eigene Serverfunktion  -> TABELLE_URL
+   Reihenfolge der Quellen:
+     1. eigene Serverfunktion -> TABELLE_URL
+        Sie liefert, was im Verwaltungsbereich eingetragen ist, und
+        faellt selbst auf die Google-Tabelle zurueck.
      2. termine.json neben der Seite
      3. eingebettete Reserve im HTML (#termine-reserve)
 
-   Die Tabelle wird über die eigene Serverfunktion geholt, damit der
-   Browser der Besucherin keinen Kontakt zu Google aufnimmt.
-   Gepflegt wird nur Quelle 1 (siehe TERMINE-PFLEGEN.md).
+   Alles laeuft ueber die eigene Funktion, damit der Browser der
+   Besucherin keinen Kontakt zu Google aufnimmt.
+   Gepflegt wird ueber /verwaltung.html (siehe TERMINE-PFLEGEN.md).
    =========================================================== */
 
 var TABELLE_URL = "/api/plaetze?tabelle=termine";
@@ -1120,8 +1122,13 @@ async function termineLaden() {
     try {
       var r = await fetch(TABELLE_URL, { cache: "no-store" });
       if (r.ok) {
-        var rows = csvLesen(await r.text());
-        if (rows.length) return { termine: rows, quelle: "tabelle" };
+        // Die Serverfunktion liefert fertiges JSON. Sie nimmt, was im
+        // Verwaltungsbereich eingetragen ist, und faellt selbst auf die
+        // Google-Tabelle zurueck, wenn dort nichts steht.
+        var vomServer = await r.json();
+        if (vomServer && vomServer.termine && vomServer.termine.length) {
+          return { termine: vomServer.termine, quelle: vomServer.quelle || "server" };
+        }
       }
     } catch (e) { /* still weiter zur nächsten Quelle */ }
   }
@@ -1210,6 +1217,14 @@ function icsDatei(o) {
 
 /* ---------- Darstellen ---------- */
 
+/* Nur echte Web-Adressen duerfen in ein href. Sonst liesse sich ueber
+   eine gepflegte Buchungsadresse ein javascript:-Verweis in die Seite
+   schreiben - das Maskieren allein verhindert das nicht. */
+function sichereAdresse(wert) {
+  var s = String(wert == null ? "" : wert).trim();
+  return /^https?:\/\//i.test(s) ? s : "";
+}
+
 function standSchild(wert) {
   var roh = String(wert == null ? "" : wert).trim();
   var w = roh.toLowerCase();
@@ -1274,8 +1289,8 @@ function terminHTML(t) {
     + '</div>'
     + '<div class="termin__tat">'
       + standSchild(t.plaetze)
-      + (t.buchung
-        ? '<a class="knopf knopf--geist knopf--klein" href="' + sicher(t.buchung) + '" target="_blank" rel="noopener noreferrer">Platz buchen</a>'
+      + (sichereAdresse(t.buchung)
+        ? '<a class="knopf knopf--geist knopf--klein" href="' + sicher(sichereAdresse(t.buchung)) + '" target="_blank" rel="noopener noreferrer">Platz buchen</a>'
         : '<button class="knopf knopf--geist knopf--klein" type="button"'
           + ' data-anmeldung="' + sicher(t.titel || art) + '"'
           + ' data-datum="' + sicher(t._von.toLocaleDateString("de-AT")) + '"'

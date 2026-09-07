@@ -16,7 +16,7 @@
 <link rel="preload" href="assets/fonts/hanken-grotesk-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/karla-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts.css?v=63482dab">
-<link rel="stylesheet" href="assets/style.css?v=bbc7fc0e">
+<link rel="stylesheet" href="assets/style.css?v=c76bcf62">
 <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
 
 <script>
@@ -135,7 +135,12 @@
 
       <h2>Was diese Website nicht tut</h2>
       <ul>
-        <li>Keine Cookies und keine vergleichbaren Speichertechniken.</li>
+        <li>
+          Keine Cookies und keine vergleichbaren Speichertechniken. Ein einziges
+          Cookie gibt es auf dieser Website überhaupt, und zwar erst nach einer
+          Anmeldung im internen Verwaltungsbereich (siehe unten). Wer die Website
+          nur liest, bekommt es nie zu sehen.
+        </li>
         <li>Kein Google Analytics, keine Statistik- oder Werbedienste.</li>
         <li>Keine Social-Media-Plugins, keine eingebetteten Karten oder Videos.</li>
         <li>
@@ -151,6 +156,7 @@
           Bewegung mitbringt, liegt auf diesem Server. Es wird nichts von einem
           Content-Delivery-Netzwerk nachgeladen.
         </li>
+        <li>Keine Konten, keine Anmeldung, kein Kundenbereich für Besucherinnen und Besucher.</li>
       </ul>
 
       <h2>Server-Protokolle</h2>
@@ -179,10 +185,39 @@
 
       <h2>Terminübersicht der Workshops</h2>
       <p>
-        Die Liste der Workshops und Kuren pflege ich in einer Google-Tabelle. Diese Tabelle
-        wird nicht von Ihrem Browser abgerufen, sondern von einer Funktion auf dem Server
-        dieser Website. Zu Google geht dabei nur die Anfrage des Servers — Ihre IP-Adresse
-        wird nicht an Google übermittelt.
+        Die Liste der Workshops und Kuren pflege ich selbst, über einen internen
+        Bereich dieser Website. Die Termine liegen im Speicher meines Hosters
+        Netlify. Es handelt sich dabei ausschließlich um Angaben zu den
+        Veranstaltungen — Datum, Titel, Preis, freie Plätze. Personenbezogene
+        Daten von Besucherinnen und Besuchern werden dort nicht gespeichert.
+      </p>
+      <p>
+        Solange dort noch nichts eingetragen ist, greift die Website auf eine
+        Google-Tabelle zurück. Auch diese wird nicht von Ihrem Browser abgerufen,
+        sondern von einer Funktion auf dem Server dieser Website. Zu Google geht
+        dabei nur die Anfrage des Servers — Ihre IP-Adresse wird nicht an Google
+        übermittelt.
+      </p>
+
+      <h2>Interner Verwaltungsbereich</h2>
+      <p>
+        Unter <code>/verwaltung.html</code> liegt ein passwortgeschützter Bereich,
+        über den ich die Termine pflege. Er richtet sich nicht an Besucherinnen und
+        Besucher und enthält keine Inhalte für die Öffentlichkeit.
+      </p>
+      <p>
+        <strong>Cookie:</strong> Nach erfolgreicher Anmeldung wird ein Cookie mit
+        einem Sitzungsmerkmal gesetzt (<code>sg_sitzung</code>, Laufzeit acht
+        Stunden). Es enthält keine personenbezogenen Daten, dient allein dazu, die
+        Anmeldung über mehrere Seitenaufrufe hinweg gültig zu halten, und ist damit
+        technisch notwendig im Sinn des § 165 Abs. 3 TKG 2021 — eine Einwilligung ist
+        dafür nicht erforderlich. Ohne Anmeldung wird kein Cookie gesetzt.<br>
+        <strong>Fehlversuche:</strong> Um Angriffe auf das Passwort abzuwehren, zählt
+        der Server fehlgeschlagene Anmeldungen. Gespeichert wird dabei nicht die
+        IP-Adresse selbst, sondern nur ein daraus berechneter Prüfwert, aus dem sich
+        die Adresse nicht zurückrechnen lässt.<br>
+        <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
+        Interesse an einem geschützten Zugang zur eigenen Website).
       </p>
 
       <h2>Online-Terminbuchung über meetergo</h2>
@@ -398,6 +433,6 @@
   <div class="zeiger__punkt" data-zeiger-punkt></div>
 </div>
 
-<script src="assets/app.js?v=7730c18a"></script>
+<script src="assets/app.js?v=446e99c5"></script>
 </body>
 </html>

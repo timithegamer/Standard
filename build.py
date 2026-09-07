@@ -92,15 +92,27 @@ def bauen():
     js = kopf + '"use strict";\n(function () {\n' + js + "\n})();\n"
     (SITE / "assets/app.js").write_text(js, encoding="utf-8")
 
+    # --- Verwaltungsbereich: eigenes Buendel ---
+    # Der Code fuer die Verwaltung hat auf den oeffentlichen Seiten nichts
+    # verloren - er wird deshalb getrennt gebaut und nur dort geladen.
+    if (SRC / "verwaltung").exists():
+        vcss = zusammenlegen("verwaltung", ".css")
+        vjs = zusammenlegen("verwaltung", ".js")
+        kopf = "/* " + WARNUNG.format(quelle="src/verwaltung/*.css") + " */\n\n"
+        (SITE / "assets/verwaltung.css").write_text(kopf + vcss, encoding="utf-8")
+        kopf = "/* " + WARNUNG.format(quelle="src/verwaltung/*.js") + " */\n"
+        (SITE / "assets/verwaltung.js").write_text(
+            kopf + '"use strict";\n(function () {\n' + vjs + "\n})();\n", encoding="utf-8")
+
     # --- Kennungen fuers Zwischenspeichern ---
     kennung = {}
-    for name in ("assets/style.css", "assets/app.js", "assets/fonts.css"):
+    for name in ("assets/style.css", "assets/app.js", "assets/fonts.css",
+                 "assets/verwaltung.css", "assets/verwaltung.js"):
         datei = SITE / name
         if datei.exists():
             kennung[name] = hashlib.sha1(datei.read_bytes()).hexdigest()[:8]
 
     # --- Seiten ---
-    rumpf = (SRC / "layout/document.html").read_text(encoding="utf-8")
     gebaut = []
 
     for seite in sorted((SRC / "pages").glob("*.html")):
@@ -124,6 +136,11 @@ def bauen():
         kanonisch = daten.get("kanonisch", "")
         robots = daten.get("robots", "")
 
+        # Seiten duerfen ein anderes Grundgeruest verlangen. Der
+        # Verwaltungsbereich ist ein Werkzeug, keine Markenseite - er
+        # braucht weder Vorhang noch eigenen Mauszeiger.
+        rumpf = (SRC / "layout" / (daten.get("rumpf", "document") + ".html")).read_text(encoding="utf-8")
+
         werte = {
             "titel": daten.get("titel", ""),
             "beschreibung": daten.get("beschreibung", ""),
@@ -137,6 +154,8 @@ def bauen():
             "css": f"assets/style.css?v={kennung.get('assets/style.css', '')}",
             "js": f"assets/app.js?v={kennung.get('assets/app.js', '')}",
             "fonts": f"assets/fonts.css?v={kennung.get('assets/fonts.css', '')}",
+            "verw_css": f"assets/verwaltung.css?v={kennung.get('assets/verwaltung.css', '')}",
+            "verw_js": f"assets/verwaltung.js?v={kennung.get('assets/verwaltung.js', '')}",
         }
 
         html = platzhalter(einbinden(rumpf), werte)

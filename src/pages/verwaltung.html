@@ -1,0 +1,98 @@
+<!--meta
+{
+  "titel": "Verwaltung — Workshops und Kuren",
+  "beschreibung": "Interner Bereich.",
+  "robots": "noindex, nofollow",
+  "rumpf": "verwaltung"
+}
+meta-->
+
+<!-- Anmeldung -->
+<section class="anmeldung" data-anmeldung hidden>
+  <div class="anmeldung__kasten">
+    <a class="anmeldung__marke" href="index.html">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+      </svg>
+      <span>Sabine Grohe</span>
+    </a>
+
+    <h1 class="anmeldung__titel">Verwaltung</h1>
+    <p class="anmeldung__text">
+      Hier werden die Workshops und Kuren gepflegt, die auf der Website erscheinen.
+    </p>
+
+    <form class="anmeldung__form" data-anmeldeform>
+      <div class="form__feld">
+        <label for="v-passwort">Passwort</label>
+        <input id="v-passwort" type="password" name="passwort"
+               autocomplete="current-password" required autofocus>
+      </div>
+      <p class="meldung meldung--fehler" data-anmeldefehler hidden role="alert"></p>
+      <button class="knopf knopf--voll" type="submit" data-anmeldeknopf>
+        <span class="knopf__text"><span data-schub="Anmelden">Anmelden</span></span>
+      </button>
+    </form>
+
+    <p class="anmeldung__fuss">
+      <a href="index.html">Zurück zur Website</a>
+    </p>
+  </div>
+</section>
+
+<!-- Bearbeiten -->
+<section class="verwaltung" data-verwaltung hidden>
+
+  <header class="vkopf">
+    <div class="vkopf__innen">
+      <div class="vkopf__marke">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <path fill="currentColor" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+        </svg>
+        <span>
+          <b>Workshops &amp; Kuren</b>
+          <span class="vkopf__stand" data-stand>wird geladen …</span>
+        </span>
+      </div>
+      <div class="vkopf__tat">
+        <a class="knopf knopf--geist knopf--klein" href="index.html#termine" target="_blank" rel="noopener">
+          Website ansehen
+        </a>
+        <button class="knopf knopf--geist knopf--klein" type="button" data-abmelden>Abmelden</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="vinnen">
+
+    <div class="vleiste">
+      <div class="vleiste__links">
+        <button class="knopf knopf--klein" type="button" data-neu="Kochworkshop">
+          <span class="knopf__text"><span data-schub="Neuer Kochworkshop">Neuer Kochworkshop</span></span>
+        </button>
+        <button class="knopf knopf--geist knopf--klein" type="button" data-neu="Kur">
+          <span class="knopf__text"><span data-schub="Neue Kur">Neue Kur</span></span>
+        </button>
+        <button class="knopf knopf--geist knopf--klein" type="button" data-uebernehmen>
+          Aus Google-Tabelle übernehmen
+        </button>
+      </div>
+      <div class="vleiste__rechts">
+        <span class="vleiste__hinweis" data-schmutzig hidden>Nicht gespeicherte Änderungen</span>
+        <button class="knopf knopf--klein" type="button" data-speichern disabled>
+          <span class="knopf__text"><span data-schub="Speichern">Speichern</span></span>
+        </button>
+      </div>
+    </div>
+
+    <p class="meldung" data-meldung hidden role="status"></p>
+
+    <div class="vliste" data-liste></div>
+
+    <p class="vfuss">
+      Die Reihenfolge auf der Website ergibt sich aus dem Datum, nicht aus
+      dieser Liste. Termine ohne Datum werden nicht angezeigt — praktisch für
+      Entwürfe. Vergangene Termine verschwinden von selbst.
+    </p>
+  </div>
+</section>

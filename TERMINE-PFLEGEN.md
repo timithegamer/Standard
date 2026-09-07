@@ -4,230 +4,126 @@
 > Arbeitszeiten ein, den Rest macht der Kalender allein. Diese Anleitung
 > hier betrifft nur die **Workshops und Kuren**.
 
-Für Sabine. Du brauchst dafür kein Programm und keine Website-Kenntnisse –
-nur eine Google-Tabelle, die du wie jede andere Tabelle bearbeitest.
+Für Sabine. Du brauchst dafür kein Programm und keine
+Website-Kenntnisse – nur den Verwaltungsbereich der Website.
+
+## Wo
+
+**[tcm-grohe.at/verwaltung.html](https://www.tcm-grohe.at/verwaltung.html)**
+
+Passwort eingeben, fertig. Der Zugang gilt acht Stunden, danach fragt die
+Seite noch einmal nach. Auf dem Handy funktioniert es genauso wie am
+Rechner.
+
+Das Passwort steht in deinem Passwortspeicher. Falls es verloren geht:
+Timo kann ein neues einrichten, siehe `README.md`.
+
+---
 
 ## Wie es funktioniert
 
-Du trägst Termine in **eine einzige Tabelle** ein. Die Website liest diese
-Tabelle bei jedem Besuch neu.
+Du trägst Termine ein, drückst auf **Speichern** – und innerhalb einer
+Minute stehen sie auf der Website.
 
 Das heißt:
 
-- **Vorbei ist weg.** Ein Termin verschwindet von selbst, sobald sein Datum
-  vorüber ist. Du musst nie etwas löschen.
+- **Vorbei ist weg.** Ein Termin verschwindet von selbst, sobald sein
+  Datum vorüber ist. Du musst nie etwas löschen.
 - **Reihenfolge stimmt immer.** Die Website sortiert nach Datum, egal in
   welcher Reihenfolge du eintippst.
-- **Änderungen sind sofort da.** Speichern passiert in Google Tabellen
-  automatisch; auf der Website ist es nach ein paar Minuten sichtbar.
+- **Ohne Datum ist Entwurf.** Ein Termin ohne Datum wird nicht angezeigt.
+  So kannst du etwas vorbereiten, ohne dass es schon online steht. Im
+  Verwaltungsbereich steht dann „Entwurf“ daneben.
 
 ---
 
-## Die Einrichtung ist erledigt
+## Einen Workshop anlegen
 
-Die Tabelle ist angelegt, veröffentlicht und mit der Website verbunden.
-Du musst ab jetzt nur noch tippen – der Rest passiert von selbst.
+1. Oben auf **Neuer Kochworkshop** drücken. Der Eintrag klappt gleich auf.
+2. Ausfüllen. Wirklich nötig ist nur der **Titel**; ohne **Datum** bleibt
+   es ein Entwurf.
+3. Auf **Speichern** drücken.
 
-Kleiner Hinweis: Google gibt die veröffentlichte Tabelle ein paar Minuten
-lang zwischengespeichert heraus. Änderungen sind also nicht in derselben
-Sekunde online, aber innerhalb weniger Minuten.
+Solange etwas nicht gespeichert ist, steht oben rechts in Orange
+„Nicht gespeicherte Änderungen“. Wenn du die Seite dann schließen willst,
+fragt der Browser noch einmal nach.
 
-<details>
-<summary>Wie es eingerichtet wurde (nur zum Nachschlagen)</summary>
+### Was in welches Feld gehört
 
-### 1. Tabelle anlegen
-
-Neue Google-Tabelle erstellen. In die **erste Zeile** kommen genau diese
-Spaltenüberschriften:
-
-| Datum | Enddatum | Uhrzeit | Art | Element | Titel | Beschreibung | Preis | Ort | Leistungen | Buchung | Plätze |
-|-------|----------|---------|-----|---------|-------|--------------|-------|-----|------------|---------|--------|
-
-### 2. Tabelle veröffentlichen
-
-In der Tabelle: **Datei → Freigeben → Im Web veröffentlichen**
-
-- Links: das Tabellenblatt auswählen
-- Rechts: **Kommagetrennte Werte (.csv)** auswählen
-- Auf **Veröffentlichen** klicken
-- Die angezeigte Adresse kopieren
-
-> Wichtig: „Im Web veröffentlichen" macht nur diese eine Tabelle öffentlich
-> lesbar. Das ist beabsichtigt – die Termine sollen ja jeder sehen können.
-> Schreib nichts Privates hinein.
-
-### 3. Adresse eintragen
-
-In der Datei `assets/app.js`, ganz oben, die kopierte Adresse einsetzen:
-
-```js
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/.../pub?output=csv";
-```
-
-</details>
-
----
-
-## Eine Zeile ausfüllen
-
-Nur **Datum** und **Titel** sind Pflicht. Alles andere darf leer bleiben –
-was leer ist, wird auf der Website einfach weggelassen.
-
-**Datum** — `25.09.2026`. Das Datum, an dem der Termin stattfindet.
-
-**Enddatum** — nur bei mehrtägigen Sachen wie einer Kur (`17.10.2026`).
-Bei einem eintägigen Workshop leer lassen. Ein mehrtägiger Termin bleibt bis
-zum Enddatum sichtbar.
-
-**Uhrzeit** — `15:00`. Erscheint als „ab 15:00 Uhr".
-
-**Art** — `Kochworkshop` oder `Kur`. Du kannst auch etwas Neues schreiben,
-zum Beispiel `Vortrag`. Sobald es zwei verschiedene Arten gibt, erscheinen
-auf der Website automatisch Filterknöpfe.
-
-**Element** — eines von: `holz`, `feuer`, `erde`, `metall`, `wasser`
-(klein geschrieben). Bestimmt die Farbe des Strichs neben dem Datum und den
-Zusatz „Metall-Element · Herbst". Passt kein Element, leer lassen.
-
-**Titel** — die Überschrift, z. B. `Winter und das Wasser-Element – rund um die Nieren`.
-
-**Beschreibung** — der erklärende Absatz darunter.
-
-**Preis** — `135 €`.
-
-**Ort** — `Pinsdorf`, `Hochkrimml`, …
-
-**Leistungen** — nur bei Kuren sinnvoll, für die Aufzählung, was inkludiert
-ist. Mit `·` trennen: `Privatzimmer mit Bad · Verpflegung · 3× Tuina Massage`
-
-**Buchung** — **bitte leer lassen.** Workshops und Kuren werden nicht online
-gebucht. Der Knopf auf der Website heißt dann **„Anmelden"** und füllt das
-Kontaktformular schon mit dem richtigen Termin aus. Wer lieber anruft, ruft an.
-
-**Plätze** — hier darf entweder eine **Zahl** stehen oder ein Wort.
-
-- Eine Zahl, zum Beispiel `6`, wird zu **„6 freie Plätze"**. Bei `1` steht
-  „1 freier Platz", bei `0` steht „Ausgebucht". Drei oder weniger färbt das
-  Schildchen dringlicher ein.
-- Sonst gehen `frei`, `wenige` oder `ausgebucht`.
-- Leer lassen, wenn du nichts dazu sagen willst — dann erscheint kein
-  Schildchen.
-
-> Diese Angabe pflegst du **selbst**. Die Website fragt nirgends nach und
-> rechnet nichts aus – es steht genau das da, was du hineinschreibst.
-> Änderst du es in der Tabelle, steht es beim nächsten Aufruf auf der Seite.
-
----
-
-## Beispielzeile
-
-| | |
+| Feld | Was hinein gehört |
 |---|---|
-| Datum | `20.11.2026` |
-| Enddatum | *(leer)* |
-| Uhrzeit | `15:00` |
-| Art | `Kochworkshop` |
-| Element | `wasser` |
-| Titel | `Winter und das Wasser-Element – rund um die Nieren` |
-| Beschreibung | `Der Winter gehört zum Wasser-Element und den Nieren …` |
-| Preis | `135 €` |
-| Ort | `Pinsdorf` |
-| Leistungen | *(leer)* |
-| Plätze | `frei` |
+| **Titel** | Der Name, wie er auf der Website steht. |
+| **Datum** | Der Tag. Ohne Datum wird der Termin nicht angezeigt. |
+| **Ende** | Nur bei mehrtägigen Sachen, etwa einer Kur. Sonst leer lassen. |
+| **Beginn** | Uhrzeit, etwa 15:00. |
+| **Art** | „Kochworkshop“ oder „Kur“. Gibt es beides, erscheinen auf der Website Filterknöpfe. |
+| **Element** | Holz, Feuer, Erde, Metall oder Wasser. Färbt den Eintrag und nennt Jahreszeit und Organ dazu. Bei „Hausmittel“ und ähnlichem einfach „kein Element“ lassen. |
+| **Preis** | So, wie es dastehen soll: `135 €`. |
+| **Ort** | `Pinsdorf`. |
+| **Plätze** | `frei`, `wenige`, `ausgebucht` – oder eine Zahl wie `3`. Bei einer Zahl schreibt die Website „3 freie Plätze“, ab drei oder weniger in einer auffälligeren Farbe. Leer lassen heißt: kein Schildchen. |
+| **Beschreibung** | Der Text unter dem Titel. Ein, zwei Sätze reichen. |
+| **Enthaltene Leistungen** | Vor allem für Kuren. Mit `·` trennen: `Privatzimmer mit Bad · Verpflegung · 3× Tuina Massage`. |
+| **Buchungslink** | Fast immer leer. Dann führt der Knopf auf der Website zum Anfrageformular, und die Anmeldung kommt per Mail zu dir. |
+
+---
+
+## Plätze aktualisieren
+
+Das ist der häufigste Handgriff. Eintrag aufklappen, **Plätze** ändern,
+speichern. Zum Beispiel von `frei` auf `wenige`, oder von `4` auf `3`.
+
+---
+
+## Einen Termin absagen
+
+Eintrag aufklappen, unten rechts **Eintrag löschen**, dann **Speichern**.
+
+Willst du ihn nur vorübergehend von der Website nehmen, lösche stattdessen
+das **Datum**. Dann steht er als Entwurf weiter in der Liste und du kannst
+ihn später mit einem neuen Datum zurückholen.
 
 ---
 
 ## Häufige Fragen
 
-**Ich habe einen Termin eingetragen, er erscheint aber nicht.**
-Drei Möglichkeiten: Das Datum liegt in der Vergangenheit. Oder das
-Datumsfeld ist leer oder falsch geschrieben – es muss `25.09.2026` heißen.
-Oder die Seite zeigt noch die alte Fassung: einmal mit `Strg`+`Shift`+`R`
-(Mac: `Cmd`+`Shift`+`R`) neu laden.
+**Ich habe gespeichert, aber die Website zeigt es noch nicht.**
+Warte eine Minute und lade die Seite neu. Die Website merkt sich die
+Termine kurz, damit sie schneller lädt.
 
-**Kann ich einen Termin absagen?**
-Zeile löschen. Oder bei **Plätze** `ausgebucht` eintragen, wenn er sichtbar
-bleiben soll.
+**Ich bin plötzlich abgemeldet.**
+Nach acht Stunden endet der Zugang von selbst. Einfach neu anmelden.
 
-**Kann ich einen Termin schon vorbereiten, ohne dass er erscheint?**
-Ja – schreib eine Zeile ohne Datum. Ohne Datum wird sie nicht angezeigt.
-Sobald du das Datum einträgst, ist sie live.
+**Ich habe das Passwort mehrfach falsch eingegeben und komme nicht mehr rein.**
+Nach fünf Fehlversuchen sperrt die Seite für fünfzehn Minuten. Das ist
+Absicht – es schützt davor, dass jemand Passwörter durchprobiert. Warte
+kurz und versuch es dann noch einmal.
 
-So liegt gerade die **Frühlingskur** bereit: Die Zeile steht schon da, mit
-den Leistungen aus der Herbstkur, aber ohne Datum. Sie erscheint in dem
-Moment auf der Website, in dem Datum und Enddatum eingetragen sind. Text und
-Preis vorher noch anpassen – im Beschreibungsfeld steht bisher „ENTWURF".
-
-**Was passiert, wenn die Tabelle mal nicht erreichbar ist?**
-Dann zeigt die Website die Termine aus der Reservedatei `termine.json`, die
-mit auf dem Server liegt. Es steht also nie eine leere Seite da.
-
-**Was, wenn gar kein Termin mehr in der Zukunft liegt?**
-Dann steht dort automatisch „Zurzeit sind keine Termine ausgeschrieben"
-mit einem Link, damit sich Interessierte trotzdem melden können.
+**Kann ich etwas kaputt machen?**
+Nichts, was sich nicht zurücknehmen ließe. Änderungen gelten erst, wenn du
+auf Speichern drückst. Und die Website selbst – Texte, Bilder, Preise –
+lässt sich hier gar nicht ändern; hier gibt es nur Workshops und Kuren.
 
 ---
 
-# Behandlungstermine (meetergo)
+## Die alte Google-Tabelle
 
-## Der Grundsatz
+Früher liefen die Termine über eine Google-Tabelle. Die Website liest sie
+weiterhin, **solange im Verwaltungsbereich noch nichts eingetragen ist**.
 
-**Was in Sabines Kalender steht, kann online nicht mehr gebucht werden.**
+Sobald dort der erste Termin gespeichert wurde, gilt nur noch der
+Verwaltungsbereich. Änderungen in der Tabelle wirken dann nicht mehr.
 
-meetergo schaut vor jeder Anfrage in den verbundenen Apple-Kalender. Ist die
-Zeit dort belegt, verschwindet sie von der Website. Sabine muss also nichts
-zusätzlich pflegen — sie trägt Termine so ein wie immer.
+Beim ersten Mal hilft der Knopf **Aus Google-Tabelle übernehmen**: Er holt
+alles Bestehende herüber, damit nichts abgetippt werden muss. Danach
+durchsehen und speichern.
 
-## Wenn jemand anruft oder in der Praxis einen Termin ausmacht
+<details>
+<summary>Wenn du doch wieder auf die Tabelle zurück willst</summary>
 
-**Den Termin sofort in den Kalender am iPhone eintragen.** Am besten noch
-während des Telefonats. Mehr ist nicht nötig — der Platz ist danach online weg.
+Alle Einträge im Verwaltungsbereich löschen und speichern. Dann greift die
+Website automatisch wieder auf die Google-Tabelle zurück.
 
-Drei Dinge, an denen es scheitern kann:
+Die Tabelle bleibt also als Netz gespannt – sie wird nur nicht mehr
+gelesen, solange oben etwas steht.
 
-1. **Der richtige Kalender.** Der Termin muss in den Kalender, den meetergo
-   prüft. Wer mehrere hat (Privat, Arbeit, Familie), trägt entweder immer in
-   denselben ein oder verbindet alle. Nachsehen unter
-   *Settings → Calendars*: dort muss beim betreffenden Kalender die Prüfung
-   auf Terminüberschneidungen eingeschaltet sein.
-
-2. **Nicht sofort, aber schnell.** Der Abgleich mit dem Apple-Kalender
-   passiert nicht in derselben Sekunde, sondern innerhalb weniger Minuten.
-   Deshalb: gleich eintragen, nicht am Abend.
-
-3. **Der Termin muss als „belegt“ gelten.** Ganztägige Notizen oder Einträge,
-   die als „frei“ markiert sind, blockieren nichts.
-
-## Die Alternative: selbst über die Buchungsseite eintragen
-
-Statt in den Kalender kann Sabine den Termin auch über ihre eigene
-Buchungsseite eintragen, mit dem Namen der Kundin:
-
-- https://cal.meetergo.com/sabinegrohe/tuina-massage
-- https://cal.meetergo.com/sabinegrohe/tcm-beratung
-
-Vorteil: Die Kundin bekommt automatisch eine Bestätigung und eine Erinnerung,
-und alle Termine liegen an einer Stelle. Nachteil: ein paar Klicks mehr als
-ein Eintrag im Kalender.
-
-Für Stammkundinnen, die ohnehin am Telefon buchen, ist der Kalendereintrag
-schneller. Für neue Kundinnen lohnt sich der Weg über die Buchungsseite,
-weil die Erinnerung mitkommt.
-
-## Damit nichts kollidiert
-
-Zwischen dem Telefonat und dem Eintrag im Kalender könnte theoretisch jemand
-online denselben Platz buchen. In der Praxis kaum ein Thema, aber zwei
-Einstellungen entschärfen es ganz:
-
-- **Vorlaufzeit** beim Termintyp: „frühestens in 24 Stunden buchbar“.
-  Dann kann niemand einen Platz für gleich wegschnappen.
-- **Pufferzeit** zwischen zwei Terminen, damit nicht direkt hintereinander
-  gebucht wird.
-
-Beides steht beim jeweiligen Termintyp unter *Limits*.
-
-## Urlaub und längere Abwesenheiten
-
-Nicht einzeln blockieren, sondern *Availability → Out of office* benutzen.
-Ein Eintrag für den ganzen Zeitraum.
+</details>

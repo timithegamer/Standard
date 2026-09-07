@@ -5,5 +5,7 @@ Allow: /
 Disallow: /impressum.html
 Disallow: /datenschutz.html
 Disallow: /danke.html
+Disallow: /verwaltung.html
+Disallow: /api/
 
 Sitemap: https://www.tcm-grohe.at/sitemap.xml

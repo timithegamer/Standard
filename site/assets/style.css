@@ -2487,6 +2487,15 @@ body.menu-offen .kopf__fortschritt { opacity: 0; }
 .wegweiser,
 .rechtlich__stand { max-width: 74ch; }
 
+
+.rechtlich code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .92em;
+  background: var(--papier-tief);
+  padding: .1em .35em;
+  border-radius: var(--radius-weich);
+}
+
 /* ---------- 17-hilfen.css ---------- */
 /* ---------- Kleine Helfer ---------- */
 
