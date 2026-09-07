@@ -1,0 +1,793 @@
+/* ===========================================================
+   tcm-grohe.at
+   Farbe : Moos (Markengrün) auf warmem Papier
+           + Fünf-Elemente-Palette (inhaltstragend)
+   Schrift: Hanken Grotesk (Ueberschriften) / Karla (Text, Labels)
+   =========================================================== */
+
+/* ---------- Tokens: Licht ---------- */
+:root {
+  --paper:      #FFFFFF;
+  --paper-2:    #FBFBF8;
+  --paper-3:    #F5F6F0;
+  --wash:       #F0F4E6;
+  --ink:        #171A11;
+  --ink-2:      #454A3B;
+  --ink-3:      #676D59;
+  --rule:       #DFDFD4;
+  --rule-soft:  #EDEDE4;
+  --moss:       #567123;
+  --moss-hover: #4B6420;
+  --moss-soft:  #EDF3DF;
+  --on-moss:    #F9F9F4;
+  --shadow:     0 1px 2px rgba(28,31,22,.05), 0 8px 24px -12px rgba(28,31,22,.18);
+  --mark-opacity: .9;
+
+  --el-holz:    #55743A;
+  --el-feuer:   #A8483C;
+  --el-erde:    #856118;
+  --el-metall:  #5F6873;
+  --el-wasser:  #3C5568;
+  --el-neutral: #676D59;
+
+  --step--1: 0.95rem;
+  --step-0:  1.1875rem;
+  --step-1:  clamp(1.3rem, 1.2rem + 0.45vw, 1.5rem);
+  --step-2:  clamp(1.55rem, 1.35rem + 0.85vw, 2rem);
+  --step-3:  clamp(2rem, 1.6rem + 1.9vw, 3rem);
+  --step-4:  clamp(2.5rem, 1.8rem + 3.1vw, 4rem);
+
+  --measure: 60ch;
+  --gutter:  clamp(1.25rem, 0.7rem + 2.4vw, 2.75rem);
+  --bay:     clamp(3.75rem, 2.4rem + 5.6vw, 7rem);
+  --maxw:    1180px;
+}
+
+/* Diese Seite ist bewusst nur hell.
+   Kein dunkles Thema: der Grund bleibt weiß, egal wie das Gerät
+   des Besuchers eingestellt ist. Alle Farben stehen deshalb
+   vollständig im :root-Block oben. */
+
+/* ---------- Basis ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Ein display-Wert aus einer Klasse wuerde das hidden-Attribut sonst
+   ueberstimmen - versteckt muss versteckt bleiben. */
+[hidden] { display: none !important; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Karla, "Helvetica Neue", Arial, sans-serif;
+  font-size: var(--step-0);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 {
+  font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.13;
+  text-wrap: balance;
+  margin: 0;
+  letter-spacing: -0.017em;
+}
+
+p { margin: 0; }
+
+a { color: var(--moss); text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+a:hover { color: var(--moss-hover); }
+
+:focus-visible {
+  outline: 2px solid var(--moss);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection { background: var(--moss-soft); color: var(--ink); }
+
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--moss); color: var(--on-moss);
+  padding: .7rem 1.1rem; z-index: 200; border-radius: 0 0 4px 0;
+}
+.skip:focus { left: 0; top: 0; }
+
+/* ---------- Typo-Bausteine ---------- */
+.label {
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-feature-settings: "tnum";
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-bottom: 1.4rem;
+}
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.lead {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: var(--measure);
+  font-weight: 300;
+}
+
+.prose { max-width: var(--measure); }
+.prose > * + * { margin-top: 1rem; }
+.prose ul { margin: 0; padding-left: 1.15rem; }
+.prose li { margin-top: .38rem; }
+.prose li::marker { color: var(--moss); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 1rem 1.6rem;
+  border: 1px solid var(--moss);
+  background: var(--moss);
+  color: var(--on-moss);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.btn:hover { background: var(--moss-hover); border-color: var(--moss-hover); color: var(--on-moss); }
+
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--rule); }
+.btn--ghost:hover { background: transparent; color: var(--moss); border-color: var(--moss); }
+
+/* ---------- Kopf ---------- */
+.masthead {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.masthead__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 4.4rem;
+}
+
+.wordmark { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--ink); margin-right: auto; }
+.wordmark__mark { width: 30px; height: 30px; flex: none; color: var(--moss); }
+.wordmark__name { font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif; font-size: 1.16rem; line-height: 1.05; letter-spacing: -.01em; }
+.wordmark__role { display: block; font-family: Karla, sans-serif; font-size: .82rem; font-weight: 600; letter-spacing: .005em; color: var(--ink-3); margin-top: .18rem; }
+
+.nav { display: flex; align-items: center; gap: clamp(.8rem, 1.6vw, 1.7rem); }
+.nav a {
+  font-size: 1rem; font-weight: 500; color: var(--ink-2);
+  text-decoration: none; padding: .3rem 0; white-space: nowrap;
+  border-bottom: 1.5px solid transparent;
+}
+.nav a:hover, .nav a[aria-current="true"] { color: var(--ink); border-bottom-color: var(--moss); }
+
+.masthead__call { order: 3; padding: .7rem 1.1rem; }
+
+/* Auf schmalen Schirmen wandern die Abschnittslinks in eine
+   eigene, seitlich scrollbare Zeile - der Anruf-Knopf bleibt oben. */
+@media (max-width: 880px) {
+  html { scroll-padding-top: 7.5rem; }
+  .masthead__inner {
+    flex-wrap: wrap;
+    gap: .35rem .8rem;
+    min-height: 0;
+    padding-block: .55rem;
+  }
+  .wordmark__name { font-size: 1.02rem; }
+  .masthead__call { font-size: .72rem; padding: .6rem .95rem; }
+  .nav {
+    order: 4;
+    flex: 1 0 100%;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: .5rem;
+    margin-top: .15rem;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+}
+
+/* ---------- Hero ---------- */
+/* Die Wortmarke wird bewusst angeschnitten: links, oben und unten
+   laeuft das G aus dem Bild heraus - wie auf dem alten Auftritt. */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--wash);
+  padding-block: clamp(3rem, 1.6rem + 4.4vw, 5rem);
+}
+
+.hero__mark {
+  position: absolute;
+  top: -8%;
+  left: 0;
+  height: 116%;                 /* höher als der Hero -> oben und unten angeschnitten */
+  width: auto;                  /* Breite folgt der Höhe, das SVG hat feste Maße */
+  transform: translateX(-28%);  /* links angeschnitten */
+  color: var(--moss);
+  opacity: var(--mark-opacity);
+  pointer-events: none;
+}
+
+.hero__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: end;
+}
+
+.hero__copy {
+  width: min(100%, 33rem);
+  max-width: 100%;
+}
+
+.hero__title { font-size: var(--step-4); margin-bottom: 1.35rem; }
+/* Hervorhebung im Titel: nur Farbe und Gewicht, nicht schräg. */
+.hero__title em { font-style: normal; font-weight: 700; color: var(--moss); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+
+/* Ab hier ueberlagern sich Marke und Text - dann tritt die Marke zurueck. */
+@media (max-width: 1160px) {
+  /* Ab hier wuerden sich Marke und Text ueberlagern - die Marke tritt zurueck. */
+  .hero__mark { opacity: .1; transform: translateX(-22%); }
+  .hero__grid { justify-items: start; }
+  .hero__copy { width: min(100%, 40rem); }
+}
+/* Auf dem Handy liegt die Marke zwangsläufig hinter dem Text und
+   erzeugt dort sichtbare Kanten. Deshalb entfällt sie dort ganz -
+   im Kopf der Seite steht sie ohnehin. */
+@media (max-width: 820px) {
+  .hero__mark { display: none; }
+}
+
+/* ---------- Bildband ---------- */
+.band { margin: 0; }
+.band img {
+  width: 100%;
+  height: clamp(200px, 30vw, 400px);
+  object-fit: cover;
+  object-position: 50% 52%;
+}
+
+/* ---------- Sektionen ---------- */
+.section { padding-block: var(--bay); }
+.section--wash { background: var(--wash); }
+.section--rule { border-top: 1px solid var(--rule); }
+.section__head { max-width: var(--measure); margin-bottom: clamp(2rem, 1.2rem + 2.4vw, 3.25rem); }
+.section__title { font-size: var(--step-3); margin-bottom: .9rem; }
+
+/* ---------- Diagnose-Trias ---------- */
+.trias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  border-block: 1px solid var(--rule);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.trias__item { background: var(--paper); padding: 1.6rem 1.5rem 1.7rem; }
+.section--wash .trias__item { background: var(--wash); }
+.trias__item h3 { font-size: var(--step-1); margin-bottom: .5rem; }
+.trias__item p { font-size: 1.08rem; color: var(--ink-2); }
+.trias__n {
+  font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.05rem; color: var(--moss);
+  display: block; margin-bottom: .8rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Leistungen ---------- */
+.services { display: grid; gap: clamp(3rem, 1.4rem + 5vw, 5.5rem); }
+.service {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: clamp(1.5rem, .8rem + 3vw, 3.5rem);
+  align-items: center;
+}
+.service:nth-child(even) .service__figure { order: 2; }
+.service__figure img { width: 100%; height: clamp(300px, 38vw, 520px); object-fit: cover; }
+.service__title { font-size: var(--step-2); margin-bottom: .3rem; }
+.service__kicker { margin-bottom: 1.1rem; }
+.service__body { font-size: var(--step-0); color: var(--ink-2); }
+.service__body > * + * { margin-top: .85rem; }
+/* Aufzaehlung der Methoden - bewusst ohne Rahmen und Flaeche,
+   damit sie nicht wie anklickbare Schaltflaechen aussieht. */
+.service__tags {
+  display: flex; flex-wrap: wrap;
+  gap: .3rem 1.15rem;
+  margin-top: 1.1rem;
+  font-size: 1.05rem; color: var(--ink-2);
+}
+.tag { display: inline-flex; align-items: center; gap: .5rem; }
+.tag::before {
+  content: ""; flex: none;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--moss);
+}
+@media (max-width: 780px) {
+  .service { grid-template-columns: 1fr; }
+  .service:nth-child(even) .service__figure { order: 0; }
+  .service__figure img { height: clamp(260px, 62vw, 380px); }
+}
+
+/* ---------- Fünf Elemente ---------- */
+.elements {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
+  align-items: center;
+}
+.wuxing { width: 100%; height: auto; }
+.wuxing text { font-family: Karla, sans-serif; }
+.wuxing .wx-name { font-size: 14px; font-weight: 700; }
+.wuxing .wx-season { font-size: 11px; fill: var(--ink-3); }
+.wuxing .wx-ring { fill: none; stroke: var(--rule); stroke-width: 1.5; stroke-dasharray: 3 6; }
+.wuxing .wx-arrow { fill: var(--ink-3); opacity: .55; }
+
+.elkey { display: grid; gap: .1rem; margin-top: 1.6rem; }
+.elkey__row {
+  display: grid;
+  grid-template-columns: 1.6rem 6.5rem 1fr;
+  align-items: baseline;
+  gap: .6rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 1.05rem;
+}
+.elkey__dot { width: 10px; height: 10px; border-radius: 50%; align-self: center; }
+.elkey__name { font-weight: 700; }
+.elkey__txt { color: var(--ink-2); }
+@media (max-width: 900px) {
+  .elements { grid-template-columns: 1fr; }
+  .wuxing { max-width: 300px; margin-inline: auto; }
+  .elkey__row { grid-template-columns: 1.3rem 5.5rem 1fr; font-size: .88rem; }
+}
+
+/* ---------- Termine ---------- */
+.termine__toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-bottom: 2rem;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--rule);
+}
+.filters { display: flex; flex-wrap: wrap; gap: .4rem; }
+.filter {
+  font-family: inherit; font-size: .95rem; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: .5rem .9rem; cursor: pointer;
+  background: transparent; color: var(--ink-3);
+  border: 1px solid var(--rule);
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.filter:hover { color: var(--ink); border-color: var(--ink-3); }
+.filter[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+.termine__list { display: grid; gap: 0; }
+
+.termin {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  gap: clamp(1rem, .5rem + 2vw, 2.5rem);
+  padding: clamp(1.5rem, 1rem + 1.4vw, 2.25rem) 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+.termin:first-child { border-top: 1px solid var(--rule); }
+
+.termin__when { position: relative; padding-left: 1rem; }
+.termin__when::before {
+  content: ""; position: absolute; left: 0; top: .35rem; bottom: .35rem;
+  width: 3px; background: var(--el, var(--el-neutral));
+}
+.termin__day {
+  font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: 2.15rem; line-height: 1; white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -.02em;
+}
+.termin__mon { font-size: .95rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-top: .4rem; color: var(--ink-2); }
+.termin__yr  { font-size: .9rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.termin__time { font-size: .95rem; color: var(--ink-3); margin-top: .5rem; font-variant-numeric: tabular-nums; }
+
+.termin__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; margin-bottom: .55rem; }
+.termin__kind {
+  font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--el, var(--el-neutral));
+}
+.termin__element { font-size: .95rem; color: var(--ink-3); }
+.termin__element::before { content: "·"; margin-right: .55rem; color: var(--rule); }
+.termin__title { font-size: var(--step-2); margin-bottom: .5rem; }
+.termin__text { color: var(--ink-2); font-size: 1.08rem; max-width: 56ch; }
+.termin__facts { display: flex; flex-wrap: wrap; gap: .4rem .9rem; margin-top: 1rem; font-size: .98rem; color: var(--ink-3); }
+.termin__facts b { color: var(--ink-2); font-weight: 700; }
+
+.termin__cta { display: grid; gap: .5rem; justify-items: end; align-content: start; }
+.status {
+  font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  padding: .35rem .7rem; white-space: nowrap;
+}
+.status--frei { background: var(--moss-soft); color: var(--moss-hover); }
+.status--wenige { background: color-mix(in srgb, var(--el-erde) 18%, transparent); color: var(--el-erde); }
+.status--voll { background: var(--paper-3); color: var(--ink-3); }
+
+/* Auf schmalen Schirmen passt "NOVEMBER" nicht neben den Titel.
+   Das Datum wird deshalb zu einer Zeile ueber dem Termin. */
+@media (max-width: 820px) {
+  .termin {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .85rem;
+    padding-block: 1.6rem;
+  }
+  .termin__when {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .1rem .6rem;
+    padding-left: .95rem;
+  }
+  .termin__when::before { top: .1rem; bottom: .1rem; }
+  .termin__day { font-size: 1.7rem; line-height: 1.1; }
+  .termin__mon { margin-top: 0; }
+  .termin__time { margin-top: 0; }
+  .termin__time::before { content: "·"; margin-right: .5rem; color: var(--rule); }
+
+  .termin__cta {
+    justify-items: start;
+    grid-auto-flow: row;
+    gap: .75rem;
+  }
+  .termin__cta .btn { width: 100%; justify-content: center; }
+}
+
+.termine__empty {
+  padding: 3rem 0; text-align: center; color: var(--ink-2);
+  border-block: 1px solid var(--rule);
+}
+.termine__foot {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+  margin-top: 1.5rem; font-size: .95rem; color: var(--ink-3);
+}
+
+/* ---------- Über mich ---------- */
+.about { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: start; }
+.about__portrait { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 32%; }
+.cv { margin-top: 2.25rem; border-top: 1px solid var(--rule); }
+.cv__row {
+  display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem;
+  padding: .85rem 0; border-bottom: 1px solid var(--rule-soft);
+  font-size: 1.05rem;
+}
+.cv__yr { font-variant-numeric: tabular-nums; color: var(--moss); font-weight: 700; font-size: 1rem; }
+@media (max-width: 780px) {
+  .about { grid-template-columns: 1fr; }
+  .about__portrait { max-width: 340px; }
+  .cv__row { grid-template-columns: 6rem 1fr; }
+}
+
+/* ---------- Kontakt ---------- */
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(1.75rem, 1rem + 3vw, 3.5rem); }
+.contact__block h3 { font-size: var(--step-1); margin-bottom: .9rem; }
+.contact__list { display: grid; gap: .65rem; font-size: var(--step-0); }
+.contact__list a { text-decoration: none; }
+.contact__list a:hover { text-decoration: underline; }
+.preisband {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .5rem 2.25rem;
+  margin-bottom: clamp(1.75rem, 1rem + 2vw, 2.5rem);
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.preisband .preis { margin: 0; }
+.preisband .contact__note { margin-top: 0; }
+
+.contact__note { margin-top: 1.2rem; font-size: 1.05rem; color: var(--ink-3); max-width: 40ch; }
+
+/* ---------- Fuß ---------- */
+.footer { background: var(--paper-3); padding-block: clamp(2.5rem, 4vw, 3.5rem); border-top: 1px solid var(--rule); }
+.logo-voll { display: block; width: min(310px, 100%); margin-bottom: 1.2rem; }
+.logo-voll svg { display: block; width: 100%; height: auto; }
+
+.footer__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+.disclaimer { font-size: .98rem; color: var(--ink-3); max-width: 58ch; line-height: 1.6; }
+.footer__links { display: flex; flex-wrap: wrap; gap: 1.2rem; font-size: 1rem; }
+.footer__links a { color: var(--ink-2); text-decoration: none; }
+.footer__links a:hover { color: var(--moss); text-decoration: underline; }
+.footer__bottom { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-size: .95rem; color: var(--ink-3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem; }
+
+/* ---------- Rechtsseiten ---------- */
+.legal { padding-block: var(--bay); }
+.legal h1 { font-size: var(--step-3); margin-bottom: 1.5rem; }
+.legal h2 { font-size: var(--step-1); margin-top: 2.25rem; margin-bottom: .6rem; }
+.legal .prose { color: var(--ink-2); }
+.legal .prose strong { color: var(--ink); }
+
+/* ---------- Sanfte Einblendung ---------- */
+/* Ohne JavaScript bleibt alles sichtbar - Inhalt darf nie an einer
+   Animation haengen bleiben. Erst die Klasse .js blendet ihn aus. */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.js .reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Offene Stellen in den Rechtstexten ---------- */
+/* Faellt bewusst aus dem Layout heraus - diese Seiten duerfen
+   nicht mit Platzhaltern online gehen. */
+.todo {
+  background: color-mix(in srgb, var(--el-erde) 26%, transparent);
+  color: var(--ink);
+  padding: .05em .3em;
+  font-weight: 700;
+  border-radius: 2px;
+}
+.todo-hinweis {
+  font-size: 1.02rem;
+  border-left: 3px solid var(--el-erde);
+  background: color-mix(in srgb, var(--el-erde) 10%, transparent);
+  padding: 1rem 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--ink-2);
+  max-width: var(--measure);
+}
+.todo-hinweis strong { color: var(--ink); }
+
+/* ---------- Ankündigung: neue Praxis ---------- */
+.announce { background: var(--moss); color: var(--on-moss); }
+.announce__inner {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1.1rem;
+  padding-block: .95rem;
+}
+.announce__tag {
+  font-size: .85rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--on-moss); color: var(--moss);
+  padding: .25rem .6rem; flex: none;
+}
+.announce__text { font-size: 1.05rem; margin: 0; flex: 1 1 20rem; }
+.announce__text strong { font-weight: 700; }
+.announce__link { color: var(--on-moss); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.announce__link:hover { color: var(--on-moss); text-decoration: underline; }
+.announce .todo { background: rgba(255,255,255,.28); color: var(--on-moss); }
+
+/* ---------- Freie Termine ---------- */
+.slots { display: grid; gap: 0; }
+.slots__laedt { color: var(--ink-3); padding: 1.5rem 0; }
+
+.slot {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr) auto;
+  gap: clamp(1rem, .6rem + 1.6vw, 2rem);
+  align-items: center;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.slot:first-child { border-top: 1px solid var(--rule); }
+
+.slot__wann { font-variant-numeric: tabular-nums; }
+.slot__tag { font-size: 1.15rem; font-weight: 700; }
+.slot__zeit { font-size: 1.05rem; color: var(--ink-2); margin-top: .15rem; }
+.slot__was { font-size: var(--step-0); }
+.slot__dauer { display: block; font-size: 1rem; color: var(--ink-3); margin-top: .2rem; }
+
+@media (max-width: 820px) {
+  .slot { grid-template-columns: 1fr; gap: .6rem; padding-block: 1.5rem; }
+  .slot__wann { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .6rem; }
+  .slot__zeit { margin-top: 0; }
+  .slot .btn { width: 100%; justify-content: center; }
+}
+
+.slots__fuss { margin-top: 1.3rem; font-size: .95rem; color: var(--ink-3); }
+.slots__notfall {
+  margin-top: 2rem; padding: 1.2rem 1.4rem;
+  background: var(--moss-soft);
+  border-left: 3px solid var(--moss);
+  max-width: var(--measure);
+}
+.slots__notfall p { font-size: 1.05rem; }
+.slots__leer { padding: 2rem 0; border-block: 1px solid var(--rule); color: var(--ink-2); }
+
+/* ---------- Formular ---------- */
+.formbox {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--rule);
+}
+.formbox__titel { font-size: var(--step-2); margin-bottom: .6rem; }
+.formbox__text { color: var(--ink-2); margin-bottom: 1.75rem; max-width: var(--measure); }
+
+.form { max-width: 44rem; display: grid; gap: 1.2rem; }
+.form__falle { position: absolute; left: -9999px; }
+.form__reihe { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
+.form__feld { display: grid; gap: .4rem; }
+.form__feld label { font-size: 1rem; font-weight: 700; color: var(--ink-2); }
+
+.form input, .form select, .form textarea {
+  font-family: inherit;
+  font-size: var(--step-0);
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 1.5px solid var(--rule);
+  padding: .8rem .9rem;
+  width: 100%;
+}
+.form input:focus, .form select:focus, .form textarea:focus {
+  outline: 2px solid var(--moss);
+  outline-offset: 1px;
+  border-color: var(--moss);
+}
+.form textarea { resize: vertical; line-height: 1.6; }
+
+.form__fuss { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: .4rem; }
+.form__hinweis { font-size: .98rem; color: var(--ink-3); flex: 1 1 18rem; margin: 0; }
+
+/* Ein Termin wurde aus der Liste übernommen */
+.form__uebernommen {
+  background: var(--moss-soft);
+  border-left: 3px solid var(--moss);
+  padding: .8rem 1rem;
+  font-size: 1.02rem;
+  color: var(--ink-2);
+}
+.form__uebernommen strong { color: var(--ink); }
+
+.termin__kalender {
+  font-size: .98rem;
+  color: var(--ink-3);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.termin__kalender:hover { color: var(--moss); text-decoration: underline; }
+.termin__kalender::before { content: "＋ "; }
+
+/* ---------- Anfahrt ---------- */
+.kochbilder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: clamp(2rem, 1.2rem + 2.4vw, 3rem);
+}
+.kochbilder figure { margin: 0; }
+.kochbilder img { display: block; width: 100%; height: clamp(220px, 30vw, 340px); object-fit: cover; }
+
+.anfahrt {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: clamp(2rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--rule);
+}
+.anfahrt__titel { font-size: var(--step-1); margin-bottom: 1.25rem; }
+.anfahrt__bilder {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  max-width: 58rem;
+}
+.anfahrt__bilder figure { margin: 0; }
+.anfahrt__bilder img {
+  width: 100%;
+  height: clamp(200px, 26vw, 300px);
+  object-fit: cover;
+}
+/* Der Wartebereich ist im Querformat aufgenommen - der Ausschnitt wandert
+   nach rechts, damit Sofa, Kommode und Buddha im Bild bleiben. */
+.bild--warten { object-position: 62% 45%; }
+
+.anfahrt__bilder figcaption {
+  margin-top: .55rem;
+  font-size: .98rem;
+  color: var(--ink-3);
+}
+
+/* ---------- Preis ---------- */
+.preis {
+  font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.6rem);
+  line-height: 1.05;
+  color: var(--moss);
+  font-variant-numeric: tabular-nums;
+}
+.preis span {
+  display: block;
+  font-family: Karla, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: .35rem;
+}
+
+/* ---------- Online-Buchung (meetergo): die Buchungskarten ----------
+   Frueher stand hier zusaetzlich eine aeltere Flex-Fassung. Deren
+   align-items: center hat sich bis ins Raster durchgeschlagen und die
+   Karten unterschiedlich hoch gemacht - deshalb ist sie entfernt. */
+.onlinebox {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  align-items: stretch;
+  gap: 1.25rem;
+  margin-bottom: 2.25rem;
+}
+.buchkarte {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  align-items: flex-start;
+  padding: 1.6rem 1.6rem 1.75rem;
+  background: var(--moss-soft);
+  border-left: 3px solid var(--moss);
+}
+.buchkarte__titel { font-size: var(--step-2); }
+.buchkarte__text { color: var(--ink-2); flex: 1; }
+.buchkarte .btn { margin-top: .3rem; }
+
+/* ---------- Fester Anrufbalken (nur Handy) ---------- */
+.rufbalken { display: none; }
+
+@media (max-width: 820px) {
+  .rufbalken {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 120;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+    /* Platz für den Bereich unter dem Bildschirm bei iPhones ohne Knopf */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    box-shadow: 0 -2px 12px rgba(23,26,17,.08);
+  }
+  .rufbalken a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 3.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .rufbalken svg { width: 18px; height: 18px; flex: none; }
+  .rufbalken__tel { background: var(--moss); color: var(--on-moss); }
+  .rufbalken__buchen { color: var(--ink); border-left: 1px solid var(--rule); }
+
+  /* Der Balken darf den Fuß der Seite nicht verdecken. */
+  body { padding-bottom: 3.5rem; }
+}
+
+@media (max-width: 820px) and (prefers-reduced-motion: no-preference) {
+  .rufbalken { transition: transform .25s ease; }
+}

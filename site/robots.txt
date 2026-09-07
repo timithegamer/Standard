@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Rechtstexte und Formularseiten gehören nicht in die Suchergebnisse
+Disallow: /impressum.html
+Disallow: /datenschutz.html
+Disallow: /danke.html
+
+Sitemap: https://www.tcm-grohe.at/sitemap.xml

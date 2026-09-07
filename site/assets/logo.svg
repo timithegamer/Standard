@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 630 168" role="img"
+     aria-label="Sabine Grohe – Wohlbefinden und Gesundheit mit TCM">
+  <g transform="translate(6 28) scale(0.56)">
+    <path fill="#567123" d="M199.5 90A100 100 0 1 1 157.36 18.08L141.87 40.2A73 73 0 1 0 170.99 117H110V90Z"/>
+  </g>
+
+  <text x="146" y="84" fill="#171A11"
+        font-family="Hanken Grotesk, Helvetica Neue, Arial, sans-serif"
+        font-size="46" font-weight="500" letter-spacing="-0.8">Sabine Grohe</text>
+  <text x="146" y="122" fill="#676D59"
+        font-family="Karla, Helvetica Neue, Arial, sans-serif"
+        font-size="25" font-weight="600">Wohlbefinden und Gesundheit mit TCM</text>
+</svg>

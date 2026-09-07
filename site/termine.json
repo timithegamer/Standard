@@ -1,0 +1,100 @@
+{
+  "hinweis": "Reserve, falls die Termintabelle nicht erreichbar ist. Gepflegt wird die Google-Tabelle (siehe TERMINE-PFLEGEN.md). Diese Datei wird nur gelegentlich nachgezogen und kann daher veraltet sein. Ein Eintrag ohne Datum wird nicht angezeigt.",
+  "termine": [
+    {
+      "datum": "2026-05-08",
+      "enddatum": "",
+      "zeit": "15:00",
+      "art": "Kochworkshop",
+      "element": "erde",
+      "titel": "Die Mitte und das Erde-Element – für eine starke Milz",
+      "text": "Die Erde bildet unsere innere Mitte. Milz und Magen sind die Quelle unserer Energie. Sie lernen, wie Sie Ihr Verdauungssystem stärken, Ihr Gewicht regulieren und durch Nahrung mehr Energie haben. Mit einfachen, alltagstauglichen Rezepten aus der TCM-Küche.",
+      "preis": "135 €",
+      "ort": "Pinsdorf",
+      "leistungen": "",
+      "buchung": "",
+      "plaetze": "frei"
+    },
+    {
+      "datum": "2026-05-29",
+      "enddatum": "",
+      "zeit": "15:00",
+      "art": "Kochworkshop",
+      "element": "holz",
+      "titel": "Frühling und das Holz-Element – rund um die Leber",
+      "text": "Der Frühling steht in der TCM für das Holz-Element und die Leber. Sie sorgt für einen freien Energiefluss, Entgiftung und emotionale Balance. Sie erfahren, wie Sie Ihre Leber stärken, Stagnationen lösen und mit der passenden Ernährung neue Leichtigkeit gewinnen.",
+      "preis": "135 €",
+      "ort": "Pinsdorf",
+      "leistungen": "",
+      "buchung": "",
+      "plaetze": "frei"
+    },
+    {
+      "datum": "2026-06-26",
+      "enddatum": "",
+      "zeit": "15:00",
+      "art": "Kochworkshop",
+      "element": "feuer",
+      "titel": "Sommer und das Feuer-Element – rund um das Herz",
+      "text": "Im Sommer herrscht das Feuer-Element, das für Lebensfreude, Begeisterung und Aktivität steht. Zu viel Hitze kann jedoch innere Unruhe oder Schlafprobleme verursachen. Wir widmen uns der leichten Sommerküche, ohne die Mitte zu schädigen, und den Syndromen des Herzens.",
+      "preis": "135 €",
+      "ort": "Pinsdorf",
+      "leistungen": "",
+      "buchung": "",
+      "plaetze": "frei"
+    },
+    {
+      "datum": "2026-09-25",
+      "enddatum": "",
+      "zeit": "15:00",
+      "art": "Kochworkshop",
+      "element": "metall",
+      "titel": "Herbst und das Metall-Element – rund um Lunge & Immunsystem",
+      "text": "Im Herbst stärkt das Metall-Element unsere Abwehrkraft. Die Lunge spielt eine zentrale Rolle für Immunsystem, Haut und Atemwege. Sie erfahren, wie Sie Ihre Lunge kräftigen, sich auf die kalte Jahreszeit vorbereiten und mit der richtigen Ernährung Ihre Widerstandskraft unterstützen.",
+      "preis": "135 €",
+      "ort": "Pinsdorf",
+      "leistungen": "",
+      "plaetze": ""
+    },
+    {
+      "datum": "",
+      "enddatum": "",
+      "zeit": "",
+      "art": "Kur",
+      "element": "",
+      "titel": "Frühlingskur",
+      "text": "ENTWURF – wird angezeigt, sobald ein Datum eingetragen ist. Text bitte noch anpassen: Bewusste Regeneration in besonderer Atmosphäre. Die Kur unterstützt Sie dabei, Ihre Mitte zu stärken, Ihr Qi zu harmonisieren und den Körper nach dem Winter neu auszurichten.",
+      "preis": "",
+      "ort": "",
+      "leistungen": "Privatzimmer mit Bad · Verpflegung · Kräuterpresslinge · 3× Tuina Massage · tägliches Programm mit Qi Gong und Spaziergängen",
+      "buchung": "",
+      "plaetze": ""
+    },
+    {
+      "datum": "2026-11-06",
+      "enddatum": "",
+      "zeit": "15:00",
+      "art": "Kochworkshop",
+      "element": "",
+      "titel": "Hausmittel nach der TCM",
+      "text": "Bewährte Hausmittel aus der Traditionellen Chinesischen Medizin für den Alltag. Wir besprechen einfache Anwendungen bei Erkältung, Verdauungsbeschwerden, Kopfschmerzen und mehr.",
+      "preis": "135 €",
+      "ort": "Pinsdorf",
+      "leistungen": "",
+      "plaetze": ""
+    },
+    {
+      "datum": "2026-11-20",
+      "enddatum": "",
+      "zeit": "15:00",
+      "art": "Kochworkshop",
+      "element": "wasser",
+      "titel": "Winter und das Wasser-Element – rund um die Nieren",
+      "text": "Der Winter gehört zum Wasser-Element und den Nieren – unserer Kraftquelle für Regeneration, Vitalität und innere Stabilität. Lernen Sie, wie Sie Ihre Nierenenergie stärken, Erschöpfung vorbeugen und sich bewusst auf die ruhige Winterzeit einstimmen – mit wärmender, nährender Küche.",
+      "preis": "135 €",
+      "ort": "Pinsdorf",
+      "leistungen": "",
+      "plaetze": ""
+    }
+  ]
+}

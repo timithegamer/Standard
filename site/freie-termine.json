@@ -1,0 +1,9 @@
+{
+  "hinweis": "BEISPIELDATEN – bitte durch echte freie Termine ersetzen. Gepflegt wird normalerweise die Google-Tabelle 'Freie Termine' (siehe TERMINE-PFLEGEN.md). Datum JJJJ-MM-TT oder TT.MM.JJJJ.",
+  "termine": [
+    { "datum": "2026-09-08", "zeit": "09:00", "dauer": "60 Min.", "leistung": "Tuina Anmo Massage" },
+    { "datum": "2026-09-08", "zeit": "14:30", "dauer": "90 Min.", "leistung": "Erstgespräch mit Befundung" },
+    { "datum": "2026-09-11", "zeit": "10:30", "dauer": "60 Min.", "leistung": "Tuina Anmo Massage" },
+    { "datum": "2026-09-15", "zeit": "16:00", "dauer": "45 Min.", "leistung": "Laserakupunktur", "hinweis": "auch für Kinder geeignet" }
+  ]
+}

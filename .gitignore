@@ -1,0 +1,10 @@
+# Die Originalfotos vom iPhone: zu groß fürs Repository und nicht nötig,
+# die zugeschnittenen Fassungen liegen in site/img/web/
+fotos/
+
+# Zwischenstände und erzeugte Dateien
+.arbeit/
+vorschau/
+schriftvergleich.html
+
+.DS_Store
